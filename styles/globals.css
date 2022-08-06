@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('react-responsive-carousel/lib/styles/carousel.min.css');
+
+@font-face {
+    font-family: iranSans;
+    src: url("/IranSans.ttf");
+}
