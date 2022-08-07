@@ -20,7 +20,7 @@ const Header = () => {
   const pathName = router.pathname;
 
   return (
-    <div>
+    <header className='px-4 pt-1'>
       <div className='flex flex-1 justify-between'>
 
         <button className='w-8' onClick={menuHandelr}>
@@ -51,7 +51,7 @@ const Header = () => {
         }
 
       </ul>
-    </div>
+    </header>
   )
 }
 
