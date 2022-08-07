@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 const menuItems = [
   { href: '/', name: 'خانه' },
-  { href: '/about-us', name: 'درباره ما' },
+  { href: '/aboutUs', name: 'درباره ما' },
   { href: '/contactUs', name: 'تماس با ما' },
 ]
 
