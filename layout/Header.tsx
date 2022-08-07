@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 const menuItems = [
   { href: '/', name: 'خانه' },
   { href: '/about-us', name: 'درباره ما' },
-  { href: '/contact-us', name: 'تماس با ما' },
+  { href: '/contactUs', name: 'تماس با ما' },
 ]
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
   const pathName = router.pathname;
 
   return (
-    <header className='px-4 pt-1'>
+    <header className='px-4 py-2'>
       <div className='flex flex-1 justify-between'>
 
         <button className='w-8' onClick={menuHandelr}>
