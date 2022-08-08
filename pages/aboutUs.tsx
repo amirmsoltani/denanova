@@ -3,7 +3,7 @@ import { Warpper } from "../layout";
 import { Carousel } from "react-responsive-carousel";
 
 
-const Home: NextPage = () => {
+const AboutUs: NextPage = () => {
   return (
     <Warpper>
       <div className="columns-1 p-4" dir="rtl">
@@ -64,4 +64,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default AboutUs;

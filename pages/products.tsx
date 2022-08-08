@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { Warpper } from "../layout";
 import Link from "next/link";
 
-const Home: NextPage = () => {
+const Products: NextPage = () => {
   return (
     <Warpper>
       <section className="columns-1 p-4">
@@ -20,9 +20,9 @@ const Home: NextPage = () => {
               <span className="mt-2text-sm opacity-40 mr-2">سارا</span>
             </div>
 
-            <p className="mt-4 mb-6 opacity-80 text-justify">
+            <p className="mt-4 mb-6 opacity-80 text-justify text-ellipsis">
               عصاره مخمر بعنوان یک منبع مغذی از مخمر بعنوان ماده اصلی تهیه می
-              گردد...
+              گردد
             </p>
           </div>
           <Link href="/product/123">
@@ -46,8 +46,8 @@ const Home: NextPage = () => {
               <span className="mt-2text-sm opacity-40 mr-2">ژیلا</span>
             </div>
 
-            <p className="mt-4 mb-6 opacity-80 text-justify">
-              حاوی کمپلکس مواد مرطوب کننده موثر جهت پیشگیری از خشکی پوست...
+            <p className="mt-4 mb-6 opacity-80 text-justify text-ellipsis">
+              حاوی کمپلکس مواد مرطوب کننده موثر جهت پیشگیری از خشکی پوست
             </p>
           </div>
           <Link href="/product/123">
@@ -63,4 +63,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Products;

@@ -13,7 +13,7 @@ export async function getStaticProps() {
   return {props:{}}
 }
 
-const Home: NextPage = () => {
+const Company: NextPage = () => {
   return (
     <Warpper>
       <Carousel
@@ -45,4 +45,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Company;
