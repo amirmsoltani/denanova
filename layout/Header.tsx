@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 const menuItems = [
   { href: '/', name: 'خانه' },
+  { href:'/products', name:'محصولات'},
   { href: '/aboutUs', name: 'درباره ما' },
   { href: '/contactUs', name: 'تماس با ما' },
 ]
@@ -27,7 +28,7 @@ const Header = () => {
           <MenuIcon />
         </button>
 
-        <div className='text-center'>
+        <div className='text-center text-lime-500'>
           <h1 className='text-2xl font-bold'>گروه</h1>
           <h1 className='text-6xl font-bold'>دنا نوا</h1>
         </div>
@@ -35,15 +36,15 @@ const Header = () => {
       </div>
 
 
-      <ul className={`${menuOpen ? "max-h-56" : "max-h-0"} overflow-hidden transition-all delay-500 flex flex-col divide-y divide-gray-400`}
+      <ul className={`${menuOpen ? "max-h-72" : "max-h-0"} overflow-hidden  transition-all delay-500 flex flex-col  mt-6`}
         dir='rtl'
         onClick={menuHandelr}
       >
         {
           menuItems.map((item) => (
-            <li key={item.href} className="flex flex-col justify-center py-4">
+            <li key={item.href} className="flex flex-col justify-center bg-lime-300 py-4 px-3 mb-1 text-center">
               <Link href={item.href}>
-                <a className={`${item.href === pathName ? "font-bold" : "text-stone-400"} text-xl`}>
+                <a className={`${item.href === pathName ? "font-bold" : "text-stone-400"} text-xl hover:bg-lime-300 `} style={{WebkitTapHighlightColor:'transparent'}}>
                   {item.name}
                 </a>
               </Link>
