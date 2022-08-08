@@ -25,7 +25,7 @@ const Home: NextPage = () => {
               گردد...
             </p>
           </div>
-          <Link href="#">
+          <Link href="/product/123">
             <button className="w-full flex justify-center mt-8">
               <a className="px-20 py-4 text-center mb-4 shadow-sm block text-white bg-lime-500">
                 ادامه مطلب
@@ -50,7 +50,7 @@ const Home: NextPage = () => {
               حاوی کمپلکس مواد مرطوب کننده موثر جهت پیشگیری از خشکی پوست...
             </p>
           </div>
-          <Link href="#">
+          <Link href="/product/123">
             <button className="w-full flex justify-center mt-8">
               <a className="px-20 py-4 text-center mb-4 shadow-sm block text-white bg-lime-500">
                 ادامه مطلب
