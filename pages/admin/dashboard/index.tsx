@@ -6,16 +6,16 @@ import {
   CollectionIcon,
   OfficeBuildingIcon,
   FolderIcon,
-  UserCircleIcon
+  UserCircleIcon,
 } from "@heroicons/react/solid";
-import TablePost from "../../components/tablePost";
+import TablePost from "../../../components/tablePost";
+import TableMessage from "../../../components/tableMessage";
+import File from "../dashboard/file";
 
-const Dashboard: NextPage = () => {
+const Post: NextPage = () => {
   return (
-    
     <div className="w-full">
-
-        {/* section sidbar */}
+      {/* section sidbar */}
 
       <div className="flex" dir="rtl">
         <div className="columns-3xs h-screen p-1 text-white bg-gray-900 text-center">
@@ -25,7 +25,7 @@ const Dashboard: NextPage = () => {
           </div>
 
           <ul className="text-center text-xl">
-          <li className=" p-2 border-y border-gray-200 ">
+            <li className=" p-2 border-y border-gray-200 ">
               <Link href="#">
                 <div className="flex items-center w-full mr-14 h-10">
                   <AnnotationIcon className="w-5 ml-2 inline" />
@@ -70,12 +70,19 @@ const Dashboard: NextPage = () => {
 
         {/* selection contant */}
 
-        <div className="w-full bg-gray-200 text-lg border-r border-gray-500 col-span-10 ">
-            <TablePost />
+        <div className="w-full bg-gray-200 text-lg ">
+          <div
+            className="w-full h-14  p-4 bg-zinc-900 text-white text-xl"
+            dir="ltr"
+          >
+            <span>Admin Dashboard </span>
+          </div>
+
+          <File />
         </div>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default Post;

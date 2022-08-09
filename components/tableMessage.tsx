@@ -1,28 +1,26 @@
 import React, { FC } from "react";
+import { MailIcon } from "@heroicons/react/solid";
 import Pagination from "../components/pagination";
-import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
 
-const TablePost: FC = () => {
+const TableMessage: FC = () => {
   return (
     <div className=" p-10">
       <table className="h-96 w-full border border-gray-500" dir="rtl">
         <tr className=" text-white bg-gray-900">
           <th className="border-l border-gray-500 py-2 w-12">شماره</th>
           <th className="border-l border-gray-500 ">عنوان</th>
-          <th className="border-l border-gray-500 w-20 ">ناشر</th>
+          <th className="border-l border-gray-500 w-36 ">نام فرستنده</th>
           <th className="border-l border-gray-500 w-28 ">تاریخ انتشار</th>
-          <th className="border-l border-gray-500 w-28 ">تاریخ بروزرسانی</th>
-          <th className="w-24 ">تغیرات</th>
+          <th className="w-14 ">نمایش پیام</th>
         </tr>
         <tr className="text-center bg-gray-100 border-b border-gray-300">
           <td className="border-l border-gray-500">1</td>
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center border-b border-gray-300">
@@ -30,10 +28,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -41,10 +38,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center border-b border-gray-300">
@@ -52,10 +48,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -63,10 +58,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center border-b border-gray-300">
@@ -74,10 +68,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -85,10 +78,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center border-b border-gray-300">
@@ -96,10 +88,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -107,10 +98,9 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
         <tr className="text-center ">
@@ -118,16 +108,16 @@ const TablePost: FC = () => {
           <td className="border-l border-gray-500">کرم</td>
           <td className="border-l border-gray-500">سارا</td>
           <td className="border-l border-gray-500">1401/5/17</td>
-          <td className="border-l border-gray-500">1401/5/17</td>
+
           <td className="py-1">
-            <PencilAltIcon className="w-5 inline" />
-            <TrashIcon className="w-5 mr-6 inline" />
+            <MailIcon className="w-5 inline" />
           </td>
         </tr>
       </table>
+
       <Pagination />
     </div>
   );
 };
 
-export default TablePost;
+export default TableMessage;

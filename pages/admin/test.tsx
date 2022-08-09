@@ -20,7 +20,7 @@ const HomeCard: FC<PropsType> = ({ src, title }) => {
             
           setA(!a);
         }}
-        type={a?"text":"password"}
+        // type={a?"text":"password"}
       >
         convert to 23
       </button>
