@@ -4,7 +4,7 @@ const Pagination: FC = () => {
   return (
     <div
       dir="ltr"
-      className=" px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+      className=" px-4 py-3  sm:px-6"
     >
       <div className="flex-1 flex justify-between sm:hidden">
         <a
@@ -22,7 +22,7 @@ const Pagination: FC = () => {
           Next{" "}
         </a>
       </div>
-      <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between ml-80">
+      <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between ">
         <div>
           <nav
             className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
