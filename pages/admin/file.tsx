@@ -5,8 +5,8 @@ const File: NextPage = () => {
   return (
     <AdminWrapper>
       <div className="columns-3">
-        <div className="w-full h-52">
-          <img className="w-full" src="../../../public/company.jpg" alt="" />
+        <div className="w-full h-96">
+          <img className="w-52 h-52" src="../../public/crusel.jpg" alt="" />
           sss
         </div>
       </div>
