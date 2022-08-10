@@ -9,7 +9,7 @@ const TableCompany: FC = () => {
         <thead>
           <tr className=" text-white bg-blue-900">
             <th className="border-l border-gray-500 py-2 w-12">شماره</th>
-            <th className="border-l border-gray-500 ">عنوان</th>
+            <th className="border-l border-gray-500 ">نام شرکت</th>
             <th className="border-l border-gray-500 w-20 ">ناشر</th>
             <th className="border-l border-gray-500 w-28 ">تاریخ انتشار</th>
             <th className="border-l border-gray-500 w-28 ">تاریخ بروزرسانی</th>
@@ -36,8 +36,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -47,8 +48,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -58,8 +60,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -69,8 +72,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -80,8 +84,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -91,8 +96,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -102,8 +108,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -113,8 +120,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
           <tr className="text-center ">
@@ -124,8 +132,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="py-1">
-              <PencilAltIcon className="w-5 inline" />
-              <TrashIcon className="w-5 text-red-600 mr-6 inline" />
+              <EyeIcon className="w-5 text-stone-700 inline" />
+              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
         </tbody>

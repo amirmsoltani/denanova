@@ -9,7 +9,7 @@ const TableMessage: FC = () => {
         <thead>
           <tr className=" text-white bg-gray-900">
             <th className="border-l border-gray-500 py-2 w-12">شماره</th>
-            <th className="border-l border-gray-500 ">عنوان</th>
+            <th className="border-l border-gray-500 ">عنوان پیام</th>
             <th className="border-l border-gray-500 w-36 ">نام فرستنده</th>
             <th className="border-l border-gray-500 w-28 ">تاریخ انتشار</th>
             <th className="w-14 ">نمایش پیام</th>
@@ -23,7 +23,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -33,7 +33,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -43,7 +43,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -53,7 +53,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -63,7 +63,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -73,7 +73,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -83,7 +83,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -93,7 +93,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -103,7 +103,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center ">
@@ -113,7 +113,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 inline" />
+              <MailIcon className="w-5 mt-1  inline" />
             </td>
           </tr>
         </tbody>

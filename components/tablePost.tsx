@@ -9,7 +9,7 @@ const TablePost: FC = () => {
         <thead>
           <tr className=" text-white bg-gray-900">
             <th className="border-l border-gray-500 py-2 w-12">شماره</th>
-            <th className="border-l border-gray-500 ">عنوان</th>
+            <th className="border-l border-gray-500 ">عنوان پست</th>
             <th className="border-l border-gray-500 w-20 ">ناشر</th>
             <th className="border-l border-gray-500 w-28 ">تاریخ انتشار</th>
             <th className="border-l border-gray-500 w-28 ">تاریخ بروزرسانی</th>
