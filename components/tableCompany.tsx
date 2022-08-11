@@ -7,7 +7,7 @@ const TableCompany: FC = () => {
     <div className=" p-10">
       <table className="h-96 w-full border border-gray-500" dir="rtl">
         <thead>
-          <tr className=" text-white bg-blue-900">
+          <tr className=" text-white h-14 bg-blue-900">
             <th className="border-l border-gray-500 py-2 w-12">شماره</th>
             <th className="border-l border-gray-500 ">نام شرکت</th>
             <th className="border-l border-gray-500 w-20 ">ناشر</th>

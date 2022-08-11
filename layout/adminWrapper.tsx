@@ -14,14 +14,14 @@ import {
 type PropsType = { children: ReactNode };
 
 const menuItems = [
-  { href: "/admin", name: "پیام ها" },
-  { href: "/admin/posts", name: "پست ها" },
+  { href: "/admin/messages", name: "پیام ها" },
+  { href: "/admin/products", name: "پست ها" },
   { href: "/admin/companys", name: "شرکت ها" },
-  { href: "/admin/add", name: "افزودن" },
+  { href: "/admin/addPost", name: "افزودن" },
   { href: "/admin/files", name: "فایل ها" },
 ];
 
-const AdminWrapper: FC<PropsType> = ({ children }) => {
+const AdminWrapper: FC<PropsType> = (props) => {
   const router = useRouter();
   const path = router.pathname;
   console.log(path);
@@ -32,41 +32,47 @@ const AdminWrapper: FC<PropsType> = ({ children }) => {
 
       <div className="flex" dir="rtl">
         <div className="w-60 h-screen text-white text-center">
-          <div className="fixed w-52 h-screen bg-gray-900 ">
+          <div className="fixed w-52 h-screen overflow-hidden bg-gray-900 ">
             <div className="flex items-center w-full mr-14 py-8">
               <UserCircleIcon className="w-5 ml-2 inline" />
               <p className="select-none">نام کاربر</p>
             </div>
 
-            <ul className="text-center text-xl">
-              {
-                menuItems.map((item) => (
-                  <li key={item.href} className=" p-2 border-y border-gray-200 ">
+            <ul className="text-center text-xl ">
+              {menuItems.map((item) => (
+                <li
+                  key={item.href}
+                  className={`border-y border-gray-200 hover:bg-gray-700 hover:cursor-pointer ${
+                    path === item.href ? "bg-gray-500" : ""
+                  }`}
+                >
                   <Link href={item.href}>
-                    <div className="flex items-center w-full mr-14 h-10">
-                      <AnnotationIcon className="w-5 ml-2 inline" />
-                      <a className="hover:cursor-pointer select-none">
-                      {item.name}
-                      </a>
-                    </div>
+                    <a
+                      className={`${
+                        item.href === path ? "font-bold" : "text-stone-400"
+                      } text-xl hover:cursor-pointer flex justify-center h-12 items-center`}
+                    >
+                        <AnnotationIcon className="w-5 ml-2 inline" />
+
+                        {item.name}
+                    </a>
                   </Link>
-                </li>))
-                
-              }
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         {/* selection contant */}
 
-        <div className="w-full bg-gray-200 text-lg ">
+        <div className="w-full bg-gray-100 text-lg ">
           <div
             className="w-full h-14  p-4 bg-zinc-900 text-white text-xl"
             dir="ltr"
           >
             <span className="z-20 w-14 h-10">Admin Dashboard </span>
           </div>
-          {children}
+          {props.children}
         </div>
       </div>
     </div>

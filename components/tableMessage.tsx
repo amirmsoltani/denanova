@@ -7,12 +7,12 @@ const TableMessage: FC = () => {
     <div className=" p-10">
       <table className="h-96 w-full border border-gray-500" dir="rtl">
         <thead>
-          <tr className=" text-white bg-gray-900">
+          <tr className=" text-white h-14 bg-gray-900">
             <th className="border-l border-gray-500 py-2 w-12">شماره</th>
             <th className="border-l border-gray-500 ">عنوان پیام</th>
             <th className="border-l border-gray-500 w-36 ">نام فرستنده</th>
             <th className="border-l border-gray-500 w-28 ">تاریخ انتشار</th>
-            <th className="w-14 ">نمایش پیام</th>
+            <th className="w-20 ">نمایش پیام</th>
           </tr>
         </thead>
         <tbody>
