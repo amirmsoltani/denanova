@@ -16,7 +16,7 @@ type PropsType = { children: ReactNode };
 const menuItems = [
   { href: "/admin/messages", name: "پیام ها" },
   { href: "/admin/products", name: "پست ها" },
-  { href: "/admin/companys", name: "شرکت ها" },
+  { href: "/admin/companies", name: "شرکت ها" },
   { href: "/admin/addPost", name: "افزودن" },
   { href: "/admin/files", name: "فایل ها" },
 ];
