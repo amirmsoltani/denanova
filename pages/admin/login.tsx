@@ -9,20 +9,37 @@ const Login: NextPage = () => {
 
   const passHandelr = () => {
     setShowIcon(!showIcon);
-
   };
+
+
+  const onSubmit = async (event:any) => {
+    event.preventDefault();
+    const form = new FormData();
+    form.append("email",event.target["email"].value);
+    form.append("password",event.target["password"].value);
+
+    const response = await fetch("/api/admin/login", {
+      method : "POST",
+      headers:{"Content-type":"application/json"},
+      body: JSON.stringify({"email":})
+      
+    });
+    console.log(response);
+
+  }
 
   return (
     <div className="text-white h-screen w-full flex items-center justify-center text-center  bg-gradient-to-tl from-sky-900 to-cyan-400">
       <div className=" p-4  w-96 h-96 drop-shadow-2xl bg-gradient-to-t from-gray-900 to-slate-900 from">
         <p className="text-2xl my-8">ADMIN LOGIN</p>
-        <form className="w-full h-full " action="">
+        <form className="w-full h-full " name="form" onSubmit={onSubmit}>
           <label
             htmlFor="email"
             className="flex shadow-xl items-center w-60 h-10 ml-14 mt-10 text-white bg-gray-600 hover:outline hover:outline-white"
           >
             <input
               id="email"
+              name="email"
               type="email"
               placeholder="Email"
               className="text-white bg-gray-600 w-52 ml-0  px-2 py-2 bg text-sm focus:outline-none "
@@ -37,6 +54,7 @@ const Login: NextPage = () => {
           >
             <input
               id="password"
+              name="password"
               type={`${showIcon ? "text" : "password"}`}
               placeholder="Password"
               className="text-white bg-gray-600 w-52 ml-0 px-2 py-2 bg text-sm focus:outline-none "

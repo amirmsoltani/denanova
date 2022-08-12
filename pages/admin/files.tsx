@@ -1,21 +1,50 @@
 import type { NextPage } from "next";
+import { EventHandler, FormEvent, useState } from "react";
 import AdminWrapper from "../../layout/adminWrapper";
 import { TrashIcon } from "@heroicons/react/solid";
 import Modal from "../../components/modal";
 
 const File: NextPage = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const modalHandler = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  const onSubmit = async (event: any) => {
+    event.preventDefault();
+    const form = new FormData();
+    form.append("image", event.target["image"].files[0]);
+    form.append("name", event.target["name"].value);
+
+    const response = await fetch("/api/admin/uploadImage", {
+      method: "POST",
+      body: form,
+    });
+    console.log(response);
+  };
   return (
     <>
-      <Modal>
-        <form action="" className="text-center">
-          <label htmlFor="file" dir="rtl" className="text-xl">آپلود عکس :</label>
-          <input id="file" type="file" className="w-full mt-5 " />
-          <input type="submit" value="ارسال" className="text-xl text-white mt-5 bg-blue-900 hover:bg-blue-700 h-10 w-24 drop-shadow"/>
+      <Modal visible={modalOpen} onClose={modalHandler}>
+        <form className="text-center" onSubmit={onSubmit}>
+          <label htmlFor="file" dir="rtl" className="text-xl">
+            آپلود عکس :
+          </label>
+          <input name="image" type="file" className="w-full mt-5 " />
+          <input name="name" type="text" className="w-full mt-5 " />
+          <input
+            type="submit"
+            value="ارسال"
+            className="text-xl text-white mt-5 bg-blue-900 hover:bg-blue-700 h-10 w-24 drop-shadow"
+          />
         </form>
       </Modal>
       <AdminWrapper>
         <div className="w-full h-16">
-          <button className="mr-5 mt-4 h-14 w-32 bg-blue-900 text-white border-2 border-blue-50 text-xl drop-shadow-xl hover:cursor-pointer hover:text-blue-900 hover:bg-blue-100 hover:border-blue-900">
+          <button
+            onClick={modalHandler}
+            className="mr-5 mt-4 h-14 w-32 bg-blue-900 text-white border-2 border-blue-50 text-xl drop-shadow-xl hover:cursor-pointer hover:text-blue-900 hover:bg-blue-100 hover:border-blue-900"
+          >
             افزودن عکس
           </button>
         </div>
