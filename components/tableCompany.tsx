@@ -23,9 +23,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -35,9 +35,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -47,9 +47,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -59,9 +59,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -71,9 +71,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -83,9 +83,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -95,9 +95,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -107,9 +107,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -119,9 +119,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -131,9 +131,9 @@ const TableCompany: FC = () => {
             <td className="border-l border-gray-500">سارا</td>
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="border-l border-gray-500">1401/5/17</td>
-            <td className="py-1">
+            <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>

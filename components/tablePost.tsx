@@ -7,7 +7,7 @@ const TablePost: FC = () => {
     <div className="p-10">
       <table className="h-96 w-full border border-gray-500" dir="rtl">
         <thead>
-          <tr className=" text-white h-14 bg-gray-900">
+          <tr className=" text-white h-14 bg-blue-900">
             <th className="border-l border-gray-500 py-2 w-12">شماره</th>
             <th className="border-l border-gray-500 ">عنوان پست</th>
             <th className="border-l border-gray-500 w-20 ">ناشر</th>
@@ -25,7 +25,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -37,7 +37,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -49,7 +49,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -61,7 +61,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -73,7 +73,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -85,7 +85,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -97,7 +97,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -109,7 +109,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -121,7 +121,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>
@@ -133,7 +133,7 @@ const TablePost: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
             <td className="p-2 flex items-center justify-between">
               <EyeIcon className="w-5 text-stone-700 inline" />
-              <PencilAltIcon className="w-5 text-lime-600 mx-4 inline" />
+              <PencilAltIcon className="w-5 text-lime-600  inline" />
               <TrashIcon className="w-5 text-red-600 inline" />
             </td>
           </tr>

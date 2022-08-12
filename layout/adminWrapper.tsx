@@ -14,17 +14,20 @@ import {
 type PropsType = { children: ReactNode };
 
 const menuItems = [
-  { href: "/admin/messages", name: "پیام ها" },
-  { href: "/admin/products", name: "پست ها" },
-  { href: "/admin/companies", name: "شرکت ها" },
-  { href: "/admin/addPost", name: "افزودن" },
-  { href: "/admin/files", name: "فایل ها" },
+  { href: "/admin/messages", name: "پیام ها" , symbolIcon: <AnnotationIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/products", name: "پست ها" , symbolIcon:<CollectionIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/companies", name: "شرکت ها" , symbolIcon:<OfficeBuildingIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/addPost", name: "افزودن" , symbolIcon:<DocumentAddIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/files", name: "فایل ها" , symbolIcon:<FolderIcon className='w-5 mr-14 ml-2 inline' /> },
 ];
 
 const AdminWrapper: FC<PropsType> = (props) => {
   const router = useRouter();
   const path = router.pathname;
-  console.log(path);
+
+  let uLink = path;
+
+
 
   return (
     <div className="w-full">
@@ -50,10 +53,9 @@ const AdminWrapper: FC<PropsType> = (props) => {
                     <a
                       className={`${
                         item.href === path ? "font-bold" : "text-stone-400"
-                      } text-xl hover:cursor-pointer flex justify-center h-12 items-center`}
+                      } text-xl hover:cursor-pointer flex  h-12 items-center`}
                     >
-                        <AnnotationIcon className="w-5 ml-2 inline" />
-
+                        {item.symbolIcon}
                         {item.name}
                     </a>
                   </Link>
@@ -70,7 +72,7 @@ const AdminWrapper: FC<PropsType> = (props) => {
             className="w-full h-14  p-4 bg-zinc-900 text-white text-xl"
             dir="ltr"
           >
-            <span className="z-20 w-14 h-10">Admin Dashboard </span>
+            <span className="z-20 w-14 h-10 capitalize ">dashboard {uLink.replace("/"," ")}</span>
           </div>
           {props.children}
         </div>
