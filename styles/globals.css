@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('react-responsive-carousel/lib/styles/carousel.min.css');
+@import url('react-quill/dist/quill.snow.css');
 
 @font-face {
     font-family: iranSans;

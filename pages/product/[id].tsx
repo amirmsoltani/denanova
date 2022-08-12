@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { Carousel } from "react-responsive-carousel";
 import { Warpper } from "../../layout";
-import Link from "next/link";
 
 export async function getStaticPaths() {
   return {
@@ -14,7 +13,7 @@ export async function getStaticProps() {
   return { props: {} };
 }
 
-const Home: NextPage = () => {
+const Product: NextPage = () => {
   return (
     <Warpper>
         <Carousel
@@ -56,4 +55,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Product;

@@ -3,7 +3,7 @@ import { Warpper } from "../layout";
 import { PhoneIcon } from "@heroicons/react/solid";
 import {MailIcon} from "@heroicons/react/outline";
 
-const Home: NextPage = () => {
+const ContactUs: NextPage = () => {
   return (
     <Warpper>
       <div className="w-full columns-1 p-4  " dir="rtl">
@@ -81,4 +81,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default ContactUs;
