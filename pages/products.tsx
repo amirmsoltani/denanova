@@ -10,19 +10,18 @@ const Products: NextPage = () => {
           محصولات
         </h3>
         <figure className="w-full bg-gray-100 mt-10 drop-shadow-lg" dir="rtl">
-          <img className=" w-full h-72" src="/post.jpg" alt="" />
+          <img className=" w-full h-72" src="/imgProduct1.jpg" alt="" />
           <div className="px-2">
-            <h3 className="my-4 text-3xl text-zinc-800 font-bold">کرم کلاژن</h3>
+            <h3 className="my-4 text-3xl text-zinc-800 font-bold">محصول سرم جنین گاوی (FBS)</h3>
             <div className="">
               <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
                 25<span className="text-base">مهر</span>
               </span>
-              <span className="mt-2text-sm opacity-40 mr-2">سارا</span>
+              <span className="mt-2text-sm opacity-40 mr-2">مهدیه درودی</span>
             </div>
 
-            <p className="mt-4 mb-6 opacity-80 text-justify text-ellipsis">
-              عصاره مخمر بعنوان یک منبع مغذی از مخمر بعنوان ماده اصلی تهیه می
-              گردد
+            <p className="mt-4 mb-6 opacity-80 text-justify text-ellipsis" >
+            سرم جنین گاوی (FBS): بخش مایع خون لخته شده در جنین گوساله است که از سلول ها، فیبرین و فاکتورهای لخته کننده آن گرفته شده، اما حاوی تعداد زیادی از مواد مغذی و ماکرومولکول های ضروری برای رشد سلول است. آلبومین موجود در سرم گاوی، اصلی ترین ترکیب موجود در FBS است.
             </p>
           </div>
           <Link href="/product/123">
@@ -34,16 +33,16 @@ const Products: NextPage = () => {
           </Link>
         </figure>
         <figure className="w-full bg-gray-100 mt-10 drop-shadow-lg" dir="rtl">
-          <img className=" w-full h-72" src="/post2.jpg" alt="" />
+          <img className=" w-full h-72" src="/imgProduct2.jpg" alt="" />
           <div className="px-2">
             <h3 className="my-4 text-3xl text-zinc-800 font-bold">
-              کرم ضد آفتاب و مرطوب کننده
+            بافرهای بیولوژیک
             </h3>
             <div className="">
               <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
-                24<span className="text-base">مهر</span>
+                24<span className="text-base">مرداد</span>
               </span>
-              <span className="mt-2text-sm opacity-40 mr-2">ژیلا</span>
+              <span className="mt-2text-sm opacity-40 mr-2">ندا معینی</span>
             </div>
 
             <p className="mt-4 mb-6 opacity-80 text-justify text-ellipsis">
