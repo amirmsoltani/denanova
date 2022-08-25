@@ -2,15 +2,39 @@ import type { NextPage } from "next";
 import AdminWrapper from "../../layout/adminWrapper";
 import { TrashIcon } from "@heroicons/react/solid";
 import Modal from "../../components/modal";
+import { prisma, withAuthSsr } from "../../lib";
+
+export const getServerSideProps = withAuthSsr(async ({ req, query }) => {
+  const pageSize = Math.abs(+(query.pageSize || 10));
+  const page = Math.abs(+(query.page || 1));
+  const search = (query.search as string) || "";
+
+  const files = await prisma.file.findMany({
+    where: { name: { contains: search } },
+    take: pageSize,
+    skip: pageSize * (page - 1),
+  });
+
+  const counts = await prisma.file.count();
+  const lastPage = Math.ceil(counts / pageSize);
+
+  return { props: { content: files, pagination: { pageSize, page } } };
+});
 
 const File: NextPage = () => {
   return (
     <>
       <Modal>
         <form action="" className="text-center">
-          <label htmlFor="file" dir="rtl" className="text-xl">آپلود عکس :</label>
+          <label htmlFor="file" dir="rtl" className="text-xl">
+            آپلود عکس :
+          </label>
           <input id="file" type="file" className="w-full mt-5 " />
-          <input type="submit" value="ارسال" className="text-xl text-white mt-5 bg-blue-900 hover:bg-blue-700 h-10 w-24 drop-shadow"/>
+          <input
+            type="submit"
+            value="ارسال"
+            className="text-xl text-white mt-5 bg-blue-900 hover:bg-blue-700 h-10 w-24 drop-shadow"
+          />
         </form>
       </Modal>
       <AdminWrapper>

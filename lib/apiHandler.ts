@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient, Prisma } from "prisma/prisma-client";
+import { PrismaClient } from "prisma/prisma-client";
 import { errorException } from "./errors";
 import { PayloadType } from "./withAuthApi";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 export type Pagination = {
   pageSize: number;
