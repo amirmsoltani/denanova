@@ -29,6 +29,12 @@ export const errors = {
   method: {
     status: 405,
     message: "Method Not Allowed",
+    isHandledError: true,
+  },
+  used: {
+    status: 409,
+    message: "این مقدار قبلا استفاده شده و قابلیت حذف آن را ندارید",
+    isHandledError: true,
   },
 };
 
