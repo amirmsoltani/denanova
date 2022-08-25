@@ -3,6 +3,24 @@ import { EventHandler, FormEvent, useState } from "react";
 import AdminWrapper from "../../layout/adminWrapper";
 import { TrashIcon } from "@heroicons/react/solid";
 import Modal from "../../components/modal";
+import { prisma, withAuthSsr } from "../../lib";
+
+export const getServerSideProps = withAuthSsr(async ({ req, query }) => {
+  const pageSize = Math.abs(+(query.pageSize || 10));
+  const page = Math.abs(+(query.page || 1));
+  const search = (query.search as string) || "";
+
+  const files = await prisma.file.findMany({
+    where: { name: { contains: search } },
+    take: pageSize,
+    skip: pageSize * (page - 1),
+  });
+
+  const counts = await prisma.file.count();
+  const lastPage = Math.ceil(counts / pageSize);
+
+  return { props: { content: files, pagination: { pageSize, page } } };
+});
 
 const File: NextPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
