@@ -3,7 +3,7 @@ import {
   withApiHandler,
   withAuthApi,
   withErrorHandler,
-} from "../../../lib";
+} from "../../../../lib";
 
 class FileHandler extends ApiHandler {
   async get() {

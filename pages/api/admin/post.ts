@@ -16,15 +16,7 @@ class PostHandler extends ApiHandler {
     const titleExist = this.prisma.post.findUnique({
       where: { title: body.title },
     });
-    console.log(
-      (
-        await this.prisma.file.findMany({
-          select: { id: true },
-          where: { id: { in: body.files.map((file: any) => file.fileId) } },
-        })
-      ).map((file) => file.id)
-    );
-
+    
     const validations = checkSchema({
       title: {
         isString: {

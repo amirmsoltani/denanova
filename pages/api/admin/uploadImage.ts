@@ -24,7 +24,6 @@ class UploadImageHandler extends ApiHandler {
     form.parse(this.req, async (err, fields, files) => {
       const name = fields.name as string;
       const file = files.image as formidable.File;
-      console.log(file);
       
       if (err) {
         this.res.status(err.httpCode || 400).json({ message: String(err) });
