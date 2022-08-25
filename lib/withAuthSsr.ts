@@ -15,7 +15,8 @@ export const withAuthSsr = <
   }
 >(
   handler: (
-    context: GetServerSidePropsContext & { payload?: PayloadType }
+    context: GetServerSidePropsContext,
+    payload?: PayloadType
   ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>,
   redirectTo: string = "/admin/login"
 ) => {
@@ -33,7 +34,7 @@ export const withAuthSsr = <
           await req.session.save();
         }
 
-        return await handler({ res, req, payload, ...context });
+        return await handler({ res, req, ...context }, payload);
       }
 
       return { redirect: { destination: redirectTo, permanent: false } };
