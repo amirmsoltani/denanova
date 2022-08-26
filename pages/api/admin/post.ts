@@ -1,8 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import {
   ApiHandler,
   errorException,
-  PayloadType,
   withApiHandler,
   withAuthApi,
   withErrorHandler,
@@ -16,36 +14,41 @@ class PostHandler extends ApiHandler {
     const titleExist = this.prisma.post.findUnique({
       where: { title: body.title },
     });
-    console.log(
-      (
-        await this.prisma.file.findMany({
-          select: { id: true },
-          where: { id: { in: body.files.map((file: any) => file.fileId) } },
-        })
-      ).map((file) => file.id)
-    );
 
     const validations = checkSchema({
+      type: {
+        isString: { errorMessage: "مقدار ارسالی اشتباه است" },
+        isIn: {
+          options: [["company", "product"]],
+          errorMessage: "type باید یکی از مقادیر company , product باشد",
+        },
+      },
       title: {
         isString: {
           if: () => !!titleExist,
+          errorMessage: "مقدار ارسالی اشتباه است",
         },
         isLength: {
           options: { max: 100, min: 5 },
+          errorMessage: "طول رشته باید بین ۵ تا ۱۰۰ حرف باشد",
         },
       },
       content: {
-        isString: true,
+        isString: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 10 },
+          errorMessage: "طول رشته باید حداقال ۱۰ حرف باشد",
         },
       },
       files: {
-        isArray: true,
-        isLength: { options: { min: 1 } },
+        isArray: { errorMessage: "مقدار ارسالی اشتباه است" },
+        isLength: {
+          options: { min: 1 },
+          errorMessage: "طول رشته باید حداقال ۱ حرف باشد",
+        },
       },
       "files.*.fileId": {
-        isInt: true,
+        isInt: { errorMessage: "مقدار ارسالی اشتباه است" },
         isIn: {
           options: [
             (
@@ -57,22 +60,29 @@ class PostHandler extends ApiHandler {
               })
             ).map((file) => file.id),
           ],
+          errorMessage: "عکس ارسالی در دیتابیس وجود ندارد",
         },
       },
       "files.*.type": {
-        isString: true,
-        isIn: { options: ["slide", "post"] },
-      },
-      "file.*.name": {
-        isString: true,
-        isLength: {
-          options: { min: 3 },
-          errorMessage: "تعداد حرف های اسم باید بیشتر از ۳ باشد.",
+        isString: { errorMessage: "مقدار ارسالی اشتباه است" },
+        isIn: {
+          options: [["slide", "post"]],
+          errorMessage: "نوع ارسالی باید یکی از گزینه های slide,post باشد",
         },
       },
+      // "file.*.name": {
+      //   isString: { errorMessage: "مقدار ارسالی اشتباه است" },
+      //   isLength: {
+      //     options: { min: 3 },
+      //     errorMessage: "طول رشته باید حداقال ۳ حرف باشد",
+      //   },
+      // },
       description: {
-        isString: true,
-        isLength: { options: { max: 255, min: 5 } },
+        isString: { errorMessage: "مقدار ارسالی اشتباه است" },
+        isLength: {
+          options: { max: 255, min: 5 },
+          errorMessage: "طول رشته باید بین ۵ تا ۲۵۵ حرف باشد",
+        },
       },
     });
     await Promise.all(
@@ -89,6 +99,7 @@ class PostHandler extends ApiHandler {
         title: body.title,
         content: body.content,
         description: body.description,
+        type: body.type,
         author: { connect: { id: this.payload!.id } },
         files: {
           create: body.files.map(

@@ -4,14 +4,17 @@ import { PrismaClient } from "prisma/prisma-client";
 import { compareSync } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { setCookie } from "cookies-next";
-import { errorException, options, withErrorHandler } from "../../../lib";
+import {
+  errorException,
+  options,
+  withErrorHandler,
+  prisma,
+} from "../../../lib";
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const body = req.body;
-
-  const prisma = new PrismaClient();
 
   const user = await prisma.user.findUnique({
     where: { email: body.email },
