@@ -5,6 +5,8 @@ import { TrashIcon } from "@heroicons/react/solid";
 import Modal from "../../components/modal";
 import { prisma, withAuthSsr } from "../../lib";
 import Pagination from "../../components/pagination";
+import Router from 'next/router';
+import Document from "next/document";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -45,6 +47,8 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
     }
     if (status === 201) {
       setModalOpen(!modalOpen);
+      Router.reload()
+
     }
   };
 
@@ -60,16 +64,30 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
     });
 
     checkStatusUpload(response.status);
-
-    console.log(showStatus);
-
-    console.log(response);
   };
+
+  const deleteFile = async (id:number) => {
+    const conApi = "/api/admin/file/"+id;
+
+    const response = await fetch(conApi,{
+      method:"delete"
+    })
+
+
+    
+    if(response.status === 200){
+      Router.reload();
+    }
+
+
+  }
+
+
+
+
 
   return (
     <>
-
-      {JSON.stringify(pagination)}
       <Modal visible={modalOpen} onClose={modalHandler}>
         <form className="text-center" onSubmit={onSubmit}>
           <label htmlFor="file" dir="rtl" className="text-xl">
@@ -96,9 +114,6 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
           <input
             type="submit"
             value="ارسال"
-            onClick={() => {
-              console.log("ok");
-            }}
             className="text-xl text-white mt-5 bg-blue-900 hover:bg-blue-700 h-10 w-24 drop-shadow"
           />
         </form>
@@ -122,7 +137,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
                 <img className="w-full p-2 " src={item.filePath} alt="" />
                 <div className="w-full mt-2 flex justify-between px-2">
                   <span className="text-center text-sm">{item.name}</span>
-                  <button className="W-8 h-7 ">
+                  <button onClick={()=> { deleteFile(item.id)}} className="W-8 h-7 ">
                     <TrashIcon className="w-6 text-red-600 hover:text-red-400 inline" />
                   </button>
                 </div>
