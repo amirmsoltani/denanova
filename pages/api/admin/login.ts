@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await prisma.user.findUnique({
     where: { email: body.email },
   });
-
+  
   if (user && compareSync(body.password, user.password!)) {
     const jwt = sign(
       {

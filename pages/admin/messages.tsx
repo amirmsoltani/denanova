@@ -2,11 +2,19 @@ import { NextPage } from "next";
 import { AdminWarpper } from "../../layout";
 import TableMessage from "../../components/tableMessage";
 import Modal from "../../components/modal";
+import { useState } from "react";
 
 const Post: NextPage = () => {
+
+  const [modalOpen , setModalOpen] = useState(false);
+  const modalHandler = ()=>{
+    setModalOpen(!modalOpen);
+  };
+
+
   return (
     <>
-      <Modal>
+      <Modal visible={modalOpen} onClose={modalHandler}>
         <div className="text-center" dir="rtl">
           <div className="text-xl ">
             <span>موضوع : </span>
@@ -25,7 +33,7 @@ const Post: NextPage = () => {
         </div>
       </Modal>
       <AdminWarpper>
-        <TableMessage />
+        <TableMessage showModal={modalHandler}/>
       </AdminWarpper>
     </>
   );

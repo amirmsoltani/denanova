@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 const menuItems = [
   { href: '/', name: 'خانه' },
   { href:'/products', name:'محصولات'},
-  { href: '/aboutUs', name: 'درباره ما' },
+  { href: '/servicesUs', name: 'خدمات ما' },
   { href: '/contactUs', name: 'تماس با ما' },
 ]
 
@@ -22,15 +22,18 @@ const Header = () => {
 
   return (
     <header className='px-4 py-2'>
-      <div className='flex flex-1 justify-between'>
+      <div className='flex flex-1 justify-between h-32'>
 
-        <button className='w-8' onClick={menuHandelr}>
+        <button className='w-8 mt-3' onClick={menuHandelr}>
           <MenuIcon />
         </button>
 
-        <div className='text-center text-lime-500'>
-          <h1 className='text-2xl font-bold'>گروه</h1>
-          <h1 className='text-6xl font-bold'>دنا نوا</h1>
+        <div className='w-full h-full flex justify-center'>
+          <Link href="/">
+            <a>
+              <img className='h-full' src="/logo.png" alt="" />
+            </a>
+          </Link>
         </div>
         <div className='w-8' />
       </div>
