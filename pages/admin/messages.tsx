@@ -11,6 +11,7 @@ const Post: NextPage = () => {
     setModalOpen(!modalOpen);
   };
 
+
   return (
     <>
       <Modal visible={modalOpen} onClose={modalHandler}>

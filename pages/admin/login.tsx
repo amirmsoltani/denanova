@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { cloneElement, useState } from "react";
 import type { NextPage } from "next";
 import { UserIcon } from "@heroicons/react/solid";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import Router from 'next/router';
-const Login: NextPage = (props,dasd) => {
+const Login: NextPage = (props) => {
 
   
   
@@ -20,7 +20,20 @@ const Login: NextPage = (props,dasd) => {
     const email = event.target["email"].value;
     const password = event.target["password"].value;
 
+    console.log(email,password)
     setShowLoading(true);
+
+    // const response = await fetch("/api/admin/login",{
+    //   method: 'POST',
+    //   mode: 'cors', 
+    //   cache: 'no-cache',
+    //   credentials: 'same-origin',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   redirect: 'follow', 
+    //   referrerPolicy: 'no-referrer',
+    //   body: JSON.stringify({email:email,password:password})})
 
 
     const response = await fetch("/api/admin/login", {
@@ -28,6 +41,7 @@ const Login: NextPage = (props,dasd) => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email: email, password: password }),
     });
+
     console.log(response);
     console.log(response.status);
     if (response.status === 200) {
