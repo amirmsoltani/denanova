@@ -14,21 +14,21 @@ class FileHandler extends ApiHandler {
       throw errorException("notFound");
     }
 
-    const file = await this.prisma.file.findUnique({ where: { id: +id } });
+    const file = await this.prisma.file.findUnique({
+      where: { id: +id },
+      include: { _count: { select: { posts: true } } },
+    });
 
     if (!file) {
       throw errorException("notFound");
     }
 
-    const posts = await this.prisma.post.findMany({
-      where: { files: { none: { fileId: +id } } },
-    });
-
-    if (posts.length) {
+    if (file._count.posts) {
       throw errorException("used");
     }
-    fs.unlinkSync("./public/"+file.filePath);
+
     await this.prisma.file.delete({ where: { id: +id } });
+    fs.unlinkSync("./public/" + file.filePath);
 
     this.res.status(200).json({ message: "file deleted" });
   }
