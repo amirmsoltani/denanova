@@ -10,54 +10,55 @@ type PropsType = {
   lastPage: number;
   counts: number;
 };
-const previousPage = () => {};
 
 const paginationShowHandler = (lastPage: number, page: number) => {
   const pagi = [];
-  let pageSelect = false,statusSelect;
+  let valueShowPage = [],
+    pageSelect = false;
 
-  if(lastPage<=5){
-    for (let i = 1; i <= lastPage; i++) {
-      if (i === page) {
-        pageSelect = true;
-      } else {
-        pageSelect = false;
-      }
-      pagi.push(
-        <Link href={"?page=" + i} key={i}>
-          <a
-            aria-current="page"
-            className={` ${
-              pageSelect
-                ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            }`}
-          >
-            {" " + i + " "}
-          </a>
-        </Link>
-      );
-    }
-  }else if(lastPage>5){
-    for (let i = 1; i <= 5; i++) {
-      if(page==i)
-      pagi.push(
-        <Link href={`?page=+${statusSelect}`} key={i}>
-          <a
-            aria-current="page"
-            className={` ${
-              pageSelect
-                ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            }`}
-          >
-            {" " + statusSelect + " "}
-          </a>
-        </Link>
-      );
-    }
+  valueShowPage.push(1);
+
+  if (page === 2) {
+    valueShowPage.push(2);
+  } else if (page === 3) {
+    valueShowPage.push(page - 1, page);
+  } else if (page >= 3) {
+    valueShowPage.push(0, page - 1, page);
   }
-  
+  if (page + 1 === lastPage) {
+    valueShowPage.push(lastPage);
+  } else if (page + 2 === lastPage) {
+    valueShowPage.push(page + 1, lastPage);
+  } else if (page + 2 <= lastPage) {
+    valueShowPage.push(page + 1, 0, lastPage);
+  }
+
+  for (let i = 0; i < valueShowPage.length; i++) {
+    if (valueShowPage[i] === page) {
+      pageSelect = true;
+    } else {
+      pageSelect = false;
+    }
+    pagi.push(
+      <Link
+        href={`${
+          valueShowPage[i] > 0 ? "?page=" + valueShowPage[i] : "?page=" + page
+        }`}
+        key={i}
+      >
+        <a
+          aria-current="page"
+          className={` ${
+            pageSelect
+              ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+              : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+          }`}
+        >
+          {` ${valueShowPage[i] > 0 ? valueShowPage[i] : "..."} `}
+        </a>
+      </Link>
+    );
+  }
 
   return pagi;
 };
