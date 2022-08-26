@@ -43,9 +43,9 @@ model Post {
 }
 
 model PostFile {
-  file   File   @relation(fields: [fileId], references: [id])
+  file   File   @relation(fields: [fileId], references: [id], onDelete: Restrict)
   fileId Int
-  post   Post   @relation(fields: [postId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int
   type   String @default("DEFAULT")
 
