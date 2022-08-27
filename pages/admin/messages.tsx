@@ -14,9 +14,9 @@ const Post: NextPage = () => {
 
   return (
     <>
-      <Modal visible={modalOpen} onClose={modalHandler}>
+      <Modal width="w-7/12" visible={modalOpen} onClose={modalHandler}>
         <div className="text-center" dir="rtl">
-          <div className="text-xl ">
+          <div className="text-xl">
             <span>موضوع : </span>
             <span>برقراری ارتباط با شما</span>
           </div>
