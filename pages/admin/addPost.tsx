@@ -5,6 +5,7 @@ import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 import Editor from "../../components/editor";
 import Modal from "../../components/modal";
 import { useState } from "react";
+import { isArray } from "util";
 
 type FileType = {
   name: string;
@@ -36,17 +37,20 @@ const AddPost: NextPage = () => {
       }>
   >([]);
 
-  const [fileCoverPost, setFileCoverPost] = useState<undefined | FileType>();
+  const [fileCoverPost, setFileCoverPost] = useState<FileType | undefined>();
+  const [filePost, setFilePost] = useState();
 
   const [statusRelFile, setStatusRelFile] = useState(false);
 
   const modalHandler = (status: string) => {
     setModalOpen(!modalOpen);
-    setMultiChange(!multiChange);
     !multiChange && apiHandler();
-
     if (status === "cover") setStatusRelFile(false);
-    if (status === "multi") setStatusRelFile(true);
+    if (status === "multi") {
+      setMultiChange(!multiChange);
+
+      setStatusRelFile(true);
+    }
   };
 
   const apiHandler = async () => {
@@ -60,12 +64,16 @@ const AddPost: NextPage = () => {
   const addImageCoverPost = (item: FileType) => {
     if (statusRelFile === false) {
       setFileCoverPost(item);
+      setFilePost(item.id);
+
     }
     if (statusRelFile === true) {
       setGetFile((oldFile) => [...oldFile, item]);
       setMultiChange(!multiChange);
     }
     setModalOpen(!modalOpen);
+
+    console.log(fileCoverPost)
   };
 
   const propsImage = () => {
@@ -96,23 +104,34 @@ const AddPost: NextPage = () => {
     !multiChange && apiHandler();
   };
 
-
-  const onSubmit = async (event:any) => {
+  const onSubmit = async (event: any) => {
     event.preventDefault();
-    const form = new FormData()
-   form.append("type",event.target["type"].value);
-   form.append("title", event.target["title"].value);
-   form.append( "description", event.target["description"].value);
-   form.append( "content" , event.target["content"].value);
+    const type = event.target["type"].value;
+    const title = event.target["title"].value;
+    const description = event.target["description"].value;
+    const content = event.target["content"].value;
 
+    let post = ()=> {
+      let value;
+      getFile.map((item) => {
+      return { fileId: item.id, type: "slide" };
+    })
+  };
     
-   const response = await fetch("/api/admin/post", {
-    method: "POST",
-    body: form,
-  });
+    post.push({fileId: filePost ,type:"post"});
+    
+    console.log('post id is',filePost);
 
+    console.log(post)
 
-  }
+    const response = await fetch("/api/admin/post", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({type : type,  description: description, title: title, content: content, files: post}),  
+    });
+
+    console.log(response)
+  };
 
   return (
     <>
@@ -158,7 +177,7 @@ const AddPost: NextPage = () => {
               name="type"
               id="typePost"
             >
-              <option className="p-1" value="post">
+              <option className="p-1" value="product">
                 پست
               </option>
               <option className="p-1" value="company">
@@ -237,6 +256,7 @@ const AddPost: NextPage = () => {
               <input
                 type="submit"
                 value="ارسال"
+                onClick={() => console.log("true")}
                 className="p-1 bg-emerald-700 text-white text-2xl border border-emerald-900 w-28 h-12"
               />
             </div>
