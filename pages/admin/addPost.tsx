@@ -111,18 +111,22 @@ const AddPost: NextPage = () => {
     const description = event.target["description"].value;
     const content = event.target["content"].value;
 
-    let post = ()=> {
-      let value;
-      getFile.map((item) => {
-      return { fileId: item.id, type: "slide" };
-    })
-  };
+    let post = [];
+    // post.push(getFile.map((item) => {
+    //   return { fileId: item.id, type: "slide" };
+    // }));
+    
+
+    for(let i=0; i<getFile.length;i++){
+      post[i]={ fileId: getFile[i].id, type: "slide" }
+    }
     
     post.push({fileId: filePost ,type:"post"});
     
-    console.log('post id is',filePost);
+    // console.log('post id is',filePost);
 
     console.log(post)
+    console.log(typeof post)
 
     const response = await fetch("/api/admin/post", {
       method: "POST",
