@@ -1,18 +1,18 @@
 import React, { FC, ReactNode } from "react";
-import { XIcon } from "@heroicons/react/solid";
+import { XCircleIcon } from "@heroicons/react/24/solid";
 
-type PropsType = { children: ReactNode; visible: boolean; onClose: () => void };
+type PropsType = { width: string ; children: ReactNode; visible: boolean; onClose: () => void };
 
-const Modal: FC<PropsType> = ({ children, visible, onClose }) => {
+const Modal: FC<PropsType> = ({ width ,children, visible, onClose }) => {
   return (
     <div
       className={`${
         visible ? "block" : "hidden"
-      } absolute z-50 w-full h-screen bg-black/75 justify-center`}
+      } fixed z-50 w-full h-screen bg-black/75 justify-center`}
     >
       <div className="w-full h-full flex justify-center items-center">
-        <div className="w-96 bg-white p-2  ">
-          <XIcon
+        <div className={`${width} h-auto bg-white p-2  `}>
+          <XCircleIcon
             onClick={onClose}
             className="absolute w-6 text-red-600 hover:text-red-400"
           />

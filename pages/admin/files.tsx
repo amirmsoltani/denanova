@@ -1,12 +1,11 @@
 import type { NextPage, InferGetServerSidePropsType } from "next";
 import { EventHandler, FormEvent, useState } from "react";
 import AdminWrapper from "../../layout/adminWrapper";
-import { TrashIcon } from "@heroicons/react/solid";
+import { TrashIcon } from "@heroicons/react/24/solid";
 import Modal from "../../components/modal";
 import { prisma, withAuthSsr } from "../../lib";
 import Pagination from "../../components/pagination";
 import Router from 'next/router';
-import Document from "next/document";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -48,7 +47,6 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
     if (status === 201) {
       setModalOpen(!modalOpen);
       Router.reload()
-
     }
   };
 
@@ -73,22 +71,14 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
       method:"delete"
     })
 
-
-    
     if(response.status === 200){
       Router.reload();
     }
-
-
   }
-
-
-
-
 
   return (
     <>
-      <Modal visible={modalOpen} onClose={modalHandler}>
+      <Modal width="w-96" visible={modalOpen} onClose={modalHandler}>
         <form className="text-center" onSubmit={onSubmit}>
           <label htmlFor="file" dir="rtl" className="text-xl">
             انتخاب فایل :

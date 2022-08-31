@@ -1,7 +1,7 @@
 import React, { cloneElement, useState } from "react";
 import type { NextPage } from "next";
-import { UserIcon } from "@heroicons/react/solid";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { UserIcon } from "@heroicons/react/24/solid";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Router from 'next/router';
 const Login: NextPage = (props) => {
 
@@ -93,7 +93,7 @@ const Login: NextPage = (props) => {
                 id="eye"
                 className={`${showIcon ? "hidden" : "block"} "w-1 "`}
               />
-              <EyeOffIcon
+              <EyeSlashIcon
                 id="eyeOff"
                 className={`${showIcon ? "block" : "hidden"} "w-1 "`}
               />

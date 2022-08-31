@@ -44,7 +44,7 @@ class PostHandler extends ApiHandler {
         isArray: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 1 },
-          errorMessage: "طول رشته باید حداقال ۱ حرف باشد",
+          errorMessage: "تعداد عکس های ارسالی باید حداقل ۱ عکس باشد",
         },
       },
       "files.*.fileId": {
@@ -55,7 +55,7 @@ class PostHandler extends ApiHandler {
               await this.prisma.file.findMany({
                 select: { id: true },
                 where: {
-                  id: { in: body.files.map((file: any) => file.fileId) },
+                  id: { in: body.files?.map((file: any) => file.fileId) },
                 },
               })
             ).map((file) => file.id),
@@ -102,7 +102,7 @@ class PostHandler extends ApiHandler {
         type: body.type,
         author: { connect: { id: this.payload!.id } },
         files: {
-          create: body.files.map(
+          create: body.files?.map(
             (file: { fileId: number; type: "slide" | "post" }) => ({
               fileId: file.fileId,
               type: file.type,

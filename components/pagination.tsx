@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { AppPropsType } from "next/dist/shared/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/router";

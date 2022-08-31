@@ -3,21 +3,23 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import {
-  DocumentAddIcon,
-  AnnotationIcon,
-  CollectionIcon,
-  OfficeBuildingIcon,
+  DocumentPlusIcon,
+  ChatBubbleLeftIcon,
+  RectangleStackIcon,
+  BuildingOffice2Icon
+
+,
   FolderIcon,
   UserCircleIcon,
-} from "@heroicons/react/solid";
+} from "@heroicons/react/24/solid";
 
 type PropsType = { children: ReactNode };
 
 const menuItems = [
-  { href: "/admin/messages", name: "پیام ها" , symbolIcon: <AnnotationIcon className='w-5 mr-14 ml-2 inline' /> },
-  { href: "/admin/products", name: "پست ها" , symbolIcon:<CollectionIcon className='w-5 mr-14 ml-2 inline' /> },
-  { href: "/admin/companies", name: "شرکت ها" , symbolIcon:<OfficeBuildingIcon className='w-5 mr-14 ml-2 inline' /> },
-  { href: "/admin/addPost", name: "افزودن" , symbolIcon:<DocumentAddIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/messages", name: "پیام ها" , symbolIcon: <ChatBubbleLeftIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/products", name: "پست ها" , symbolIcon:<RectangleStackIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/companies", name: "شرکت ها" , symbolIcon:<BuildingOffice2Icon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/addPost", name: "افزودن" , symbolIcon:<DocumentPlusIcon className='w-5 mr-14 ml-2 inline' /> },
   { href: "/admin/files", name: "فایل ها" , symbolIcon:<FolderIcon className='w-5 mr-14 ml-2 inline' /> },
 ];
 
