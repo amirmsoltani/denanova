@@ -4,7 +4,7 @@ import {
   withApiHandler,
   withAuthApi,
   withErrorHandler,
-} from "../../../lib";
+} from "../../../../lib";
 
 import { checkSchema, validationResult } from "express-validator";
 
