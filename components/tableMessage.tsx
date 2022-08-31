@@ -1,8 +1,10 @@
 import React, { FC } from "react";
-import { MailIcon } from "@heroicons/react/solid";
+import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import Pagination from "../components/pagination";
 
-const TableMessage: FC = () => {
+type PropsType ={showModal: () => void};
+
+const TableMessage: FC<PropsType> = ({showModal}) => {
   return (
     <div className=" p-10">
       <table className="h-96 w-full border border-gray-500" dir="rtl">
@@ -25,7 +27,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -36,7 +38,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -47,7 +49,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -58,7 +60,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -69,7 +71,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -80,7 +82,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -91,7 +93,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center border-b border-gray-300">
@@ -102,7 +104,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center bg-gray-100 border-b border-gray-300">
@@ -113,7 +115,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1 inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1 inline" />
             </td>
           </tr>
           <tr className="text-center ">
@@ -124,7 +126,7 @@ const TableMessage: FC = () => {
             <td className="border-l border-gray-500">1401/5/17</td>
 
             <td className="py-1">
-              <MailIcon className="w-5 mt-1  inline" />
+              <EnvelopeIcon onClick={showModal} className="w-5 mt-1  inline" />
             </td>
           </tr>
         </tbody>

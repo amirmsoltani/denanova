@@ -17,6 +17,8 @@ export async function getStaticProps() {
 type PropsType = Awaited<ReturnType<typeof getStaticProps>>["props"];
 
 const Home: NextPage<PropsType> = (props) => {
+
+
   return (
     <Warpper>
       <Carousel
@@ -25,28 +27,22 @@ const Home: NextPage<PropsType> = (props) => {
         interval={3000}
         infiniteLoop
         autoPlay
-        className="mt-6"
       >
         <div className="h-72">
-          <img src="/crusel.jpg" className="h-full" />
+          <img src="/ferdowsiUni1.jpg" className="h-full" />
         </div>
         <div className="h-72">
-          <img src="/crusel2.jpg" className="h-full" />
+          <img src="/ferdowsiUni2.jpg" className="h-full" />
         </div>
         <div className="h-72">
-          <img src="/crusel3.jpg" className="h-full" />
+          <img src="/ferdowsiUni3.jpg" className="h-full" />
         </div>
       </Carousel>
 
       <div className="columns-1 mt-10 px-4" dir="rtl">
         <hr className="w-full border-t-2" />
-        <p className="mt-4 p-1 text-justify">
-          در گروه توسعه بن دا، ما اعتقاد داریم که توسعه پایدار یک فرآیند است که
-          یک رویکرد جامع برای جنبه های مختلف اجتماعی، اقتصادی، محیط زیست و محیطی
-          را در برمی گیرد. هدف اصلی ما در تمام پروژه های ساخت و ساز، ارتقاء
-          کیفیت زندگی و ایجاد یک تغییر مثبت در زمینه هایی است که در آن ما قصد
-          داریم مداخله کنیم.
-        </p>
+        <p className="mt-6 p-1 text-justify">شرکت سهامی خاص " دنا نوا آزما"  در سال 1400 با تکیه بر اصل علم گرایی با همت جمعی از فارغ التحصیلان مقطع دکتری از دانشگاه های معتبر کشور و با هدف ارائه تولید محصولات دانش بنیان متکی بر دانش بیوتکنولوژی در شهر مشهد آغاز به کار نمود. در حال حاضر، دفتر اصلی شرکت در مرکز رشد دانشگاه فردوسی مشهد واقع شده است.  اولین محصولات تولیدی شامل سرم جنین گاوی (FBS)، سرم آلبومین گاوی (BSA)، اسیدآمینه سیستئین و اسیدآمینه گلایسین هستند و پس از آن همچنین به تولید محصولاتی چون محیط‌‌‌‌های کشت میکروبیولوژی، معرف ها و محلول‌‌‌‌های مربوط به تشخیص‌‌‌‌های میکروبی و ...روی آورده است.</p>
+        <p className="p-1 mt-4 text-justify">شرکت دانش بنیان دنا نوا آزما آماده همکاری برای تولید طرح‌‌‌‌های دانش بنیان تولیدی در حوزه سلامت بوده و از طرح‌‌‌‌های تولیدی پژوهش گران جوان همواره حمایت می نماید. بر این اساس به زودی شاهد رشد و شکوفایی ایده هایی نو با حمایت شرکت دنا نوا آزما و توسط محققان و دانشمندان کشور عزیزمان خواهید بود.</p>
         <hr className="w-full border-t-2 mt-8 " />
       </div>
 
@@ -54,7 +50,7 @@ const Home: NextPage<PropsType> = (props) => {
         <Link href="/company/1234">
           <figure className="w-full mb-8 ">
             <a>
-              <img className="h-72 w-full" src="/company.jpg" alt="بن دا فرآور" />
+              <img className="h-72 w-full" src="/company1.jpg" alt="بن دا فرآور" />
               <h3 className="mt-2">بن دا فرآور</h3>
             </a>
           </figure>
