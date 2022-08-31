@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MenuIcon } from "@heroicons/react/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -25,7 +25,7 @@ const Header = () => {
       <div className='flex flex-1 justify-between h-32'>
 
         <button className='w-8 mt-3' onClick={menuHandelr}>
-          <MenuIcon />
+          <Bars3Icon />
         </button>
 
         <div className='w-full h-full flex justify-center'>
