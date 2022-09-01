@@ -5,7 +5,8 @@ import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 import Editor from "../../components/editor";
 import Modal from "../../components/modal";
 import { useState } from "react";
-import { isArray } from "util";
+import { type } from "os";
+
 
 type FileType = {
   name: string;
@@ -13,6 +14,8 @@ type FileType = {
   createAt: string;
   id: number;
 };
+
+// type dataMessage =
 
 const AddPost: NextPage = () => {
   const [getFile, setGetFile] = useState<
@@ -25,7 +28,15 @@ const AddPost: NextPage = () => {
   >([]);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalErrOpen, setModalErrOpen] = useState(false);
   const [multiChange, setMultiChange] = useState(false);
+  const [errorPost, setErrorPost] = useState< 
+  |undefined 
+  | Array<{
+      param:string;
+      msg:string;
+  }>>([]);
+
 
   const [file, setFile] = useState<
     | undefined
@@ -98,7 +109,9 @@ const AddPost: NextPage = () => {
 
     return property;
   };
-
+  const removeCover = () => {
+    setFileCoverPost(undefined);
+  }
   const removeFile = (index: number) => {
     getFile.splice(index, 1);
     !multiChange && apiHandler();
@@ -112,9 +125,6 @@ const AddPost: NextPage = () => {
     const content = event.target["content"].value;
 
     let post = [];
-    // post.push(getFile.map((item) => {
-    //   return { fileId: item.id, type: "slide" };
-    // }));
     
 
     for(let i=0; i<getFile.length;i++){
@@ -123,7 +133,6 @@ const AddPost: NextPage = () => {
     
     post.push({fileId: filePost ,type:"post"});
     
-    // console.log('post id is',filePost);
 
     console.log(post)
     console.log(typeof post)
@@ -134,8 +143,74 @@ const AddPost: NextPage = () => {
       body: JSON.stringify({type : type,  description: description, title: title, content: content, files: post}),  
     });
 
+    if (response.status !== 200) 
+    {
+      const err = await response.json();
+      const setErr = [{}];
+      
+      setErr.pop();
+      
+      err.message.map( item => {setErr.push({param : item.param})});
+      
+
+      console.log("err ",err.message);
+      console.log("setErr ",setErr);
+
+      setErrorPost(setErr);
+      setModalErrOpen(!modalErrOpen)
+
+    }
     console.log(response)
   };
+
+  const search = async (event:any) => {
+    event.preventDefault();
+    const value = event.target.value;
+    
+    const response = await fetch("/api/admin/file?search="+value,{
+      method:"get",
+      headers: { "Content-type": "application/json" },
+    })
+    const res = await response.json();
+    console.log("start")
+    console.log("res",res.contents)
+
+    setFile(res.contents)
+    
+  }
+
+  console.log("eP",errorPost)
+
+
+  const showErr = () => {
+    const result = [];
+    errorPost?.map(item => {
+      let x="";
+      switch (item.param){
+        case "title": 
+          x="عنوان";
+          break;
+        case "description":
+          x="توضیحات"
+          break;
+        case "content":
+            x="محتوا"
+            break;
+        case "files[0].fileId":
+          x="فایل عکس ها"
+          break;
+      }
+      result.push(<div className="w-full p-1"><p>بخش {x} مشکل دارد!</p></div>)
+    })
+
+    console.log("showwwwwwwwwww", result)
+    return result;
+
+  }
+
+  const modalErrHandler = () => {
+    setModalErrOpen(!modalErrOpen)
+  }
 
   return (
     <>
@@ -148,7 +223,9 @@ const AddPost: NextPage = () => {
           <div className="w-96 bg-slate-200 rounded-full flex  py-1 px-1 border border-slate-700">
             <input
               type="text"
+              name="search"
               className=" px-1 w-96 h-10 bg-slate-50/0 focus:outline-none"
+              onChange={search}
             />
             <MagnifyingGlassCircleIcon className="w-9 text-slate-700" />
           </div>
@@ -167,6 +244,19 @@ const AddPost: NextPage = () => {
               </div>
             </div>
           ))}
+          <div className={`${file?.length ===0 ? "block" : "hidden"} w-full text-center text-2xl h-auto m-2 p-2  `}>
+            <p> ! فایل مورد نظر موجود نیست</p>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        width="w-11/12"
+        visible={modalErrOpen}
+        onClose={() => modalErrHandler()}
+      >
+        <div className="w-full text-center" dir="rtl">
+         {errorPost !== undefined ?  showErr() : null}
         </div>
       </Modal>
 
@@ -234,7 +324,7 @@ const AddPost: NextPage = () => {
                 </div>
                 {fileCoverPost && (
                   <div className="w-32 mt-1">
-                    <XCircleIcon className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer" />
+                    <XCircleIcon onClick={removeCover} className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer" />
                   </div>
                 )}
               </div>

@@ -28,8 +28,8 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
     },
   });
 
-  const counts = await prisma.file.count();
-  const lastPage = Math.ceil(counts / pageSize);
+  const counts = await prisma.post.count();
+  const lastPage = Math.ceil(counts  / pageSize);
 
   return {
     props: {
@@ -51,13 +51,11 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Post: NextPage<PropsType> = ({ content, pagination }) => {
-  // console.log(content, pagination);
+  console.log(content, pagination);
 
 
   return (
     <AdminWrapper>
-      {JSON.stringify(content)}
-      {JSON.stringify(pagination)}
       <TablePost dataPagination={pagination}>
         {content.map((item,index) => {
           return (

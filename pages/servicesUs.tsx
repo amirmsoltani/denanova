@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Warpper } from "../layout";
 import { Carousel } from "react-responsive-carousel";
-import { CubeIcon } from "@heroicons/react/outline";
+import { CubeIcon } from "@heroicons/react/24/outline";
 
 const AboutUs: NextPage = () => {
   return (

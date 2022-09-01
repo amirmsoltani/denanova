@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Warpper } from "../layout";
-import { PhoneIcon } from "@heroicons/react/solid";
-import { DeviceMobileIcon, MailIcon } from "@heroicons/react/outline";
+import { PhoneIcon } from "@heroicons/react/24/solid";
+import { DevicePhoneMobileIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 
 const ContactUs: NextPage = () => {
   return (
@@ -85,7 +85,7 @@ const ContactUs: NextPage = () => {
             <a className=" mr-1" href="tel:+989155995924">
               989155995924+
             </a>
-            <DeviceMobileIcon className="w-5 inline  mr-2" />
+            <DevicePhoneMobileIcon className="w-5 inline  mr-2" />
           </span>
           <span className="flex items-start">
             <span>
@@ -94,7 +94,7 @@ const ContactUs: NextPage = () => {
                 Denanovaazma@hotmail.com
               </a>
             </span>
-            <MailIcon className="w-5 inline mr-2" />
+            <EnvelopeIcon className="w-5 inline mr-2" />
           </span>
         </div>
       </div>
