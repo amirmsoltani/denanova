@@ -41,4 +41,5 @@ yarn-error.log*
 #evirement
 .env
 *.db
+*.db-*
 public/uploadedImages/*
