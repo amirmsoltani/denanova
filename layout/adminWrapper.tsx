@@ -17,7 +17,7 @@ type PropsType = { children: ReactNode };
 
 const menuItems = [
   { href: "/admin/messages", name: "پیام ها" , symbolIcon: <ChatBubbleLeftIcon className='w-5 mr-14 ml-2 inline' /> },
-  { href: "/admin/products", name: "پست ها" , symbolIcon:<RectangleStackIcon className='w-5 mr-14 ml-2 inline' /> },
+  { href: "/admin/products", name: "محصولات" , symbolIcon:<RectangleStackIcon className='w-5 mr-14 ml-2 inline' /> },
   { href: "/admin/companies", name: "شرکت ها" , symbolIcon:<BuildingOffice2Icon className='w-5 mr-14 ml-2 inline' /> },
   { href: "/admin/addPost", name: "افزودن" , symbolIcon:<DocumentPlusIcon className='w-5 mr-14 ml-2 inline' /> },
   { href: "/admin/files", name: "فایل ها" , symbolIcon:<FolderIcon className='w-5 mr-14 ml-2 inline' /> },

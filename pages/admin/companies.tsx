@@ -8,6 +8,8 @@ import {
   EyeIcon,
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { useState } from "react";
+import Router from "next/router";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -45,21 +47,33 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
   };
 });
 
-const deletecompany = (id: number) => {
-  console.log(id);
-};
 
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Post: NextPage<PropsType> = ({ content, pagination }) => {
-  console.log(content, pagination);
+
+  const [showLoading, setShowLoading] = useState<number>()
+
+  const deletecompany = async (id: number,index:number) => {
+    setShowLoading(index);
+    const urlApi = "/api/admin/post/"+id;
+    const response = await fetch(urlApi,{
+      method:'delete'
+    })
+    const msg = await response;
+    if(msg.status === 200){
+      Router.reload()
+      
+    }
+  };
+  
 
   return (
     <AdminWrapper>
       <TableCompany dataPagination={pagination}>
         {content.map((item, index) => {
           return (
-            <tr className="text-center bg-gray-100 border-b border-gray-300">
+            <tr key={index} className="text-center bg-gray-100 border-b border-gray-300">
               <td className="border-l border-gray-500">{++index}</td>
               <td className="border-l border-gray-500">{item.title}</td>
               <td className="border-l border-gray-500 text-sm">
@@ -78,10 +92,8 @@ const Post: NextPage<PropsType> = ({ content, pagination }) => {
                 <Link href={"/admin/addPost?id=" + item.id}>
                   <PencilSquareIcon className="w-5 text-lime-600  inline" />
                 </Link>
-                <TrashIcon
-                  onClick={() => deletecompany(item.id)}
-                  className="w-5 text-red-600 inline"
-                />
+                <img src="/loading.webp" className={`${index===showLoading?"inline":"hidden"} w-6 inline`} alt="" />
+                <TrashIcon onClick={() => deletecompany(item.id,index)} className={`${index !==showLoading ? "inline" : "hidden"} w-5 text-red-600`} />
               </td>
             </tr>
           );

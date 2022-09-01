@@ -9,6 +9,8 @@ import {
 } from "@heroicons/react/24/solid";
 import Router from "next/router";
 import Link from "next/link";
+import { useState } from "react";
+import dayjs from "dayjs";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -28,7 +30,9 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
     },
   });
 
-  const counts = await prisma.post.count();
+  const counts = await prisma.post.count({
+    where: { title: { contains: search }, type: "product" }
+  });
   const lastPage = Math.ceil(counts  / pageSize);
 
   return {
@@ -44,35 +48,47 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
 });
 
 
- const deletePost = async(id:number) => {
-  console.log(id)
- }
+
 
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Post: NextPage<PropsType> = ({ content, pagination }) => {
-  console.log(content, pagination);
 
+  const [showLoading,setShowLoading] = useState<Number>();
+
+  const deletePost = async(id:number,index:number) => {
+    setShowLoading(index);
+    const urlApi = "/api/admin/post/"+id;
+    const  response = await fetch(urlApi,{
+      method:"delete",
+    })
+    const msg = await response;
+    if(msg.status === 200) {
+      Router.reload()
+    }
+  
+  }
 
   return (
     <AdminWrapper>
       <TablePost dataPagination={pagination}>
         {content.map((item,index) => {
           return (
-            <tr className="text-center bg-gray-100 border-b border-gray-300">
+            <tr key={index} className="text-center bg-gray-100 border-b border-gray-300">
               <td className="border-l border-gray-500">{++index}</td>
               <td className="border-l border-gray-500">{item.title}</td>
               <td className="border-l border-gray-500 text-sm"> {item.author.fullname}</td>
-              <td className="border-l border-gray-500 text-sm">{item.createAt}</td>
-              <td className="border-l border-gray-500 text-sm">{item.updateAt}</td>
-              <td className="p-2 flex items-center justify-between">
+              <td className="border-l border-gray-500 text-sm">{dayjs(item.createAt).calendar('jalali').format('hh:mm - YYYY/MM/DD ')}</td>
+              <td className="border-l border-gray-500 text-sm">{dayjs(item.updateAt).calendar('jalali').format('hh:mm - YYYY/MM/DD')}</td>
+              <td className="px-2 py-3 flex items-center justify-between">
                 <Link href={"/product/"+item.id}>
                   <EyeIcon href="" className="w-5 text-stone-700 inline" />
                 </Link>
                 <Link href={"/admin/addPost?id="+item.id}>
                 <PencilSquareIcon className="w-5 text-lime-600  inline" />
                 </Link>
-                <TrashIcon onClick={() => deletePost(item.id)} className="w-5 text-red-600 inline" />
+                <img src="/loading.webp" className={`${index===showLoading?"inline":"hidden"} w-6 inline`} alt="" />
+                <TrashIcon onClick={() => deletePost(item.id,index)} className={`${index !==showLoading ? "inline" : "hidden"} w-5 text-red-600`} />
               </td>
             </tr>
           );

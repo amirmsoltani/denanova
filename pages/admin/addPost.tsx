@@ -5,7 +5,8 @@ import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 import Editor from "../../components/editor";
 import Modal from "../../components/modal";
 import { useState } from "react";
-import { type } from "os";
+import Router from "next/router";
+import { validateConfig } from "next/dist/server/config-shared";
 
 
 type FileType = {
@@ -30,12 +31,7 @@ const AddPost: NextPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalErrOpen, setModalErrOpen] = useState(false);
   const [multiChange, setMultiChange] = useState(false);
-  const [errorPost, setErrorPost] = useState< 
-  |undefined 
-  | Array<{
-      param:string;
-      msg:string;
-  }>>([]);
+  const [errorPost, setErrorPost] = useState<|undefined |Array<String>>([]);
 
 
   const [file, setFile] = useState<
@@ -83,8 +79,6 @@ const AddPost: NextPage = () => {
       setMultiChange(!multiChange);
     }
     setModalOpen(!modalOpen);
-
-    console.log(fileCoverPost)
   };
 
   const propsImage = () => {
@@ -131,12 +125,8 @@ const AddPost: NextPage = () => {
       post[i]={ fileId: getFile[i].id, type: "slide" }
     }
     
-    post.push({fileId: filePost ,type:"post"});
+    if(filePost !== undefined)post.push({fileId: filePost ,type:"post"});
     
-
-    console.log(post)
-    console.log(typeof post)
-
     const response = await fetch("/api/admin/post", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -146,21 +136,16 @@ const AddPost: NextPage = () => {
     if (response.status !== 200) 
     {
       const err = await response.json();
-      const setErr = [{}];
+      const setErr:any = [];
       
-      setErr.pop();
+      err.message.map( (item) => {setErr.push(item.param)});
       
-      err.message.map( item => {setErr.push({param : item.param})});
-      
-
-      console.log("err ",err.message);
-      console.log("setErr ",setErr);
-
       setErrorPost(setErr);
       setModalErrOpen(!modalErrOpen)
 
+    }else if(response.status === 200){
+      Router.reload();
     }
-    console.log(response)
   };
 
   const search = async (event:any) => {
@@ -172,39 +157,47 @@ const AddPost: NextPage = () => {
       headers: { "Content-type": "application/json" },
     })
     const res = await response.json();
-    console.log("start")
-    console.log("res",res.contents)
 
     setFile(res.contents)
     
   }
 
-  console.log("eP",errorPost)
 
 
   const showErr = () => {
-    const result = [];
-    errorPost?.map(item => {
-      let x="";
-      switch (item.param){
+    const result:any = [];
+    
+    for(let i=0; i < errorPost.length; i++)
+    {
+      let message="";
+      switch (errorPost[i]){
         case "title": 
-          x="عنوان";
+          message="مقدار ورودی عنوان خالی یا تکراری می باشد ! (طول رشته باید بین ۵ تا ۱۰۰ حرف باشد)";
+          result.push(<div key={i} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>{message}</p></div>)
           break;
         case "description":
-          x="توضیحات"
+          message="مقدار ورودی توضیحات خالی می باشد ! (طول رشته باید بین ۵ تا ۲۵۵ حرف باشد)"
+          result.push(<div key={i} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>{message}</p></div>)
           break;
         case "content":
-            x="محتوا"
-            break;
-        case "files[0].fileId":
-          x="فایل عکس ها"
+          message="مقدار ورودی محتوا درست نمی باشد ! (طول رشته باید حداقال ۱۰ حرف باشد)"
+          result.push(<div key={i} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>{message}</p></div>)
           break;
       }
-      result.push(<div className="w-full p-1"><p>بخش {x} مشکل دارد!</p></div>)
-    })
+    }
 
-    console.log("showwwwwwwwwww", result)
-    return result;
+    if(fileCoverPost===undefined){
+      result.push(<div key={10}className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>عکس کاور پست خالی یا در دیتابیس موجود نمی باشد !</p></div>)
+    }
+
+    if(getFile.length===0){
+      result.push(<div key={11} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>عکس های اسلایدر خالی یا در دیتابیس موجود نمی باشد !</p></div>)
+    }
+
+
+    
+
+    return result.reverse();
 
   }
 
@@ -251,11 +244,14 @@ const AddPost: NextPage = () => {
       </Modal>
 
       <Modal
-        width="w-11/12"
+        width="w-8/12"
         visible={modalErrOpen}
         onClose={() => modalErrHandler()}
       >
-        <div className="w-full text-center" dir="rtl">
+        <div className="w-full text-center text-lg" dir="rtl">
+          <div className="w-full border-b border-b-slate-700 mb-2 pb-2 text-red-600 text-xl">
+            <p>پست ارسال نشد !</p>
+          </div>
          {errorPost !== undefined ?  showErr() : null}
         </div>
       </Modal>
@@ -350,7 +346,6 @@ const AddPost: NextPage = () => {
               <input
                 type="submit"
                 value="ارسال"
-                onClick={() => console.log("true")}
                 className="p-1 bg-emerald-700 text-white text-2xl border border-emerald-900 w-28 h-12"
               />
             </div>
