@@ -27,7 +27,10 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
     },
   });
 
-  const counts = await prisma.file.count();
+  const counts = await prisma.post.count({
+    where: { title: { contains: search }, type: "company" }
+  });
+
   const lastPage = Math.ceil(counts / pageSize);
 
   return {
@@ -42,10 +45,9 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
   };
 });
 
-
-const deletecompany = (id:number) => {
-  console.log(id)
-}
+const deletecompany = (id: number) => {
+  console.log(id);
+};
 
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -73,10 +75,13 @@ const Post: NextPage<PropsType> = ({ content, pagination }) => {
                 <Link href={"/company/" + item.id}>
                   <EyeIcon className="w-5 text-stone-700 inline" />
                 </Link>
-                <Link href={"/admin/addPost?id="+item.id}>
+                <Link href={"/admin/addPost?id=" + item.id}>
                   <PencilSquareIcon className="w-5 text-lime-600  inline" />
                 </Link>
-                <TrashIcon onClick={() => deletecompany(item.id)} className="w-5 text-red-600 inline" />
+                <TrashIcon
+                  onClick={() => deletecompany(item.id)}
+                  className="w-5 text-red-600 inline"
+                />
               </td>
             </tr>
           );
