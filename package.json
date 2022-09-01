@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.0",
-    "@prisma/client": "4.1.1",
+    "@prisma/client": "4.3.0",
     "autoprefixer": "^10.4.8",
     "bcryptjs": "^2.4.3",
     "cookies-next": "^2.1.1",
@@ -23,7 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "next": "12.2.3",
     "postcss": "^8.4.14",
-    "prisma": "^4.1.1",
+    "prisma": "^4.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
