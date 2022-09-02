@@ -6,8 +6,7 @@ import Editor from "../../components/editor";
 import Modal from "../../components/modal";
 import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
-import axios from "axios";
-import { update } from "immutable";
+import axios, { AxiosError } from "axios";
 
 type FileType = {
   name: string;
@@ -26,6 +25,15 @@ type getPost = {
   updateAt: string;
 };
 
+type FileStateType = {
+  name: string;
+  filePath: string;
+  createAt: string;
+  id: number;
+  type:string;
+  file:FileStateType;
+};
+
 const AddPost: NextPage = () => {
   const [getFile, setGetFile] = useState<
     Array<{
@@ -39,44 +47,37 @@ const AddPost: NextPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalErrOpen, setModalErrOpen] = useState(false);
   const [multiChange, setMultiChange] = useState(false);
-  const [errorPost, setErrorPost] = useState<undefined | Array<String>>([]);
-  const [file, setFile] = useState<
-    | undefined
-    | Array<{
-        name: string;
-        filePath: string;
-        createAt: string;
-        id: number;
-      }>
-  >([]);
+  const [errorPost, setErrorPost] = useState<string[]>([]);
+  const [file, setFile] = useState<FileStateType[]>([]);
 
   const [fileCoverPost, setFileCoverPost] = useState<FileType | undefined>();
-  const [filePost, setFilePost] = useState();
+  const [filePost, setFilePost] = useState<number | undefined>();
   const [statusRelFile, setStatusRelFile] = useState(false);
-  const [statusUpdate, setStatusUpdate] = useState<Number | null>();
+  const [statusUpdate, setStatusUpdate] = useState<number | null>();
   const [getPost, setGetPost] = useState<getPost | undefined>();
 
-  const router = useRouter();
-  const id = Number(router.query.id);
+  const { query } = useRouter();
+  const id = Number(query.id);
 
   //check id for set mode update post
   useEffect(() => {
-    if (id !== null) {
-      setStatusUpdate((newid) => {
-        axios.get("/api/admin/post/" + id).then((response) => {
-          setGetPost( newData => {
-            const title = document.getElementById('title');
-            title?.setAttribute("value",getPost?.title);
-            return response.data
-          });
-          console.log(response.data);
+    if (id) {
+      axios.get("/api/admin/post/" + id).then((response) => {
+        setGetPost(response.data);
+        const slide = Array();
+        response.data.files.map((item:FileStateType) =>{
+          if(item.type === "post"){
+            setFileCoverPost(item.file)
+            setFilePost(item.file.id)
+          }
+          else if(item.type === "slide"){
+            slide.push(item.file)
+          }
         });
-
-
-        return id;
+        setGetFile(slide);
       });
     }
-  }, [statusUpdate]);
+  }, [id]);
 
   //modal files handler
   const modalHandler = (status: string) => {
@@ -159,54 +160,29 @@ const AddPost: NextPage = () => {
 
     if (filePost !== undefined) post.push({ fileId: filePost, type: "post" });
 
-    if (statusUpdate === null) {
-      const response = await fetch("/api/admin/post", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
+    try {
+      const response = await axios[id ? "put" : "post"](
+        `/api/admin/post${id ? "/" + id : ""}`,
+        {
           type: type,
           description: description,
           title: title,
           content: content,
           files: post,
-        }),
+        }
+      );
+      const infoType = type === "company" ? "companies" : "products";
+      Router.replace('/admin/'+infoType);
+    } catch (e) {
+      const error = e as AxiosError<{ message: { param: string }[] }>;
+      const err = await error.response?.data;
+      const setErr: any = [];
+      err?.message.map((item) => {
+        setErr.push(item.param);
       });
-      if (response.status !== 200) {
-        const err = await response.json();
-        const setErr: any = [];
-        err.message.map((item) => {
-          setErr.push(item.param);
-        });
 
-        setErrorPost(setErr);
-        setModalErrOpen(!modalErrOpen);
-      } else if (response.status === 200) {
-        Router.reload();
-      }
-    } else {
-      const response = await fetch("/api/admin/post/"+id , {
-        method: "put",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          type: type,
-          description: description,
-          title: title,
-          content: content,
-          files: post,
-        }),
-      });
-      if (response.status !== 200) {
-        const err = await response.json();
-        const setErr: any = [];
-        err.message.map((item) => {
-          setErr.push(item.param);
-        });
-
-        setErrorPost(setErr);
-        setModalErrOpen(!modalErrOpen);
-      } else if (response.status === 201) {
-        Router.reload();
-      }
+      setErrorPost(setErr);
+      setModalErrOpen(!modalErrOpen);
     }
   };
 
@@ -362,115 +338,114 @@ const AddPost: NextPage = () => {
           <div className="w-full border-b border-b-slate-700 mb-2 pb-2 text-red-600 text-xl">
             <p>پست ارسال نشد !</p>
           </div>
-          {errorPost !== undefined ? showErr() : null}
+          {errorPost && showErr()}
         </div>
       </Modal>
 
       <AdminWrapper>
-        <div className="p-10">
-          <form name="formPost" onSubmit={onSubmit}>
-            <label htmlFor="typePost" className="block">
-              نوع محتوا :
-            </label>
-            <select
-              className="mt-2 w-full h-10 p-1 bg-white border border-gray-500"
-              name="type"
-              id="typePost"
-            >
-              <option
-                className="p-1"
-                value="product"
-                selected={getPost?.type === "company" ? true : false}
+        <div className="">
+          {getPost || !id ? (
+            <form name="formPost" className="p-10" onSubmit={onSubmit} >
+              <label htmlFor="typePost" className="block">
+                نوع محتوا :
+              </label>
+              <select
+                className="mt-2 w-full h-10 p-1 bg-white border border-gray-500"
+                name="type"
+                defaultValue={getPost?.type}
               >
-                پست
-              </option>
-              <option
-                className="p-1"
-                value="company"
-                selected={getPost?.type === "company" ? true : false}
-              >
-                شرکت
-              </option>
-            </select>
-            <label htmlFor="title" className="mt-5 block">
-              <span className="text-xl block ">عنوان : </span>
-            </label>
-            <input
-              id="title"
-              type="text"
-              name="title"
-              className="p-1 w-full h-10 mt-2 border border-gray-500"
-            />
+                <option className="p-1" value="product">
+                  پست
+                </option>
+                <option className="p-1" value="company">
+                  شرکت
+                </option>
+              </select>
+              <label htmlFor="title" className="mt-5 block">
+                <span className="text-xl block ">عنوان : </span>
+              </label>
+              <input
+                type="text"
+                name="title"
+                defaultValue={getPost?.title}
+                className="p-1 w-full h-10 mt-2 border border-gray-500"
+              />
 
-            <label htmlFor="description" className="mt-4 block">
-              <span className="text-xl block">توضیحات : </span>
-            </label>
-            <input
-              id="description"
-              type="text"
-              name="description"
-              className="p-1 w-full h-10 mt-2 border border-gray-500"
-            />
+              <label htmlFor="description" className="mt-4 block">
+                <span className="text-xl block">توضیحات : </span>
+              </label>
+              <input
+                type="text"
+                name="description"
+                defaultValue={getPost?.description}
+                className="p-1 w-full h-10 mt-2 border border-gray-500"
+              />
 
-            <label htmlFor="content" className="block mt-6">
-              <span className="text-xl">محتوا :</span>
-            </label>
-            <Editor name="content" value={getPost && getPost.content} />
+              <label htmlFor="content" className="block mt-6">
+                <span className="text-xl">محتوا :</span>
+              </label>
+              <Editor name="content" initialValue={getPost?.content}/>
 
-            <span className="block w-full mt-5">عکس اصلی :</span>
-            <div className="w-full p-1 mt-5 flex justify-center">
-              <div className="w-96 flex flex-col items-center">
-                <div
-                  className="w-96 h-96"
-                  onClick={() => modalHandler("cover")}
-                >
-                  {fileCoverPost ? (
-                    <img
-                      className="w-full h-full"
-                      src={fileCoverPost.filePath}
-                      alt=""
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-96 w-96 border border-black bg-white hover:bg-lime-50 hover:cursor-pointer hover:text-lime-600 hover:border-lime-600">
-                      <PlusIcon className=" w-12 " />
+              <span className="block w-full mt-5">عکس اصلی :</span>
+              <div className="w-full p-1 mt-5 flex justify-center">
+                <div className="w-96 flex flex-col items-center">
+                  <div
+                    className="w-96 h-96"
+                    onClick={() => modalHandler("cover")}
+                  >
+                    {fileCoverPost ? (
+                      <img
+                        className="w-full h-full"
+                        src={fileCoverPost.filePath}
+                        alt=""
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-96 w-96 border border-black bg-white hover:bg-lime-50 hover:cursor-pointer hover:text-lime-600 hover:border-lime-600">
+                        <PlusIcon className=" w-12 " />
+                      </div>
+                    )}
+                  </div>
+                  {fileCoverPost && (
+                    <div className="w-32 mt-1">
+                      <XCircleIcon
+                        onClick={removeCover}
+                        className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer"
+                      />
                     </div>
                   )}
                 </div>
-                {fileCoverPost && (
-                  <div className="w-32 mt-1">
-                    <XCircleIcon
-                      onClick={removeCover}
-                      className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer"
-                    />
-                  </div>
-                )}
               </div>
-            </div>
-            <span className="mt-5">عکس های اسلایدر :</span>
-            <div className="w-full h-auto">
-              <div
-                className="w-full flex flex-wrap justify-around items-center h-auto"
-                dir="ltr"
-              >
-                <>{!multiChange && propsImage()}</>
+              <span className="mt-5">عکس های اسلایدر :</span>
+              <div className="w-full h-auto">
                 <div
-                  onClick={() => modalHandler("multi")}
-                  className="w-32 ml-2"
+                  className="w-full flex flex-wrap justify-around items-center h-auto"
+                  dir="ltr"
                 >
-                  <div className=" w-full h-32 mt-8 bg-white flex items-center justify-center border border-black text-black hover:text-blue-600 hover:bg-blue-50 cursor-pointer hover:border-blue-600">
-                    <PlusIcon className=" w-8 " />
+                  {!multiChange && propsImage()}
+                  <div
+                    onClick={() => modalHandler("multi")}
+                    className="w-32 ml-2"
+                  >
+                    <div className=" w-full h-32 mt-8 bg-white flex items-center justify-center border border-black text-black hover:text-blue-600 hover:bg-blue-50 cursor-pointer hover:border-blue-600">
+                      <PlusIcon className=" w-8 " />
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className="w-full mt-14 flex justify-center">
+                <input
+                  type="submit"
+                  value="ارسال"
+                  className="p-1 bg-emerald-700 text-white text-2xl border border-emerald-900 w-28 h-12"
+                />
+              </div>
+            </form>
+          ) : (
+            <div className="w-full h-screen flex justify-center items-center">
+              <img src="/loading.webp" className="w-24" alt="" />
+
             </div>
-            <div className="w-full mt-14 flex justify-center">
-              <input
-                type="submit"
-                value="ارسال"
-                className="p-1 bg-emerald-700 text-white text-2xl border border-emerald-900 w-28 h-12"
-              />
-            </div>
-          </form>
+          )}
         </div>
       </AdminWrapper>
     </>
