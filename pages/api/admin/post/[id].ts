@@ -6,9 +6,10 @@ import {
   withErrorHandler,
 } from "../../../../lib";
 import { checkSchema, validationResult } from "express-validator";
+import { type } from "os";
 
 class PostHandler extends ApiHandler {
-  async getPost() {
+  async getPost(files?: boolean) {
     const id = this.req.query.id as string;
 
     if (!/\d/g.test(id as string)) {
@@ -17,6 +18,9 @@ class PostHandler extends ApiHandler {
 
     const post = await this.prisma.post.findUnique({
       where: { id: +id },
+      include: {
+        files: { select: { file:  { select: { filePath: true, id: true } } , type:true } },
+      },
     });
 
     if (!post) {
@@ -27,7 +31,7 @@ class PostHandler extends ApiHandler {
   }
 
   async delete() {
-    const post = await this.getPost();
+    const post = await this.getPost(true);
     await this.prisma.post.delete({ where: { id: post.id } });
     this.res.status(200).json({ message: "post deleted" });
     this.res.end();

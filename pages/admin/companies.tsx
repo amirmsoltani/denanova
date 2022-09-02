@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import Router from "next/router";
+import dayjs from "dayjs";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -80,10 +81,10 @@ const Post: NextPage<PropsType> = ({ content, pagination }) => {
                 {item.author.fullname}
               </td>
               <td className="border-l border-gray-500 text-sm">
-                {item.createAt}
+                {dayjs(item.createAt).calendar('jalali').format('hh:mm - YYYY/MM/DD')}
               </td>
               <td className="border-l border-gray-500 text-sm">
-                {item.updateAt}
+                {dayjs(item.updateAt).calendar('jalali').format('hh:mm - YYYY/MM/DD')}
               </td>
               <td className="p-2 flex items-center justify-between">
                 <Link href={"/company/" + item.id}>
