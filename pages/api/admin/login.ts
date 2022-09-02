@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { withIronSessionApiRoute } from "iron-session/next";
-import { PrismaClient } from "prisma/prisma-client";
 import { compareSync } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { setCookie } from "cookies-next";
