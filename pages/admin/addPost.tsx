@@ -4,10 +4,10 @@ import { PlusIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 import Editor from "../../components/editor";
 import Modal from "../../components/modal";
-import { useState } from "react";
-import Router from "next/router";
-import { validateConfig } from "next/dist/server/config-shared";
-
+import { useEffect, useState } from "react";
+import Router, { useRouter } from "next/router";
+import axios from "axios";
+import { update } from "immutable";
 
 type FileType = {
   name: string;
@@ -15,8 +15,16 @@ type FileType = {
   createAt: string;
   id: number;
 };
-
-// type dataMessage =
+type getPost = {
+  authorId: number;
+  content: string;
+  createAt: string;
+  description: string;
+  id: number;
+  title: string;
+  type: string;
+  updateAt: string;
+};
 
 const AddPost: NextPage = () => {
   const [getFile, setGetFile] = useState<
@@ -31,9 +39,7 @@ const AddPost: NextPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalErrOpen, setModalErrOpen] = useState(false);
   const [multiChange, setMultiChange] = useState(false);
-  const [errorPost, setErrorPost] = useState<|undefined |Array<String>>([]);
-
-
+  const [errorPost, setErrorPost] = useState<undefined | Array<String>>([]);
   const [file, setFile] = useState<
     | undefined
     | Array<{
@@ -46,20 +52,43 @@ const AddPost: NextPage = () => {
 
   const [fileCoverPost, setFileCoverPost] = useState<FileType | undefined>();
   const [filePost, setFilePost] = useState();
-
   const [statusRelFile, setStatusRelFile] = useState(false);
+  const [statusUpdate, setStatusUpdate] = useState<Number | null>();
+  const [getPost, setGetPost] = useState<getPost | undefined>();
 
+  const router = useRouter();
+  const id = Number(router.query.id);
+
+  //check id for set mode update post
+  useEffect(() => {
+    if (id !== null) {
+      setStatusUpdate((newid) => {
+        axios.get("/api/admin/post/" + id).then((response) => {
+          setGetPost( newData => {
+            const title = document.getElementById('title');
+            title?.setAttribute("value",getPost?.title);
+            return response.data
+          });
+          console.log(response.data);
+        });
+
+
+        return id;
+      });
+    }
+  }, [statusUpdate]);
+
+  //modal files handler
   const modalHandler = (status: string) => {
     setModalOpen(!modalOpen);
     !multiChange && apiHandler();
     if (status === "cover") setStatusRelFile(false);
     if (status === "multi") {
       setMultiChange(!multiChange);
-
       setStatusRelFile(true);
     }
   };
-
+  //get files and set state for show
   const apiHandler = async () => {
     const response = await fetch("/api/admin/file/", {
       method: "get",
@@ -68,11 +97,11 @@ const AddPost: NextPage = () => {
     setFile(result.contents);
   };
 
+  //set imaages for post and slider
   const addImageCoverPost = (item: FileType) => {
     if (statusRelFile === false) {
       setFileCoverPost(item);
       setFilePost(item.id);
-
     }
     if (statusRelFile === true) {
       setGetFile((oldFile) => [...oldFile, item]);
@@ -81,6 +110,7 @@ const AddPost: NextPage = () => {
     setModalOpen(!modalOpen);
   };
 
+  // show selected images silder
   const propsImage = () => {
     let property = [];
     property.push(
@@ -103,14 +133,17 @@ const AddPost: NextPage = () => {
 
     return property;
   };
+
+  //remove file post
   const removeCover = () => {
     setFileCoverPost(undefined);
-  }
+  };
   const removeFile = (index: number) => {
     getFile.splice(index, 1);
     !multiChange && apiHandler();
   };
 
+  // form submited send data to api for add post
   const onSubmit = async (event: any) => {
     event.preventDefault();
     const type = event.target["type"].value;
@@ -119,91 +152,164 @@ const AddPost: NextPage = () => {
     const content = event.target["content"].value;
 
     let post = [];
-    
 
-    for(let i=0; i<getFile.length;i++){
-      post[i]={ fileId: getFile[i].id, type: "slide" }
+    for (let i = 0; i < getFile.length; i++) {
+      post[i] = { fileId: getFile[i].id, type: "slide" };
     }
-    
-    if(filePost !== undefined)post.push({fileId: filePost ,type:"post"});
-    
-    const response = await fetch("/api/admin/post", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({type : type,  description: description, title: title, content: content, files: post}),  
-    });
 
-    if (response.status !== 200) 
-    {
-      const err = await response.json();
-      const setErr:any = [];
-      
-      err.message.map( (item) => {setErr.push(item.param)});
-      
-      setErrorPost(setErr);
-      setModalErrOpen(!modalErrOpen)
+    if (filePost !== undefined) post.push({ fileId: filePost, type: "post" });
 
-    }else if(response.status === 200){
-      Router.reload();
+    if (statusUpdate === null) {
+      const response = await fetch("/api/admin/post", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          type: type,
+          description: description,
+          title: title,
+          content: content,
+          files: post,
+        }),
+      });
+      if (response.status !== 200) {
+        const err = await response.json();
+        const setErr: any = [];
+        err.message.map((item) => {
+          setErr.push(item.param);
+        });
+
+        setErrorPost(setErr);
+        setModalErrOpen(!modalErrOpen);
+      } else if (response.status === 200) {
+        Router.reload();
+      }
+    } else {
+      const response = await fetch("/api/admin/post/"+id , {
+        method: "put",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          type: type,
+          description: description,
+          title: title,
+          content: content,
+          files: post,
+        }),
+      });
+      if (response.status !== 200) {
+        const err = await response.json();
+        const setErr: any = [];
+        err.message.map((item) => {
+          setErr.push(item.param);
+        });
+
+        setErrorPost(setErr);
+        setModalErrOpen(!modalErrOpen);
+      } else if (response.status === 201) {
+        Router.reload();
+      }
     }
   };
 
-  const search = async (event:any) => {
+  //search file in modal image post and slider
+  const search = async (event: any) => {
     event.preventDefault();
     const value = event.target.value;
-    
-    const response = await fetch("/api/admin/file?search="+value,{
-      method:"get",
+
+    const response = await fetch("/api/admin/file?search=" + value, {
+      method: "get",
       headers: { "Content-type": "application/json" },
-    })
+    });
     const res = await response.json();
 
-    setFile(res.contents)
-    
-  }
+    setFile(res.contents);
+  };
 
-
-
+  //show error in modal
   const showErr = () => {
-    const result:any = [];
-    
-    for(let i=0; i < errorPost.length; i++)
-    {
-      let message="";
-      switch (errorPost[i]){
-        case "title": 
-          message="مقدار ورودی عنوان خالی یا تکراری می باشد ! (طول رشته باید بین ۵ تا ۱۰۰ حرف باشد)";
-          result.push(<div key={i} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>{message}</p></div>)
+    const result: any = [];
+    let counter = 0;
+    if (errorPost !== undefined) counter = errorPost?.length;
+    for (let i = 0; i < counter; i++) {
+      let message = "";
+      switch (errorPost ? errorPost[i] : null) {
+        case "title":
+          message =
+            "مقدار ورودی عنوان خالی یا تکراری می باشد ! (طول رشته باید بین ۵ تا ۱۰۰ حرف باشد)";
+          result.push(
+            <div
+              key={i}
+              className={`${
+                result.length % 2 === 1 ? "text-gray-600" : "text-black"
+              } w-full p-1`}
+            >
+              <p>{message}</p>
+            </div>
+          );
           break;
         case "description":
-          message="مقدار ورودی توضیحات خالی می باشد ! (طول رشته باید بین ۵ تا ۲۵۵ حرف باشد)"
-          result.push(<div key={i} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>{message}</p></div>)
+          message =
+            "مقدار ورودی توضیحات خالی می باشد ! (طول رشته باید بین ۵ تا ۲۵۵ حرف باشد)";
+          result.push(
+            <div
+              key={i}
+              className={`${
+                result.length % 2 === 1 ? "text-gray-600" : "text-black"
+              } w-full p-1`}
+            >
+              <p>{message}</p>
+            </div>
+          );
           break;
         case "content":
-          message="مقدار ورودی محتوا درست نمی باشد ! (طول رشته باید حداقال ۱۰ حرف باشد)"
-          result.push(<div key={i} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>{message}</p></div>)
+          message =
+            "مقدار ورودی محتوا درست نمی باشد ! (طول رشته باید حداقال ۱۰ حرف باشد)";
+          result.push(
+            <div
+              key={i}
+              className={`${
+                result.length % 2 === 1 ? "text-gray-600" : "text-black"
+              } w-full p-1`}
+            >
+              <p>{message}</p>
+            </div>
+          );
           break;
       }
     }
 
-    if(fileCoverPost===undefined){
-      result.push(<div key={10}className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>عکس کاور پست خالی یا در دیتابیس موجود نمی باشد !</p></div>)
+    if (fileCoverPost === undefined) {
+      result.push(
+        <div
+          key={10}
+          className={`${
+            result.length % 2 === 1 ? "text-gray-600" : "text-black"
+          } w-full p-1`}
+        >
+          <p>عکس کاور پست خالی یا در دیتابیس موجود نمی باشد !</p>
+        </div>
+      );
     }
 
-    if(getFile.length===0){
-      result.push(<div key={11} className={`${result.length%2 === 1? "text-gray-600":"text-black"} w-full p-1`}><p>عکس های اسلایدر خالی یا در دیتابیس موجود نمی باشد !</p></div>)
+    if (getFile.length === 0) {
+      result.push(
+        <div
+          key={11}
+          className={`${
+            result.length % 2 === 1 ? "text-gray-600" : "text-black"
+          } w-full p-1`}
+        >
+          <p>عکس های اسلایدر خالی یا در دیتابیس موجود نمی باشد !</p>
+        </div>
+      );
     }
-
-
-    
 
     return result.reverse();
+  };
 
-  }
-
+  //modal error handler
   const modalErrHandler = () => {
-    setModalErrOpen(!modalErrOpen)
-  }
+    setModalErrOpen(!modalErrOpen);
+  };
 
   return (
     <>
@@ -237,7 +343,11 @@ const AddPost: NextPage = () => {
               </div>
             </div>
           ))}
-          <div className={`${file?.length ===0 ? "block" : "hidden"} w-full text-center text-2xl h-auto m-2 p-2  `}>
+          <div
+            className={`${
+              file?.length === 0 ? "block" : "hidden"
+            } w-full text-center text-2xl h-auto m-2 p-2  `}
+          >
             <p> ! فایل مورد نظر موجود نیست</p>
           </div>
         </div>
@@ -252,7 +362,7 @@ const AddPost: NextPage = () => {
           <div className="w-full border-b border-b-slate-700 mb-2 pb-2 text-red-600 text-xl">
             <p>پست ارسال نشد !</p>
           </div>
-         {errorPost !== undefined ?  showErr() : null}
+          {errorPost !== undefined ? showErr() : null}
         </div>
       </Modal>
 
@@ -267,10 +377,18 @@ const AddPost: NextPage = () => {
               name="type"
               id="typePost"
             >
-              <option className="p-1" value="product">
+              <option
+                className="p-1"
+                value="product"
+                selected={getPost?.type === "company" ? true : false}
+              >
                 پست
               </option>
-              <option className="p-1" value="company">
+              <option
+                className="p-1"
+                value="company"
+                selected={getPost?.type === "company" ? true : false}
+              >
                 شرکت
               </option>
             </select>
@@ -297,7 +415,7 @@ const AddPost: NextPage = () => {
             <label htmlFor="content" className="block mt-6">
               <span className="text-xl">محتوا :</span>
             </label>
-            <Editor name="content" />
+            <Editor name="content" value={getPost && getPost.content} />
 
             <span className="block w-full mt-5">عکس اصلی :</span>
             <div className="w-full p-1 mt-5 flex justify-center">
@@ -320,7 +438,10 @@ const AddPost: NextPage = () => {
                 </div>
                 {fileCoverPost && (
                   <div className="w-32 mt-1">
-                    <XCircleIcon onClick={removeCover} className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer" />
+                    <XCircleIcon
+                      onClick={removeCover}
+                      className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer"
+                    />
                   </div>
                 )}
               </div>
