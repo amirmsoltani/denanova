@@ -1,7 +1,8 @@
 import React, { Children, FC, ReactNode } from "react";
 import Pagination from "../components/pagination";
 
-type propsType = {children : ReactNode, dataPagination:object}
+type paginatonType ={page:number; lastPage:number; pageSize:number; counts:number}
+type propsType = {children : ReactNode, dataPagination:paginatonType}
 
 const TableCompany: FC<propsType> = ({children,dataPagination}) => {
   return (
