@@ -1,6 +1,11 @@
 import React, { FC, ReactNode } from "react";
 import Head from "next/head";
 import Header from "./Header";
+import { PhoneIcon } from "@heroicons/react/24/solid";
+import {
+  DevicePhoneMobileIcon,
+  EnvelopeIcon,
+} from "@heroicons/react/24/outline";
 
 type PropsType = { children: ReactNode };
 
@@ -14,14 +19,59 @@ const warpper: FC<PropsType> = ({ children }) => {
       </Head>
 
       <Header />
+      <hr className="border-t-2 mb-6" />
       <main className="flex justify-center">
         <div className="container">{children}</div>
       </main>
-      <footer className="mt-8 text-center text-md">
-        <hr className="border-t-2 " />
-        <p className="my-8 text-gray-600 opacity-70" dir="rtl">
-          تمامی حقوق مادی و معنوی سایت برای گروه دنا نوا محفوظ میباشد.
-        </p>
+      <hr className="border-t-2 mt-7" />
+      <footer className=" text-md flex justify-center" dir="rtl">
+        <div className="container">
+          <div className="w-full my-6 px-4">
+            <p className="text-xl font-semibold text-slate-700 my-8">
+              <span className="border-b-2 py-2 border-lime-400">
+                اطلاعات تماس
+              </span>
+              &nbsp;با شرکت صنایع زیستی دنا نوا آزما
+            </p>
+            <address className="">
+              <span>آدرس: </span>
+              <br />
+              مشهد، میدان آزادی، دانشگاه فردوسی، مرکز رشد شماره ۴، واحد 419
+            </address>
+            <p className="my-5">
+              <span className="mt-2">کدپستی :</span>9177943338
+            </p>
+            <span className="my-5 flex items-center">
+              <label> تلفن : </label>
+              <a className=" mr-1" href="tel:+985138769383">
+                985138769383+
+              </a>
+              <PhoneIcon className="w-4 inline  mr-2" />
+            </span>
+            <span className="my-5 flex items-start">
+              <label>شماره همراه :</label>
+              <a className=" mr-1" href="tel:+989155995924">
+                989155995924+
+              </a>
+              <DevicePhoneMobileIcon className="w-5 inline  mr-2" />
+            </span>
+            <span className="flex items-start">
+              <span>
+                ایمیل :
+                <a className=" mr-1" href="mailto:Denanovaazma@hotmail.com">
+                  Denanovaazma@hotmail.com
+                </a>
+              </span>
+              <EnvelopeIcon className="w-5 inline mr-2" />
+            </span>
+          </div>
+
+          <div className="w-full text-center">
+            <p className="my-8 text-gray-600  opacity-70" dir="rtl">
+              تمامی حقوق مادی و معنوی سایت برای گروه دنا نوا محفوظ میباشد.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
