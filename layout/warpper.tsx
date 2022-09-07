@@ -6,6 +6,7 @@ import {
   DevicePhoneMobileIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 type PropsType = { children: ReactNode };
 
@@ -55,7 +56,7 @@ const warpper: FC<PropsType> = ({ children }) => {
               </a>
               <DevicePhoneMobileIcon className="w-5 inline  mr-2" />
             </span>
-            <span className="flex items-start">
+            <span className="my-5 flex items-start">
               <span>
                 ایمیل :
                 <a className=" mr-1" href="mailto:Denanovaazma@hotmail.com">
@@ -64,6 +65,21 @@ const warpper: FC<PropsType> = ({ children }) => {
               </span>
               <EnvelopeIcon className="w-5 inline mr-2" />
             </span>
+            <span className="my-5 block">شبکه های اجتماعی ما : </span>
+
+            <div className="flex">
+              
+              <Link href="#">
+                <a>
+                  <img className="w-7 mr-2" src="/instagram.svg" alt="" />
+                </a>
+              </Link>
+              <Link href="#">
+                <a>
+                  <img className="w-7 mr-3" src="/whatsapp.svg" alt="" />
+                </a>
+              </Link>
+            </div>
           </div>
 
           <div className="w-full text-center">
