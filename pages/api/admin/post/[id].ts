@@ -6,7 +6,6 @@ import {
   withErrorHandler,
 } from "../../../../lib";
 import { checkSchema, validationResult } from "express-validator";
-import { type } from "os";
 
 class PostHandler extends ApiHandler {
   async getPost(files?: boolean) {
@@ -70,6 +69,7 @@ class PostHandler extends ApiHandler {
         },
       },
       content: {
+        optional:true,
         isString: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 10 },
@@ -77,6 +77,7 @@ class PostHandler extends ApiHandler {
         },
       },
       files: {
+        optional:true,
         isArray: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 1 },

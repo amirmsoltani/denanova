@@ -33,7 +33,7 @@ model Post {
   id          Int        @id @default(autoincrement())
   title       String     @unique
   description String?
-  content     String
+  content     String?
   type        String     @default("PRODUCT")
   author      User       @relation(fields: [authorId], references: [id])
   authorId    Int
@@ -41,6 +41,8 @@ model Post {
   createAt    DateTime   @default(now())
   updateAt    DateTime   @default(now())
 }
+
+
 
 model PostFile {
   file   File   @relation(fields: [fileId], references: [id], onDelete: Restrict)
@@ -62,3 +64,4 @@ model ContantUs {
   fullName String
   Content  String
 }
+
