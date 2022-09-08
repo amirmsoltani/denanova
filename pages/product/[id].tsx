@@ -24,11 +24,11 @@ const Product: NextPage = () => {
             autoPlay
             className="mt-6"
           >
-            <div className="h-72">
-              <img src="/imgProduct1.jpg" className="h-full" />
+            <div className="md:h-ft h-72">
+              <img src="/imgProduct1.jpg" className="h-full object-contain" />
             </div>
-            <div className="h-72">
-              <img src="/imgProduct3.jpg" className="h-full" />
+            <div className="md:h-ft h-72">
+              <img src="/imgProduct3.jpg" className="h-full object-contain" />
             </div>
           </Carousel>
         <div className="w-full" dir="rtl">
