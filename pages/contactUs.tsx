@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { Warpper } from "../layout";
-import { PhoneIcon } from "@heroicons/react/24/solid";
-import { DevicePhoneMobileIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+
 
 const ContactUs: NextPage = () => {
   return (
@@ -58,45 +57,7 @@ const ContactUs: NextPage = () => {
             type="submit"
           />
         </form>
-        <div className="w-full my-6">
-          <p className="text-xl my-8">
-            <span className="border-b-2 py-2 border-yellow-500">
-              اطلاعات تماس
-            </span>
-            &nbsp;با شرکت صنایع زیستی دنا نوا آزما
-          </p>
-          <address>
-            <span>آدرس: </span>
-            <br />
-            مشهد، میدان آزادی، دانشگاه فردوسی، مرکز رشد شماره ۴، واحد 419
-          </address>
-          <p className="my-5">
-            <span className="mt-2">کدپستی :</span>9177943338
-          </p>
-          <span className="my-5 flex items-center">
-            <label> تلفن : </label>
-            <a className=" mr-1" href="tel:+985138769383">
-              985138769383+
-            </a>
-            <PhoneIcon className="w-4 inline  mr-2" />
-          </span>
-          <span className="my-5 flex items-start">
-            <label>شماره همراه :</label>
-            <a className=" mr-1" href="tel:+989155995924">
-              989155995924+
-            </a>
-            <DevicePhoneMobileIcon className="w-5 inline  mr-2" />
-          </span>
-          <span className="flex items-start">
-            <span>
-              ایمیل :
-              <a className=" mr-1" href="mailto:Denanovaazma@hotmail.com">
-                Denanovaazma@hotmail.com
-              </a>
-            </span>
-            <EnvelopeIcon className="w-5 inline mr-2" />
-          </span>
-        </div>
+        
       </div>
     </Warpper>
   );

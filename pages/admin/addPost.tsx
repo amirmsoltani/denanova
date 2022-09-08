@@ -9,7 +9,6 @@ import Router, { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import { withAuthSsr, prisma } from "../../lib";
 
-
 export const getServerSideProps = withAuthSsr(async () => {
   return {
     props: {},
@@ -38,8 +37,8 @@ type FileStateType = {
   filePath: string;
   createAt: string;
   id: number;
-  type:string;
-  file:FileStateType;
+  type: string;
+  file: FileStateType;
 };
 
 const AddPost: NextPage = () => {
@@ -61,8 +60,16 @@ const AddPost: NextPage = () => {
   const [fileCoverPost, setFileCoverPost] = useState<FileType | undefined>();
   const [filePost, setFilePost] = useState<number | undefined>();
   const [statusRelFile, setStatusRelFile] = useState(false);
-  const [statusUpdate, setStatusUpdate] = useState<number | null>();
+  const [typePost, setTypePost] = useState("product");
   const [getPost, setGetPost] = useState<getPost | undefined>();
+
+  // type post handler
+  const typePostHandler = (event: any) => {
+    event.preventDefault();
+    const type = event.target.value;
+    console.log(type);
+    setTypePost(type);
+  };
 
   const { query } = useRouter();
   const id = Number(query.id);
@@ -73,13 +80,12 @@ const AddPost: NextPage = () => {
       axios.get("/api/admin/post/" + id).then((response) => {
         setGetPost(response.data);
         const slide = Array();
-        response.data.files.map((item:FileStateType) =>{
-          if(item.type === "post"){
-            setFileCoverPost(item.file)
-            setFilePost(item.file.id)
-          }
-          else if(item.type === "slide"){
-            slide.push(item.file)
+        response.data.files.map((item: FileStateType) => {
+          if (item.type === "post") {
+            setFileCoverPost(item.file);
+            setFilePost(item.file.id);
+          } else if (item.type === "slide") {
+            slide.push(item.file);
           }
         });
         setGetFile(slide);
@@ -180,7 +186,7 @@ const AddPost: NextPage = () => {
         }
       );
       const infoType = type === "company" ? "companies" : "products";
-      Router.replace('/admin/'+infoType);
+      Router.replace("/admin/" + infoType);
     } catch (e) {
       const error = e as AxiosError<{ message: { param: string }[] }>;
       const err = await error.response?.data;
@@ -353,7 +359,7 @@ const AddPost: NextPage = () => {
       <AdminWrapper>
         <div className="">
           {getPost || !id ? (
-            <form name="formPost" className="p-10" onSubmit={onSubmit} >
+            <form name="formPost" className="p-10" onSubmit={onSubmit}>
               <label htmlFor="typePost" className="block">
                 نوع محتوا :
               </label>
@@ -361,12 +367,13 @@ const AddPost: NextPage = () => {
                 className="mt-2 w-full h-10 p-1 bg-white border border-gray-500"
                 name="type"
                 defaultValue={getPost?.type}
+                onChange={typePostHandler}
               >
                 <option className="p-1" value="product">
                   پست
                 </option>
                 <option className="p-1" value="company">
-                  شرکت
+                  نمایندگی
                 </option>
               </select>
               <label htmlFor="title" className="mt-5 block">
@@ -378,68 +385,83 @@ const AddPost: NextPage = () => {
                 defaultValue={getPost?.title}
                 className="p-1 w-full h-10 mt-2 border border-gray-500"
               />
+              {typePost === "company" ? (
+                <>
+                  <label htmlFor="title" className="mt-5 block">
+                    <span className="text-xl block ">لینک نمایندگی : </span>
+                  </label>
+                  <input
+                    type="link"
+                    name="link"
+                    className="p-1 w-full h-10 mt-2 border border-gray-500"
+                  />
+                </>
+              ) : (
+                <>
+                  <label htmlFor="description" className="mt-4 block">
+                    <span className="text-xl block">توضیحات : </span>
+                  </label>
+                  <input
+                    type="text"
+                    name="description"
+                    defaultValue={getPost?.description}
+                    className="p-1 w-full h-10 mt-2 border border-gray-500"
+                  />
 
-              <label htmlFor="description" className="mt-4 block">
-                <span className="text-xl block">توضیحات : </span>
-              </label>
-              <input
-                type="text"
-                name="description"
-                defaultValue={getPost?.description}
-                className="p-1 w-full h-10 mt-2 border border-gray-500"
-              />
+                  <label htmlFor="content" className="block mt-6">
+                    <span className="text-xl">محتوا :</span>
+                  </label>
+                  <Editor name="content" initialValue={getPost?.content} />
 
-              <label htmlFor="content" className="block mt-6">
-                <span className="text-xl">محتوا :</span>
-              </label>
-              <Editor name="content" initialValue={getPost?.content}/>
-
-              <span className="block w-full mt-5">عکس اصلی :</span>
-              <div className="w-full p-1 mt-5 flex justify-center">
-                <div className="w-96 flex flex-col items-center">
-                  <div
-                    className="w-96 h-96"
-                    onClick={() => modalHandler("cover")}
-                  >
-                    {fileCoverPost ? (
-                      <img
-                        className="w-full h-full"
-                        src={fileCoverPost.filePath}
-                        alt=""
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center h-96 w-96 border border-black bg-white hover:bg-lime-50 hover:cursor-pointer hover:text-lime-600 hover:border-lime-600">
-                        <PlusIcon className=" w-12 " />
+                  <span className="block w-full mt-5">عکس اصلی :</span>
+                  <div className="w-full p-1 mt-5 flex justify-center">
+                    <div className="w-96 flex flex-col items-center">
+                      <div
+                        className="w-96 h-96"
+                        onClick={() => modalHandler("cover")}
+                      >
+                        {fileCoverPost ? (
+                          <img
+                            className="w-full h-full"
+                            src={fileCoverPost.filePath}
+                            alt=""
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center h-96 w-96 border border-black bg-white hover:bg-lime-50 hover:cursor-pointer hover:text-lime-600 hover:border-lime-600">
+                            <PlusIcon className=" w-12 " />
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  {fileCoverPost && (
-                    <div className="w-32 mt-1">
-                      <XCircleIcon
-                        onClick={removeCover}
-                        className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer"
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-              <span className="mt-5">عکس های اسلایدر :</span>
-              <div className="w-full h-auto">
-                <div
-                  className="w-full flex flex-wrap justify-around items-center h-auto"
-                  dir="ltr"
-                >
-                  {!multiChange && propsImage()}
-                  <div
-                    onClick={() => modalHandler("multi")}
-                    className="w-32 ml-2"
-                  >
-                    <div className=" w-full h-32 mt-8 bg-white flex items-center justify-center border border-black text-black hover:text-blue-600 hover:bg-blue-50 cursor-pointer hover:border-blue-600">
-                      <PlusIcon className=" w-8 " />
+                      {fileCoverPost && (
+                        <div className="w-32 mt-1">
+                          <XCircleIcon
+                            onClick={removeCover}
+                            className="w-6 mr-12 text-red-600 hover:text-red-400 hover:cursor-pointer"
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              </div>
+                  <span className="mt-5">عکس های اسلایدر :</span>
+                  <div className="w-full h-auto">
+                    <div
+                      className="w-full flex flex-wrap justify-around items-center h-auto"
+                      dir="ltr"
+                    >
+                      {!multiChange && propsImage()}
+                      <div
+                        onClick={() => modalHandler("multi")}
+                        className="w-32 ml-2"
+                      >
+                        <div className=" w-full h-32 mt-8 bg-white flex items-center justify-center border border-black text-black hover:text-blue-600 hover:bg-blue-50 cursor-pointer hover:border-blue-600">
+                          <PlusIcon className=" w-8 " />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
               <div className="w-full mt-14 flex justify-center">
                 <input
                   type="submit"
@@ -451,7 +473,6 @@ const AddPost: NextPage = () => {
           ) : (
             <div className="w-full h-screen flex justify-center items-center">
               <img src="/loading.webp" className="w-24" alt="" />
-
             </div>
           )}
         </div>

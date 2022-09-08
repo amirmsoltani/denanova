@@ -10,7 +10,11 @@ module.exports = {
       sans: ['iranSans', 'sans-serif'],
       serif: ['iranSans', 'serif'],
     },
-    extend: {},
+    extend: {
+      height: {
+        'ft':"40vw"
+      }
+    },
   },
   plugins: [],
 }
