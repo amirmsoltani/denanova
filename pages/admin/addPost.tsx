@@ -373,7 +373,7 @@ const AddPost: NextPage = () => {
                   پست
                 </option>
                 <option className="p-1" value="company">
-                  شرکت
+                  نمایندگی
                 </option>
               </select>
               <label htmlFor="title" className="mt-5 block">
