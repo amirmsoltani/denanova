@@ -42,8 +42,6 @@ model Post {
   updateAt    DateTime   @default(now())
 }
 
-
-
 model PostFile {
   file   File   @relation(fields: [fileId], references: [id], onDelete: Restrict)
   fileId Int
@@ -55,13 +53,12 @@ model PostFile {
   @@index([fileId, postId])
 }
 
-model ContantUs {
+model ContactUs {
   id       Int      @id @default(autoincrement())
   read     Boolean  @default(false)
   createAt DateTime @default(now())
   email    String
   subject  String
   fullName String
-  Content  String
+  content  String
 }
-
