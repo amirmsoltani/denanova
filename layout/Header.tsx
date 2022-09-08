@@ -22,7 +22,7 @@ const Header = () => {
   const pathName = router.pathname;
 
   return (
-    <header className="px-4 py-2">
+    <header className="px-4 py-2 w-full">
       <div className="lg:hidden">
         <div className="flex flex-1 justify-between h-32 ">
           <button className="w-8 mt-3" onClick={menuHandelr}>
@@ -33,15 +33,18 @@ const Header = () => {
             className="w-full h-full md:flex md:justify-center text-center "
             dir="rtl"
           >
-            <Link href="/">
-              <a className="">
-                <img
-                  className=" md:h-full m-auto h-20"
-                  src="/logo.png"
-                  alt=""
-                />
-              </a>
-            </Link>
+            <div className="flex justify-center">
+              <Link href="/">
+                <a className="flex">
+                  <img className=" h-20" src="/logoFarsi" alt="" />
+                </a>
+              </Link>
+              <Link href="/">
+                <a className="flex">
+                  <img className="h-20" src="/logoEng" alt="" />
+                </a>
+              </Link>
+            </div>
             <Link href="/">
               <a className="md:self-center">
                 <p className="lg:w-full text-3xl mt-2 font-semibold tracking-wide">
@@ -50,7 +53,6 @@ const Header = () => {
               </a>
             </Link>
           </div>
-          <div className="w-8 md:hidden" />
         </div>
 
         <ul
@@ -81,24 +83,27 @@ const Header = () => {
       </div>
       {/* menu for lg and xl */}
 
-      <div className="lg:flex h-20 hidden mb-5" dir="rtl">
-        <div
-          className="w-full h-full flex "
-          dir="rtl"
-        >
+      <div className="lg:block w-full h-28 hidden mb-5" dir="rtl">
+        <div className="w-full h-20 flex justify-around" dir="rtl">
           <Link href="/">
             <a className="">
-              <img className=" h-full" src="/logo.png" alt="" />
+              <img className=" h-full" src="/logoFarsi" alt="" />
             </a>
           </Link>
           <Link href="/">
             <a className="self-end pb-2">
-              <p className="lg:w-full text-2xl mt-2 font-semibold tracking-wide">
+              <p className="lg:w-full text-2xl mt-2 font-semibold tracking-widest">
                 شرکت دانش بنیان دنا نوا
               </p>
             </a>
           </Link>
-
+          <Link href="/">
+            <a className="">
+              <img className=" h-full" src="/logoEng" alt="" />
+            </a>
+          </Link>
+        </div>
+        <div className="mt-4 w-full flex justify-center my-2">
           <ul className="flex self-end pb-2" dir="rtl" onClick={menuHandelr}>
             {menuItems.map((item) => (
               <li key={item.href} className="mr-10">
