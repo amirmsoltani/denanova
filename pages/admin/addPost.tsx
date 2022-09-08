@@ -7,6 +7,14 @@ import Modal from "../../components/modal";
 import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
+import { withAuthSsr, prisma } from "../../lib";
+
+
+export const getServerSideProps = withAuthSsr(async () => {
+  return {
+    props: {},
+  };
+});
 
 type FileType = {
   name: string;
@@ -436,7 +444,7 @@ const AddPost: NextPage = () => {
                 <input
                   type="submit"
                   value="ارسال"
-                  className="p-1 bg-emerald-700 text-white text-2xl border border-emerald-900 w-28 h-12"
+                  className="p-1 bg-emerald-700 text-white drop-shadow-xl text-2xl border border-emerald-900 w-32 h-12 hover:cursor-pointer  hover:bg-emerald-200 hover:text-emerald-700"
                 />
               </div>
             </form>

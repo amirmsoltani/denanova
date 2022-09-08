@@ -40,7 +40,7 @@ const AdminWrapper: FC<PropsType> = (props) => {
           <div className="fixed w-52 h-screen overflow-hidden bg-gray-900 ">
             <div className="flex items-center w-full mr-14 py-8">
               <UserCircleIcon className="w-5 ml-2 inline" />
-              <p className="select-none">نام کاربر</p>
+              <p className="select-none">پنل مدیریت</p>
             </div>
 
             <ul className="text-center text-xl ">
