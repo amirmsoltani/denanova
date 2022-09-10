@@ -7,7 +7,7 @@ import Modal from "../../components/modal";
 import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
-import { withAuthSsr, prisma } from "../../lib";
+import { withAuthSsr } from "../../lib";
 
 export const getServerSideProps = withAuthSsr(async () => {
   return {
@@ -67,7 +67,6 @@ const AddPost: NextPage = () => {
   const typePostHandler = (event: any) => {
     event.preventDefault();
     const type = event.target.value;
-    console.log(type);
     setTypePost(type);
   };
 

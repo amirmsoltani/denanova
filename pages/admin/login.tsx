@@ -2,16 +2,14 @@ import React, { cloneElement, useState } from "react";
 import type { NextPage } from "next";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import Router from 'next/router';
+import Router from "next/router";
 const Login: NextPage = (props) => {
 
-  
-  
   const [showIcon, setShowIcon] = useState(false);
   const [errorUser, setErrorUser] = useState(false);
-  const [showLoading , setShowLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
 
-  const passHandelr = () => {
+  const passHandler = () => {
     setShowIcon(!showIcon);
   };
 
@@ -22,34 +20,18 @@ const Login: NextPage = (props) => {
 
     setShowLoading(true);
 
-    // const response = await fetch("/api/admin/login",{
-    //   method: 'POST',
-    //   mode: 'cors', 
-    //   cache: 'no-cache',
-    //   credentials: 'same-origin',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   redirect: 'follow', 
-    //   referrerPolicy: 'no-referrer',
-    //   body: JSON.stringify({email:email,password:password})})
-
-
     const response = await fetch("/api/admin/login", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email: email, password: password }),
     });
 
-    console.log(response);
-    console.log(response.status);
     if (response.status === 200) {
       Router.replace("messages");
-    }else {
+    } else {
       setErrorUser(true);
     }
     setShowLoading(false);
-
   };
 
   return (
@@ -87,7 +69,7 @@ const Login: NextPage = (props) => {
             <button
               type="button"
               className=" ml-52 px-1 w-8 h-10 absolute "
-              onClick={passHandelr}
+              onClick={passHandler}
             >
               <EyeIcon
                 id="eye"
@@ -108,7 +90,11 @@ const Login: NextPage = (props) => {
             disabled={showLoading}
             className={` hover:bg-cyan-700 hover:text-neutral-300 flex items-center justify-center transition-all delay-50 text-md font-bold px-5 h-10 ml-14  drop-shadow-xl  bg-sky-700 mt-4`}
           >
-            <img src="/loading.webp" className={`${showLoading?"inline":"hidden"} w-6 inline`} alt="" />
+            <img
+              src="/loading.webp"
+              className={`${showLoading ? "inline" : "hidden"} w-6 inline`}
+              alt=""
+            />
             <span className="mx-1">login</span>
           </button>
         </form>
