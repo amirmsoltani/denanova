@@ -1,22 +1,8 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { Carousel } from "react-responsive-carousel";
 import { Warpper } from "../layout";
 
-export async function getStaticProps() {
-  // const { PrismaClient } = await import("@prisma/client");
-  // const prisma = new PrismaClient();
-  // const posts = await prisma.post.findMany({
-  //   include: { author: {} },
-  //   where: { published: true },
-  // });
-
-  return { props: { a: 1 } };
-}
-
-type PropsType = Awaited<ReturnType<typeof getStaticProps>>["props"];
-
-const Home: NextPage<PropsType> = (props) => {
+const Home: NextPage = () => {
   return (
     <Warpper>
       <Carousel

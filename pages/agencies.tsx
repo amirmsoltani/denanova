@@ -1,19 +1,56 @@
-import type { NextPage } from "next";
+import type {
+  NextPage,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 import { Warpper } from "../layout";
 import Link from "next/link";
+import { prisma } from "../lib";
 
-// export async function getStaticPaths(){
-//   return {
-//     paths: [],
-//     fallback: true, // can also be true or 'blocking'
-//   }
-// }
+export const getServerSideProps = async ({ query }:GetServerSidePropsContext) => {
+  const pageSize = Math.abs(+(query.pageSize || 10));
+  const page = Math.abs(+(query.page || 1));
 
-const Company: NextPage = () => {
+  const companies = await prisma.post.findMany({
+    where: { type: "company" },
+    take: pageSize,
+    skip: pageSize * (page - 1),
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      createAt: true,
+      updateAt: true,
+      author: { select: { fullname: true } },
+    },
+  });
+
+  const counts = await prisma.post.count({
+    where: { type: "company" },
+  });
+
+  const lastPage = Math.ceil(counts / pageSize);
+
+  return {
+    props: {
+      content: companies.map((company) => ({
+        ...company,
+        createAt: company.createAt.toISOString(),
+        updateAt: company.updateAt.toISOString(),
+      })),
+      pagination: { pageSize, page, counts, lastPage },
+    },
+  };
+};
+
+type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
+
+const Company: NextPage<PropsType> = ({ content, pagination }) => {
+  console.log(content, pagination);
+
   return (
     <Warpper>
       <div className="columns-1 my-10 px-4" dir="rtl">
-
         <p className="text-lg">
           نمایندگی های شرکت دانش بنیان دنا نوا به شرح زیر می باشد :
         </p>
@@ -28,7 +65,7 @@ const Company: NextPage = () => {
               <a className="hover:text-gray-600">شرکت 2</a>
             </Link>
           </li>
-          <li className="mt-3" >
+          <li className="mt-3">
             <Link href="#">
               <a className="hover:text-gray-600">شرکت 3</a>
             </Link>

@@ -22,7 +22,7 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
       createAt: true,
       fullName: true,
       email: true,
-      Content: true,
+      content: true,
       read: true,
     },
   });
@@ -47,7 +47,7 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 type messageType ={
-  Content:string;
+  content:string;
   createAt:string;
   email:string;
   fullName:string;
@@ -79,7 +79,7 @@ const Post: NextPage<PropsType> = ({ content, pagination }) => {
             <p>نام : {msgState?.fullName}</p>
             <p className="">تاریخ : {dayjs().calendar('jalali').format('hh:mm - YYYY/MM/DD')}</p>
           </div>
-          <p className="text-justify mt-2 text-lg">{msgState?.Content}</p>
+          <p className="text-justify mt-2 text-lg">{msgState?.content}</p>
           <p className="text-start mt-2 text-md text-blue-900" dir="ltr">{msgState?.email}</p>
         </div>
       </Modal>

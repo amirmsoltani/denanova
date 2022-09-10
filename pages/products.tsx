@@ -1,13 +1,67 @@
-import type { NextPage } from "next";
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
 import { Warpper } from "../layout";
+import { prisma } from "../lib";
 import Link from "next/link";
 
-const Products: NextPage = () => {
+export const getServerSideProps = async ({
+  query,
+}: GetServerSidePropsContext) => {
+  const pageSize = Math.abs(+(query.pageSize || 10));
+  const page = Math.abs(+(query.page || 1));
+
+  const products = await prisma.post.findMany({
+    where: { type: "product" },
+    take: pageSize,
+    skip: pageSize * (page - 1),
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      files: {
+        where: { type: { equals: "post" } },
+        include: { file: { select: { filePath: true } } },
+      },
+      createAt: true,
+      updateAt: true,
+      author: { select: { fullname: true } },
+    },
+  });
+
+  const counts = await prisma.post.count({
+    where: { type: "product" },
+  });
+  const lastPage = Math.ceil(counts / pageSize);
+
+  return {
+    props: {
+      content: products.map((product) => ({
+        ...product,
+        createAt: product.createAt.toISOString(),
+        updateAt: product.updateAt.toISOString(),
+      })),
+      pagination: { pageSize, page, counts, lastPage },
+    },
+  };
+};
+
+type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
+
+const Products: NextPage<PropsType> = ({ content, pagination }) => {
+  console.log(content, pagination);
+
   return (
     <Warpper>
       <section className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 grid-cols-1">
         <figure className="h-auto bg-gray-100 m-5 drop-shadow-lg" dir="rtl">
-          <img className=" w-full md:h-72 sm:h-96 h-72" src="/imgProduct1.jpg" alt="" />
+          <img
+            className=" w-full md:h-72 sm:h-96 h-72"
+            src="/imgProduct1.jpg"
+            alt=""
+          />
           <div className="px-2">
             <h3 className="my-4 text-3xl text-zinc-800 font-bold">
               محصول سرم جنین گاوی (FBS)
@@ -35,7 +89,11 @@ const Products: NextPage = () => {
           </Link>
         </figure>
         <figure className="h-auto bg-gray-100 m-5 drop-shadow-lg" dir="rtl">
-          <img className=" w-full md:h-72 sm:h-96 h-72" src="/imgProduct1.jpg" alt="" />
+          <img
+            className=" w-full md:h-72 sm:h-96 h-72"
+            src="/imgProduct1.jpg"
+            alt=""
+          />
           <div className="px-2">
             <h3 className="my-4 text-3xl text-zinc-800 font-bold">
               محصول سرم جنین گاوی (FBS)
@@ -62,8 +120,6 @@ const Products: NextPage = () => {
             </button>
           </Link>
         </figure>
-
-       
       </section>
     </Warpper>
   );

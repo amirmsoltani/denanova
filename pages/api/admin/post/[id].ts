@@ -11,14 +11,19 @@ class PostHandler extends ApiHandler {
   async getPost(files?: boolean) {
     const id = this.req.query.id as string;
 
-    if (!/\d/g.test(id as string)) {
+    if (!/^\d$/g.test(id as string)) {
       throw errorException("notFound");
     }
 
     const post = await this.prisma.post.findUnique({
       where: { id: +id },
       include: {
-        files: { select: { file:  { select: { filePath: true, id: true } } , type:true } },
+        files: {
+          select: {
+            file: { select: { filePath: true, id: true } },
+            type: true,
+          },
+        },
       },
     });
 
@@ -69,7 +74,7 @@ class PostHandler extends ApiHandler {
         },
       },
       content: {
-        optional:true,
+        optional: true,
         isString: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 10 },
@@ -77,7 +82,7 @@ class PostHandler extends ApiHandler {
         },
       },
       files: {
-        optional:true,
+        optional: true,
         isArray: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 1 },
