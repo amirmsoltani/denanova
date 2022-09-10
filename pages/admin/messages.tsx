@@ -12,7 +12,7 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const page = Math.abs(+(query.page || 1));
   const search = (query.search as string) || "";
 
-  const messages = await prisma.contantUs.findMany({
+  const messages = await prisma.contactUs.findMany({
     where: { subject: { contains: search } },
     take: pageSize,
     skip: pageSize * (page - 1),
@@ -27,7 +27,7 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
     },
   });
 
-  const counts = await prisma.contantUs.count({
+  const counts = await prisma.contactUs.count({
     where: { subject: { contains: search } },
   });
 
