@@ -8,6 +8,7 @@ import { prisma } from "../lib";
 import Link from "next/link";
 import { data } from "autoprefixer";
 import dayjs from "dayjs";
+import Pagination from "../components/pagination";
 
 export const getServerSideProps = async ({
   query,
@@ -53,7 +54,6 @@ export const getServerSideProps = async ({
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Products: NextPage<PropsType> = ({ content, pagination }) => {
-  console.log(content, pagination);
 
   const dataProducts = () => {
     const data = Array();
@@ -101,9 +101,12 @@ const Products: NextPage<PropsType> = ({ content, pagination }) => {
   return (
     <Warpper>
       <section className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 grid-cols-1">
-
         {dataProducts()}
       </section>
+      <div className={`${pagination.lastPage>1 ? 'block': 'hidden'} flex justify-center mt-6`}>
+      <Pagination counts={pagination.counts} lastPage={pagination.lastPage} page={pagination.page} pageSize={pagination.pageSize} />
+
+      </div>
     </Warpper>
   );
 };

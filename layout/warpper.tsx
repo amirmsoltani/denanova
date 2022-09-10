@@ -65,10 +65,14 @@ const warpper: FC<PropsType> = ({ children }) => {
               </span>
               <EnvelopeIcon className="w-5 inline mr-2" />
             </span>
+            <Link href="https://www.google.com/maps/place/36.309366,%2059.537432">
+              <a>
+                <img src="/map.png" alt="" className="w-96" />
+              </a>
+            </Link>
             <span className="my-5 block">شبکه های اجتماعی ما : </span>
 
             <div className="flex">
-              
               <Link href="http://www.instagram.com/denanovaazma">
                 <a>
                   <img className="w-7 mr-2" src="/instagram.svg" alt="" />

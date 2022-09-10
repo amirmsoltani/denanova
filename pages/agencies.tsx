@@ -46,7 +46,26 @@ export const getServerSideProps = async ({ query }:GetServerSidePropsContext) =>
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Company: NextPage<PropsType> = ({ content, pagination }) => {
-  console.log(content, pagination);
+
+  const dataCompany = () => {
+    const data = Array();
+
+    content.map( item => {
+      data.push(
+        <li className="mt-3">
+            <Link href={item.description!}>
+              <a className="hover:text-gray-600"> {item.title}</a>
+            </Link>
+          </li>
+      )
+    })
+
+
+
+    return data;
+
+
+  }
 
   return (
     <Warpper>
@@ -55,21 +74,7 @@ const Company: NextPage<PropsType> = ({ content, pagination }) => {
           نمایندگی های شرکت دانش بنیان دنا نوا به شرح زیر می باشد :
         </p>
         <ul className="list-decimal mr-5 mt-2">
-          <li className="mt-3">
-            <Link href="#">
-              <a className="hover:text-gray-600">شرکت 1</a>
-            </Link>
-          </li>
-          <li className="mt-3">
-            <Link href="#">
-              <a className="hover:text-gray-600">شرکت 2</a>
-            </Link>
-          </li>
-          <li className="mt-3">
-            <Link href="#">
-              <a className="hover:text-gray-600">شرکت 3</a>
-            </Link>
-          </li>
+          {dataCompany()}
         </ul>
       </div>
     </Warpper>

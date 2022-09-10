@@ -73,10 +73,6 @@ const AboutUs: NextPage = () => {
             </li>
           </ul>
         </div>
-
-        <div className="w-full mt-8">
-          <img className="w-full" src="/logoBig.png" alt="" />
-        </div>
       </div>
 
       <Carousel
@@ -86,6 +82,16 @@ const AboutUs: NextPage = () => {
         autoPlay
         className="mt-6"
       >
+        <div className="md:h-ft h-72">
+          <img src="/sliderSerIMG1.jpg" className="h-full" />
+        </div>
+        <div className="md:h-ft h-72">
+          <img src="/sliderSerIMG2.jpg" className="h-full" />
+        </div>
+
+        <div className="md:h-ft h-72">
+          <img src="/sliderSerIMG3.jpg" className="h-full" />
+        </div>
         <div className="md:h-ft h-72">
           <img src="/ferdowsiUni1.jpg" className="h-full" />
         </div>
