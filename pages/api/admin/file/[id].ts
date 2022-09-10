@@ -10,7 +10,7 @@ import fs from "fs";
 class FileHandler extends ApiHandler {
   async delete() {
     const id = this.req.query.id as string;
-    if (!/^\d$/g.test(id as string)) {
+    if (!/^\d+$/g.test(id as string)) {
       throw errorException("notFound");
     }
 

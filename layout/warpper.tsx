@@ -69,12 +69,12 @@ const warpper: FC<PropsType> = ({ children }) => {
 
             <div className="flex">
               
-              <Link href="#">
+              <Link href="http://www.instagram.com/denanovaazma">
                 <a>
                   <img className="w-7 mr-2" src="/instagram.svg" alt="" />
                 </a>
               </Link>
-              <Link href="#">
+              <Link href="https://api.whatsapp.com/send?phone=989155995924">
                 <a>
                   <img className="w-7 mr-3" src="/whatsapp.svg" alt="" />
                 </a>

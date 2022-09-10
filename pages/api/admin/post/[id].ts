@@ -11,7 +11,7 @@ class PostHandler extends ApiHandler {
   async getPost(files?: boolean) {
     const id = this.req.query.id as string;
 
-    if (!/^\d$/g.test(id as string)) {
+    if (!/^\d+$/g.test(id as string)) {
       throw errorException("notFound");
     }
 

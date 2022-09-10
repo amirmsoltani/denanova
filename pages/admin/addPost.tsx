@@ -79,6 +79,7 @@ const AddPost: NextPage = () => {
       axios.get("/api/admin/post/" + id).then((response) => {
         setGetPost(response.data);
         const slide = Array();
+        setTypePost(response.data.type);
         response.data.files.map((item: FileStateType) => {
           if (item.type === "post") {
             setFileCoverPost(item.file);
@@ -163,15 +164,19 @@ const AddPost: NextPage = () => {
     const type = event.target["type"].value;
     const title = event.target["title"].value;
     const description = event.target["description"].value;
-    const content = event.target["content"].value;
+    const content = event.target["content"]?.value;
 
-    let post = [];
+     let post ;
 
-    for (let i = 0; i < getFile.length; i++) {
-      post[i] = { fileId: getFile[i].id, type: "slide" };
-    }
-
-    if (filePost !== undefined) post.push({ fileId: filePost, type: "post" });
+     if(type === 'product'){
+      post = [];
+      for (let i = 0; i < getFile.length; i++) {
+        post[i] = { fileId: getFile[i].id, type: "slide" };
+      }
+  
+      if (filePost !== undefined) post.push({ fileId: filePost, type: "post" });
+     }
+    
 
     try {
       const response = await axios[id ? "put" : "post"](
@@ -391,7 +396,8 @@ const AddPost: NextPage = () => {
                   </label>
                   <input
                     type="link"
-                    name="link"
+                    name="description"
+                    defaultValue={getPost?.description}
                     className="p-1 w-full h-10 mt-2 border border-gray-500"
                   />
                 </>
