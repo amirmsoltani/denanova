@@ -34,13 +34,16 @@ class PostHandler extends ApiHandler {
         },
       },
       content: {
+        optional:true,
         isString: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 10 },
           errorMessage: "طول رشته باید حداقال ۱۰ حرف باشد",
         },
+        
       },
       files: {
+        optional:true,
         isArray: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
           options: { min: 1 },
@@ -70,13 +73,6 @@ class PostHandler extends ApiHandler {
           errorMessage: "نوع ارسالی باید یکی از گزینه های slide,post باشد",
         },
       },
-      // "file.*.name": {
-      //   isString: { errorMessage: "مقدار ارسالی اشتباه است" },
-      //   isLength: {
-      //     options: { min: 3 },
-      //     errorMessage: "طول رشته باید حداقال ۳ حرف باشد",
-      //   },
-      // },
       description: {
         isString: { errorMessage: "مقدار ارسالی اشتباه است" },
         isLength: {
