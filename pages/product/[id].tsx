@@ -1,11 +1,8 @@
-import { data } from "autoprefixer";
 import dayjs from "dayjs";
 import type {
   NextPage,
-  InferGetStaticPropsType,
   GetStaticPropsContext,
 } from "next";
-import { ReactNode } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { Warpper } from "../../layout";
 import { prisma } from "../../lib";

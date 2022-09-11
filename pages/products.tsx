@@ -6,7 +6,6 @@ import type {
 import { Warpper } from "../layout";
 import { prisma } from "../lib";
 import Link from "next/link";
-import { data } from "autoprefixer";
 import dayjs from "dayjs";
 import Pagination from "../components/pagination";
 
