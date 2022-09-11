@@ -1,8 +1,9 @@
-import React, { cloneElement, useState } from "react";
+import React, { useState } from "react";
 import type { NextPage } from "next";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Router from "next/router";
+
 const Login: NextPage = (props) => {
 
   const [showIcon, setShowIcon] = useState(false);

@@ -29,26 +29,18 @@ const Header = () => {
             <Bars3Icon />
           </button>
 
-          <div
-            className="w-full h-full md:flex md:justify-center text-center "
-            dir="rtl"
-          >
+          <div className="w-full h-full text-center " dir="rtl">
             <div className="flex justify-center">
               <Link href="/">
                 <a className="flex">
                   <img className=" h-20" src="/logoFarsi" alt="" />
                 </a>
               </Link>
-              <Link href="/">
-                <a className="flex">
-                  <img className="h-20" src="/logoEng" alt="" />
-                </a>
-              </Link>
             </div>
             <Link href="/">
               <a className="md:self-center">
                 <p className="lg:w-full text-3xl mt-2 font-semibold tracking-wide">
-                  شرکت دانش بنیان دنا نوا
+                  شرکت سهامی خاص دنا نوا آزما
                 </p>
               </a>
             </Link>
@@ -83,27 +75,26 @@ const Header = () => {
       </div>
       {/* menu for lg and xl */}
 
-      <div className="lg:block w-full h-28 hidden mb-5" dir="rtl">
-        <div className="w-full h-20 flex justify-around" dir="rtl">
-          <Link href="/">
-            <a className="">
-              <img className=" h-full" src="/logoFarsi" alt="" />
-            </a>
-          </Link>
-          <Link href="/">
-            <a className="self-end pb-2">
-              <p className="lg:w-full text-2xl mt-2 font-semibold tracking-widest">
-                شرکت دانش بنیان دنا نوا
-              </p>
-            </a>
-          </Link>
-          <Link href="/">
-            <a className="">
-              <img className=" h-full" src="/logoEng" alt="" />
-            </a>
-          </Link>
+      <div className="lg:block w-full h-40 hidden mb-5" dir="rtl">
+      <div className="">
+          <div className="w-full h-full text-center " dir="rtl">
+            <div className="flex justify-center">
+              <Link href="/">
+                <a className="flex">
+                  <img className=" h-20" src="/logoFarsi" alt="" />
+                </a>
+              </Link>
+            </div>
+            <Link href="/">
+              <a className="self-center">
+                <p className="w-full text-3xl mt-2 font-semibold tracking-wide">
+                  شرکت سهامی خاص دنا نوا آزما
+                </p>
+              </a>
+            </Link>
+          </div>
         </div>
-        <div className="mt-4 w-full flex justify-center my-2">
+        <div className="mt-5 w-full flex justify-center my-2">
           <ul className="flex self-end pb-2" dir="rtl" onClick={menuHandelr}>
             {menuItems.map((item) => (
               <li key={item.href} className="mr-10">

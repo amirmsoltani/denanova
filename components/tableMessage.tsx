@@ -1,14 +1,14 @@
 import React, { Children, FC, ReactNode } from "react";
 import Pagination from "../components/pagination";
 
-type paginationType ={
+type PaginationType ={
   pageSize:number;
   page:number;
   lastPage:number;
   counts:number;
 }
 
-type PropsType ={children:ReactNode,dataPagination:paginationType};
+type PropsType ={children:ReactNode,dataPagination:PaginationType};
 
 const TableMessage: FC<PropsType> = ({children,dataPagination}) => {
   return (

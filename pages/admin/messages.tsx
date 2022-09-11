@@ -46,7 +46,7 @@ export const getServerSideProps = withAuthSsr(async ({ query }) => {
 
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-type messageType ={
+type MessageType ={
   content:string;
   createAt:string;
   email:string;
@@ -59,10 +59,10 @@ type messageType ={
 const Post: NextPage<PropsType> = ({ content, pagination }) => {
   
   const [modalOpen, setModalOpen] = useState(false);
-  const [msgState, setMsgState] = useState<messageType | undefined>()
+  const [msgState, setMsgState] = useState<MessageType | undefined>()
   
   //modalHandler & set state
-  const modalHandler = (dataMessage?:messageType) => {
+  const modalHandler = (dataMessage?:MessageType) => {
     dataMessage&&setMsgState(dataMessage);
     setModalOpen(!modalOpen);
   };

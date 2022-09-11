@@ -1,10 +1,10 @@
 import React, { Children, FC, ReactNode } from "react";
 import Pagination from "../components/pagination";
 
-type paginatonType ={page:number; lastPage:number; pageSize:number; counts:number}
-type propsType = {children : ReactNode, dataPagination:paginatonType}
+type PaginatonType ={page:number; lastPage:number; pageSize:number; counts:number}
+type PropsType = {children : ReactNode, dataPagination:PaginatonType}
 
-const TableCompany: FC<propsType> = ({children,dataPagination}) => {
+const TableCompany: FC<PropsType> = ({children,dataPagination}) => {
   return (
     <div className=" p-10">
       <table className="h-auto w-full border border-gray-500" dir="rtl">

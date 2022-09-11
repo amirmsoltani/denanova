@@ -6,6 +6,8 @@ import type {
 import { Warpper } from "../layout";
 import { prisma } from "../lib";
 import Link from "next/link";
+import dayjs from "dayjs";
+import Pagination from "../components/pagination";
 
 export const getServerSideProps = async ({
   query,
@@ -51,76 +53,51 @@ export const getServerSideProps = async ({
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Products: NextPage<PropsType> = ({ content, pagination }) => {
-  console.log(content, pagination);
 
   return (
     <Warpper>
       <section className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 grid-cols-1">
-        <figure className="h-auto bg-gray-100 m-5 drop-shadow-lg" dir="rtl">
-          <img
-            className=" w-full md:h-72 sm:h-96 h-72"
-            src="/imgProduct1.jpg"
-            alt=""
-          />
-          <div className="px-2">
-            <h3 className="my-4 text-3xl text-zinc-800 font-bold">
-              محصول سرم جنین گاوی (FBS)
-            </h3>
-            <div className="">
-              <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
-                25<span className="text-base">مهر</span>
-              </span>
-              <span className="mt-2 text-sm opacity-40 mr-2">مهدیه درودی</span>
-            </div>
-
-            <p className="mt-4 mb-6 opacity-80 text-justify text-ellipsis overflow-hidden">
-              سرم جنین گاوی (FBS): بخش مایع خون لخته شده در جنین گوساله است که
-              از سلول ها، فیبرین و فاکتورهای لخته کننده آن گرفته شده، اما حاوی
-              تعداد زیادی از مواد مغذی و ماکرومولکول های ضروری برای رشد سلول
-              است. آلبومین موجود در سرم گاوی، اصلی ترین ترکیب موجود در FBS است.
-            </p>
-          </div>
-          <Link href="/product/123">
-            <button className="w-full flex justify-center mt-8">
-              <a className="px-20 py-4 text-center mb-4 shadow-sm block text-white bg-lime-500">
-                ادامه مطلب
-              </a>
-            </button>
-          </Link>
-        </figure>
-        <figure className="h-auto bg-gray-100 m-5 drop-shadow-lg" dir="rtl">
-          <img
-            className=" w-full md:h-72 sm:h-96 h-72"
-            src="/imgProduct1.jpg"
-            alt=""
-          />
-          <div className="px-2">
-            <h3 className="my-4 text-3xl text-zinc-800 font-bold">
-              محصول سرم جنین گاوی (FBS)
-            </h3>
-            <div className="">
-              <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
-                25<span className="text-base">مهر</span>
-              </span>
-              <span className="mt-2 text-sm opacity-40 mr-2">مهدیه درودی</span>
-            </div>
-
-            <p className="mt-4 mb-6 opacity-80 text-justify text-ellipsis overflow-hidden">
-              سرم جنین گاوی (FBS): بخش مایع خون لخته شده در جنین گوساله است که
-              از سلول ها، فیبرین و فاکتورهای لخته کننده آن گرفته شده، اما حاوی
-              تعداد زیادی از مواد مغذی و ماکرومولکول های ضروری برای رشد سلول
-              است. آلبومین موجود در سرم گاوی، اصلی ترین ترکیب موجود در FBS است.
-            </p>
-          </div>
-          <Link href="/product/123">
-            <button className="w-full flex justify-center mt-8">
-              <a className="px-20 py-4 text-center mb-4 shadow-sm block text-white bg-lime-500">
-                ادامه مطلب
-              </a>
-            </button>
-          </Link>
-        </figure>
+        {
+          content.map( item => (
+              <figure className="h-auto bg-gray-100 m-5 drop-shadow-lg" dir="rtl" key={item.id}>
+                <img
+                  className=" w-full md:h-72 sm:h-96 h-72"
+                  src={item.files[0].file.filePath}
+                  alt=""
+                />
+                <div className="px-2">
+                  <h3 className="my-4 text-2xl text-zinc-800 font-bold">
+                    {item.title}
+                  </h3>
+                  <div className="">
+                    <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
+                    {dayjs().calendar('jalali').format('DD')}<span className="text-base"> {dayjs().calendar('jalali').locale('fa').format('MMMM')}</span>
+                    </span>
+                    <span className="mt-2 text-sm opacity-40 mr-2"> {item.author.fullname}</span>
+                  </div>
+      
+                  <p className="mt-4 h-20 w-full mb-16 opacity-80 text-justify text-ellipsis overflow-hidden ...">
+                    {item.description!.slice(0,100)}{item.description!.length>100 &&'. . .'}
+                  </p>
+                </div>
+                <div className="w-full h-16 absolute bottom-0">
+                <Link href={`/product/${item.id}`}>
+                  <button className="w-full flex justify-center">
+                    <a className="px-20 py-4 text-center mb-4 shadow-sm block text-white bg-lime-500">
+                      ادامه مطلب
+                    </a>
+                  </button>
+                </Link>
+                </div>
+              </figure>
+            )
+          )
+        }
       </section>
+      <div className={`${pagination.lastPage>1 ? 'block': 'hidden'} flex justify-center mt-6`}>
+      <Pagination counts={pagination.counts} lastPage={pagination.lastPage} page={pagination.page} pageSize={pagination.pageSize} />
+
+      </div>
     </Warpper>
   );
 };

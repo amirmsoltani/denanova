@@ -21,6 +21,12 @@ const Home: NextPage = () => {
         <div className="md:h-ft h-72">
           <img src="/ferdowsiUni3.jpg" className="h-full" />
         </div>
+        <div className="md:h-ft h-72">
+          <img src="/sliderHomeIMG1.jpg" className="h-full" />
+        </div>
+        <div className="md:h-ft h-72">
+          <img src="/sliderHomeIMG2.jpg" className="h-full" />
+        </div>
       </Carousel>
 
       <div className="columns-1 mt-10 px-4 text-lg" dir="rtl">

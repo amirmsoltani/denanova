@@ -92,7 +92,7 @@ const Post: NextPage<PropsType> = ({ content, pagination }) => {
                   .format("hh:mm - YYYY/MM/DD")}
               </td>
               <td className="p-2 flex items-center justify-between">
-                <Link href={"/company/" + item.id}>
+                <Link href={"/agencies"}>
                   <EyeIcon className="w-5 text-stone-700 inline hover:cursor-pointer" />
                 </Link>
                 <Link href={"/admin/addPost?id=" + item.id}>
