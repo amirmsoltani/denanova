@@ -85,7 +85,6 @@ const Product: NextPage<PropsType> = ({ content }) => {
   const dataProduct = () => {
     const img = Array();
 
-    console.log(content);
     content.files.map((item:FilesType,index:number) => {
       img.push(
         <div className="md:h-ft h-72"  key={index}>

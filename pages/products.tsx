@@ -78,7 +78,7 @@ const Products: NextPage<PropsType> = ({ content, pagination }) => {
             </div>
 
             <p className="mt-4 h-20 w-full mb-16 opacity-80 text-justify text-ellipsis overflow-hidden ...">
-              {item.description!.slice(0,100)} . . .
+              {item.description!.slice(0,100)}{item.description!.length>100 &&'. . .'}
             </p>
           </div>
           <div className="w-full h-16 absolute bottom-0">
