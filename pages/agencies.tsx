@@ -7,7 +7,9 @@ import { Warpper } from "../layout";
 import Link from "next/link";
 import { prisma } from "../lib";
 
-export const getServerSideProps = async ({ query }:GetServerSidePropsContext) => {
+export const getServerSideProps = async ({
+  query,
+}: GetServerSidePropsContext) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
   const page = Math.abs(+(query.page || 1));
 
@@ -46,27 +48,6 @@ export const getServerSideProps = async ({ query }:GetServerSidePropsContext) =>
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Company: NextPage<PropsType> = ({ content, pagination }) => {
-
-  const dataCompany = () => {
-    const data = Array();
-
-    content.map( item => {
-      data.push(
-        <li className="mt-3">
-            <Link href={item.description!}>
-              <a className="hover:text-gray-600"> {item.title}</a>
-            </Link>
-          </li>
-      )
-    })
-
-
-
-    return data;
-
-
-  }
-
   return (
     <Warpper>
       <div className="columns-1 my-10 px-4" dir="rtl">
@@ -74,7 +55,13 @@ const Company: NextPage<PropsType> = ({ content, pagination }) => {
           نمایندگی های شرکت دانش بنیان دنا نوا به شرح زیر می باشد :
         </p>
         <ul className="list-decimal mr-5 mt-2">
-          {dataCompany()}
+          {content.map((item) => (
+            <li className="mt-3">
+              <Link href={item.description!}>
+                <a className="hover:text-gray-600" target="_blank"> {item.title}</a>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </Warpper>

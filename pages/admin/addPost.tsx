@@ -21,7 +21,7 @@ type FileType = {
   createAt: string;
   id: number;
 };
-type getPost = {
+type GetPost = {
   authorId: number;
   content: string;
   createAt: string;
@@ -61,7 +61,7 @@ const AddPost: NextPage = () => {
   const [filePost, setFilePost] = useState<number | undefined>();
   const [statusRelFile, setStatusRelFile] = useState(false);
   const [typePost, setTypePost] = useState("product");
-  const [getPost, setGetPost] = useState<getPost | undefined>();
+  const [getPost, setGetPost] = useState<GetPost | undefined>();
 
   // type post handler
   const typePostHandler = (event: any) => {

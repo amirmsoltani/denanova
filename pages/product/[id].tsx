@@ -21,21 +21,16 @@ type ContentType = {
   title: string;
   description: string;
   content: string;
-  files: {
+  files: Array<{
     file: {
       filePath: string;
     };
-  };
+  }>;
   author: {
     fullname: string;
   };
 };
 
-type FilesType={
-  file:{
-  filePath:string
-  }
-}
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const id = params!.id!.toString();
@@ -82,61 +77,50 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 type PropsType = { content: ContentType };
 
 const Product: NextPage<PropsType> = ({ content }) => {
-  const dataProduct = () => {
-    const img = Array();
-
-    content.files.map((item:FilesType,index:number) => {
-      img.push(
-        <div className="md:h-ft h-72"  key={index}>
-          <img src={item.file.filePath} className="h-full object-contain" />
-        </div>
-      );
-    });
-
-
-    return (
-      <>
-        <Carousel
-          showThumbs={false}
-          showStatus={false}
-          interval={3000}
-          infiniteLoop
-          autoPlay
-          className="mt-6"
-        >
-          {img}
-        </Carousel>
-        <div className="w-full" dir="rtl">
-          <div className="p-4">
-            <div className="">
-              <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
-                {dayjs().calendar("jalali").format("DD")}
-                <span className="text-base">
-                  {" "}
-                  {dayjs().calendar("jalali").locale("fa").format("MMMM")}
-                </span>
-              </span>
-              <span className="mt-2 text-sm opacity-40 mr-2">
-                {" "}
-                {content.author.fullname}
-              </span>
-            </div>
-            <h3 className=" text-3xl text-zinc-800 font-bold my-4">
-              {" "}
-              {content.title}{" "}
-            </h3>
-
-            <div
-              className="my-2 opacity-80 text-justify"
-              dangerouslySetInnerHTML={{ __html: content.content }}
-            ></div>
+  return (
+    <Warpper>
+      <Carousel
+        showThumbs={false}
+        showStatus={false}
+        interval={3000}
+        infiniteLoop
+        autoPlay
+        className="mt-6"
+      >
+        {content.files.map((item) => (
+          <div className="md:h-ft h-72">
+            <img src={item.file.filePath} className="h-full object-contain" />
           </div>
-        </div>
-      </>
-    );
-  };
+        ))}
+      </Carousel>
+      <div className="w-full" dir="rtl">
+        <div className="p-4">
+          <div className="">
+            <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
+              {dayjs().calendar("jalali").format("DD")}
+              <span className="text-base">
+                {" "}
+                {dayjs().calendar("jalali").locale("fa").format("MMMM")}
+              </span>
+            </span>
+            <span className="mt-2 text-sm opacity-40 mr-2">
+              {" "}
+              {content.author.fullname}
+            </span>
+          </div>
+          <h3 className=" text-3xl text-zinc-800 font-bold my-4">
+            {" "}
+            {content.title}{" "}
+          </h3>
 
-  return <Warpper>{dataProduct()}</Warpper>;
+          <div
+            className="my-2 opacity-80 text-justify"
+            dangerouslySetInnerHTML={{ __html: content.content }}
+          ></div>
+        </div>
+      </div>
+    </Warpper>
+  );
 };
 
 export default Product;
