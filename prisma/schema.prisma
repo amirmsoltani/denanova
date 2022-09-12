@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://denanova:gqYbh6bzimHvg020xYacGhuDcOE57EKC@127.0.0.1:5432/denanova_db"
+  url      = env("DATABASE_URL")
 }
 
 model User {
