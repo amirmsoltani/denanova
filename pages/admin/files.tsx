@@ -56,6 +56,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
   const onSubmit = async (event: any) => {
     event.preventDefault();
     const form = new FormData();
+    setStatusUpload(true);
     form.append("image", event.target["image"].files[0]);
     form.append("name", event.target["name"].value);
 
@@ -63,7 +64,6 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
       method: "POST",
       body: form,
     });
-    setStatusUpload(true);
     checkStatusUpload(response.status);
   };
 
