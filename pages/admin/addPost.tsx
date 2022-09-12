@@ -390,7 +390,7 @@ const AddPost: NextPage = () => {
                 onChange={typePostHandler}
               >
                 <option className="p-1" value="product">
-                  پست
+                  محصول
                 </option>
                 <option className="p-1" value="company">
                   نمایندگی
