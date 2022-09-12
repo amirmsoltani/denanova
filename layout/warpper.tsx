@@ -87,7 +87,7 @@ const warpper: FC<PropsType> = ({ children }) => {
                 </Link>
               </div>
             </div>
-            <div className="w-full md:mt-10 px-4 md:px-0 mt-6 md:ml-4 2xl:px-16 2xl:w-3/4 ">
+            <div className="w-full px-4   md:mt-10  mt-6 md:ml-4 lg:px-4 lg:w-3/4 xl:w-2/4 2xl:px-16 2xl:w-2/4 ">
               <div className="w-full">
                 <Link href="https://www.google.com/maps/place/36.309366,%2059.537432">
                   <a target="_blank"  className="relative h-full w-full block">
