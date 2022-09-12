@@ -36,12 +36,14 @@ type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const File: NextPage<PropsType> = ({ contents, pagination }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [showStatus, setShowStatus] = useState(true);
+  const [statusUpload, setStatusUpload] = useState(false);
 
   const modalHandler = () => {
     setModalOpen(!modalOpen);
   };
 
   const checkStatusUpload = (status: number) => {
+    setStatusUpload(false);
     if (status === 400) {
       setShowStatus(false);
     }
@@ -61,7 +63,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
       method: "POST",
       body: form,
     });
-
+    setStatusUpload(true);
     checkStatusUpload(response.status);
   };
 
@@ -102,11 +104,34 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
             فایل را انتخاب کرده سپس نام فایل را وارد کنید!
           </p>
 
-          <input
+          <div className="flex justify-center">
+
+          <button
             type="submit"
-            value="ارسال"
-            className="text-xl text-white mt-5 bg-blue-900 hover:bg-blue-700 h-10 w-24 drop-shadow"
-          />
+            className={`${statusUpload? "bg-gray-800 hover:bg-gary-800" : "bg-blue-900 hover:bg-blue-700" } text-xl text-white mt-5  py-2 px-4 h-10 w-auto drop-shadow flex items-center `}
+
+            disabled={statusUpload ? true : false}
+          >
+            
+            <div
+              className={`${
+                    statusUpload ? "inline" : "hidden"
+                  } w-6 h-6 inline`}
+                >
+                  <Image
+                    src="/loading.webp"
+                    alt=""
+                    width="100%"
+                    height="100%"
+                    layout="responsive"
+                  />
+                </div>
+                <span className="inline mx-1" dir="rtl">{
+              statusUpload? 'لطفا منتظر بمانید' : "ارسال"
+            }</span>
+            </button>
+          </div>
+
         </form>
       </Modal>
       <AdminWrapper>
@@ -126,7 +151,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
                 className="w-56 h-auto m-2 p-2 drop-shadow  bg-gray-100 "
               >
                 <div className="w-full p-2 ">
-                <Image src={item.filePath} alt="" width="100%" height="100%" layout="responsive"  />
+                <img src={item.filePath} alt="" width="100%" height="100%"  />
                 </div>
                 <div className="w-full mt-2 flex justify-between px-2">
                   <span className="text-center text-sm">{item.name}</span>

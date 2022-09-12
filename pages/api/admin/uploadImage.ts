@@ -24,7 +24,7 @@ class UploadImageHandler extends ApiHandler {
     form.parse(this.req, async (err, fields, files) => {
       const name = fields.name as string;
       const file = files.image as formidable.File;
-      
+
       if (err) {
         this.res.status(err.httpCode || 400).json({ message: String(err) });
         return;
@@ -44,9 +44,9 @@ class UploadImageHandler extends ApiHandler {
       }
 
       const data = fs.readFileSync(file.filepath);
-      const filePath = `./public/uploadedImages/${dayjs().format(
-        "MM-DD-YYYY"
-      )}`;
+      const filePath = `./${
+        process.env.NODE_ENV === "development" ? "public/" : ""
+      }uploadedImages/${dayjs().format("MM-DD-YYYY")}`;
 
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(filePath, { recursive: true });
