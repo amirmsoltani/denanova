@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Warpper } from "../layout";
 import Router from "next/router";
 import Modal from "../components/modal";
+import Image from "next/image";
 
 const ContactUs: NextPage = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-
 
   const submit = async (event: any) => {
     event.preventDefault();
@@ -37,21 +37,27 @@ const ContactUs: NextPage = () => {
     setShowLoading(false);
   };
 
-
   const modalHandler = () => {
     setModalOpen(!modalOpen);
-  }
-
+  };
 
   return (
     <>
-      <Modal width="w-96" visible={modalOpen} onClose={() => modalHandler()} >
+      <Modal width="w-96" visible={modalOpen} onClose={() => modalHandler()}>
         <div className="text-center">
-          <p className="py-2 border-b text-red-600 text-lg">! پیام شما ارسال نشد</p>
-        <p className="py-1 mt-1 ">ایمیل خود را بررسی کنید</p>
-        <p className="py-1 text-gray-600">نام و نام خانوادگی خود را پس وارد کردن بررسی کنید</p>
-        <p className="py-1 ">تعداد حروف موضوع پیام باید بین ۶ تا ۱۰۰ حرف باشد.</p>
-        <p className="py-1 text-gray-600">تعداد حروف پیام ارسالی باید بین ۱۰ تا ۱۵۰۰ حرف باشد</p>
+          <p className="py-2 border-b text-red-600 text-lg">
+            ! پیام شما ارسال نشد
+          </p>
+          <p className="py-1 mt-1 ">ایمیل خود را بررسی کنید</p>
+          <p className="py-1 text-gray-600">
+            نام و نام خانوادگی خود را پس وارد کردن بررسی کنید
+          </p>
+          <p className="py-1 ">
+            تعداد حروف موضوع پیام باید بین ۶ تا ۱۰۰ حرف باشد.
+          </p>
+          <p className="py-1 text-gray-600">
+            تعداد حروف پیام ارسالی باید بین ۱۰ تا ۱۵۰۰ حرف باشد
+          </p>
         </div>
       </Modal>
       <Warpper>
@@ -113,11 +119,17 @@ const ContactUs: NextPage = () => {
               type="submit"
             >
               <span className="mx-1">ارسال</span>
-              <img
-                src="/loading.webp"
+              <div
                 className={`${showLoading ? "inline" : "hidden"} w-6 inline`}
-                alt=""
-              />
+              >
+                <Image
+                  src="/loading.webp"
+                  width="100%"
+                  height="100%"
+                  layout="responsive"
+                  alt=""
+                />
+              </div>
             </button>
           </form>
         </div>

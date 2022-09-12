@@ -6,6 +6,7 @@ import Modal from "../../components/modal";
 import { prisma, withAuthSsr } from "../../lib";
 import Pagination from "../../components/pagination";
 import Router from "next/router";
+import Image from "next/image";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -124,7 +125,9 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
                 key={item.id}
                 className="w-56 h-auto m-2 p-2 drop-shadow  bg-gray-100 "
               >
-                <img className="w-full p-2 " src={item.filePath} alt="" />
+                <div className="w-full p-2 ">
+                <Image src={item.filePath} alt="" width="100%" height="100%" layout="responsive"  />
+                </div>
                 <div className="w-full mt-2 flex justify-between px-2">
                   <span className="text-center text-sm">{item.name}</span>
                   <button

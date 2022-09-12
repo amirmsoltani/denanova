@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { Warpper } from "../layout";
 import { Carousel } from "react-responsive-carousel";
 import { CubeIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const AboutUs: NextPage = () => {
   return (
@@ -83,23 +84,23 @@ const AboutUs: NextPage = () => {
         className="mt-6"
       >
         <div className="md:h-ft h-72">
-          <img src="/sliderSerIMG1.jpg" className="h-full" />
+          <Image src="/sliderSerIMG1.jpg" layout="fill" alt=""/>
         </div>
         <div className="md:h-ft h-72">
-          <img src="/sliderSerIMG2.jpg" className="h-full" />
+          <Image src="/sliderSerIMG2.jpg" layout="fill" alt=""/>
         </div>
 
         <div className="md:h-ft h-72">
-          <img src="/sliderSerIMG3.jpg" className="h-full" />
+          <Image src="/sliderSerIMG3.jpg" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <img src="/ferdowsiUni1.jpg" className="h-full" />
+          <Image src="/ferdowsiUni1.webp" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <img src="/ferdowsiUni2.jpg" className="h-full" />
+          <Image src="/ferdowsiUni2.webp" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <img src="/ferdowsiUni3.jpg" className="h-full" />
+          <Image src="/ferdowsiUni3.webp" layout="fill" alt="" />
         </div>
       </Carousel>
     </Warpper>

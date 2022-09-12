@@ -11,6 +11,7 @@ import Router from "next/router";
 import Link from "next/link";
 import { useState } from "react";
 import dayjs from "dayjs";
+import Image from "next/image";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -87,7 +88,10 @@ const Post: NextPage<PropsType> = ({ content, pagination }) => {
                 <Link href={"/admin/addPost?id="+item.id}>
                 <PencilSquareIcon className="w-5 text-lime-600  inline hover:cursor-pointer" />
                 </Link>
-                <img src="/loading.webp" className={`${index===showLoading?"inline":"hidden"} w-6 inline hover:cursor-pointer`} alt="" />
+                <div className={`${index===showLoading?"inline":"hidden"} w-6 inline hover:cursor-pointer`}>
+
+                <Image src="/loading.webp"  alt="" width="100%" height="100%" layout="responsive"  />
+                </div>
                 <TrashIcon onClick={() => deletePost(item.id,index)} className={`${index !==showLoading ? "inline" : "hidden"} w-5 text-red-600`} />
               </td>
             </tr>
