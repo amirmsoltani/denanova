@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = "postgresql://denanova:gqYbh6bzimHvg020xYacGhuDcOE57EKC@127.0.0.1:5432/denanova_db"
 }
 
 model User {
