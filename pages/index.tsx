@@ -14,19 +14,19 @@ const Home: NextPage = () => {
         autoPlay
       >
         <div className="md:h-ft h-72">
-          <Image width="100%" height="100%" layout="responsive"  src="/ferdowsiUni1.jpg" alt="" />
+          <Image layout="fill"  src="/ferdowsiUni1.webp" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image width="100%" height="100%" layout="responsive"  src="/ferdowsiUni2.jpg" alt="" />
+          <Image layout="fill"  src="/ferdowsiUni2.webp" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni3.jpg" width="100%" height="100%" layout="responsive" alt="" />
+          <Image src="/ferdowsiUni3.webp" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/sliderHomeIMG1.jpg" width="100%" height="100%" layout="responsive" alt="" />
+          <Image src="/sliderHomeIMG1.jpg" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/sliderHomeIMG2.jpg" width="100%" height="100%" layout="responsive" alt="" />
+          <Image src="/sliderHomeIMG2.jpg" layout="fill" alt="" />
         </div>
       </Carousel>
 

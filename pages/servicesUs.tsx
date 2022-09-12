@@ -94,13 +94,13 @@ const AboutUs: NextPage = () => {
           <Image src="/sliderSerIMG3.jpg" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni1.jpg" layout="fill" alt="" />
+          <Image src="/ferdowsiUni1.webp" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni2.jpg" layout="fill" alt="" />
+          <Image src="/ferdowsiUni2.webp" layout="fill" alt="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni3.jpg" layout="fill" alt="" />
+          <Image src="/ferdowsiUni3.webp" layout="fill" alt="" />
         </div>
       </Carousel>
     </Warpper>
