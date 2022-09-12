@@ -44,9 +44,8 @@ class UploadImageHandler extends ApiHandler {
       }
 
       const data = fs.readFileSync(file.filepath);
-      const filePath = `./${
-        process.env.NODE_ENV === "development" ? "public/" : ""
-      }uploadedImages/${dayjs().format("MM-DD-YYYY")}`;
+      const filePath = `${process.env
+        .UPLOAD_PATH!}/uploadedImages/${dayjs().format("MM-DD-YYYY")}`;
 
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(filePath, { recursive: true });
@@ -57,7 +56,7 @@ class UploadImageHandler extends ApiHandler {
       fs.writeFileSync(path, data);
 
       const prismaFile = await this.prisma.file.create({
-        data: { filePath: path.replace("./public", ""), name },
+        data: { filePath: path.replace(process.env.UPLOAD_PATH!, ""), name },
       });
 
       fs.unlinkSync(file.filepath);

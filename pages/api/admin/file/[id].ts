@@ -28,7 +28,7 @@ class FileHandler extends ApiHandler {
     }
 
     await this.prisma.file.delete({ where: { id: +id } });
-    fs.unlinkSync("./"+ (process.env.NODE_ENV === "development" ? "public/" : "") + file.filePath);
+    fs.unlinkSync(process.env.UPLOAD_PATH + file.filePath);
 
     this.res.status(200).json({ message: "file deleted" });
   }
