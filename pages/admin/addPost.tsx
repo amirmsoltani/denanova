@@ -135,12 +135,11 @@ const AddPost: NextPage = () => {
           <div className="w-32 h-36 mt-8 px-1" key={index}>
             <div className="w-full h-32">
               <div className="w-32 h-32">
-                <Image
+                <img
                   src={item.filePath}
                   alt=""
                   width="100%"
                   height="100%"
-                  layout="responsive"
                 />
               </div>
             </div>
@@ -340,12 +339,11 @@ const AddPost: NextPage = () => {
               onClick={() => addImageCoverPost(item)}
             >
               <div className="w-full p-2 ">
-                <Image
+                <img
                   src={item.filePath}
                   alt=""
                   width="100%"
                   height="100%"
-                  layout="responsive"
                 />
               </div>
               <div className="w-full mt-2 flex justify-center px-2">
@@ -443,12 +441,11 @@ const AddPost: NextPage = () => {
                       >
                         {fileCoverPost ? (
                           <div className="w-full h-full">
-                            <Image
+                            <img
                               src={fileCoverPost.filePath}
                               alt=""
                               width="100%"
                               height="100%"
-                              layout="responsive"
                             />
                           </div>
                         ) : (
