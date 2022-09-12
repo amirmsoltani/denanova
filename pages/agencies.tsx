@@ -55,8 +55,8 @@ const Company: NextPage<PropsType> = ({ content, pagination }) => {
           نمایندگی های شرکت دانش بنیان دنا نوا به شرح زیر می باشد :
         </p>
         <ul className="list-decimal mr-5 mt-2">
-          {content.map((item) => (
-            <li className="mt-3">
+          {content.map((item,index) => (
+            <li className="mt-3" key={index}>
               <Link href={item.description!}>
                 <a className="hover:text-gray-600" target="_blank"> {item.title}</a>
               </Link>

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import { withAuthSsr } from "../../lib";
+import Image from "next/image";
 
 export const getServerSideProps = withAuthSsr(async () => {
   return {
@@ -131,9 +132,17 @@ const AddPost: NextPage = () => {
     property.push(
       getFile.map((item, index) => {
         return (
-          <div className="w-32 h-36 mt-8 px-1">
+          <div className="w-32 h-36 mt-8 px-1" key={index}>
             <div className="w-full h-32">
-              <img className="w-32 h-32" src={item.filePath} alt="" />
+              <div className="w-32 h-32">
+                <Image
+                  src={item.filePath}
+                  alt=""
+                  width="100%"
+                  height="100%"
+                  layout="responsive"
+                />
+              </div>
             </div>
             <div className="w-32 mt-3  flex justify-center">
               <XCircleIcon
@@ -166,17 +175,16 @@ const AddPost: NextPage = () => {
     const description = event.target["description"].value;
     const content = event.target["content"]?.value;
 
-     let post ;
+    let post;
 
-     if(type === 'product'){
+    if (type === "product") {
       post = [];
       for (let i = 0; i < getFile.length; i++) {
         post[i] = { fileId: getFile[i].id, type: "slide" };
       }
-  
+
       if (filePost !== undefined) post.push({ fileId: filePost, type: "post" });
-     }
-    
+    }
 
     try {
       const response = await axios[id ? "put" : "post"](
@@ -331,7 +339,15 @@ const AddPost: NextPage = () => {
               className="w-32 h-auto m-2 p-2 drop-shadow  bg-gray-100 "
               onClick={() => addImageCoverPost(item)}
             >
-              <img className="w-full p-2 " src={item.filePath} alt="" />
+              <div className="w-full p-2 ">
+                <Image
+                  src={item.filePath}
+                  alt=""
+                  width="100%"
+                  height="100%"
+                  layout="responsive"
+                />
+              </div>
               <div className="w-full mt-2 flex justify-center px-2">
                 <span className="text-center text-sm">{item.name}</span>
               </div>
@@ -426,11 +442,15 @@ const AddPost: NextPage = () => {
                         onClick={() => modalHandler("cover")}
                       >
                         {fileCoverPost ? (
-                          <img
-                            className="w-full h-full"
-                            src={fileCoverPost.filePath}
-                            alt=""
-                          />
+                          <div className="w-full h-full">
+                            <Image
+                              src={fileCoverPost.filePath}
+                              alt=""
+                              width="100%"
+                              height="100%"
+                              layout="responsive"
+                            />
+                          </div>
                         ) : (
                           <div className="flex items-center justify-center h-96 w-96 border border-black bg-white hover:bg-lime-50 hover:cursor-pointer hover:text-lime-600 hover:border-lime-600">
                             <PlusIcon className=" w-12 " />
@@ -477,7 +497,10 @@ const AddPost: NextPage = () => {
             </form>
           ) : (
             <div className="w-full h-screen flex justify-center items-center">
-              <img src="/loading.webp" className="w-24" alt="" />
+              <div className="w-24">
+              <Image src="/loading.webp"  alt="" width="100%" height="100%" layout="responsive"  />
+
+              </div>
             </div>
           )}
         </div>

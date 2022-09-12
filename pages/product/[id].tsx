@@ -1,11 +1,9 @@
 import dayjs from "dayjs";
-import type {
-  NextPage,
-  GetStaticPropsContext,
-} from "next";
+import type { NextPage, GetStaticPropsContext } from "next";
 import { Carousel } from "react-responsive-carousel";
 import { Warpper } from "../../layout";
 import { prisma } from "../../lib";
+import Image from "next/image";
 
 export const getStaticPaths = async () => {
   return {
@@ -27,7 +25,6 @@ type ContentType = {
     fullname: string;
   };
 };
-
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const id = params!.id!.toString();
@@ -84,9 +81,17 @@ const Product: NextPage<PropsType> = ({ content }) => {
         autoPlay
         className="mt-6"
       >
-        {content.files.map((item) => (
-          <div className="md:h-ft h-72">
-            <img src={item.file.filePath} className="h-full object-contain" />
+        {content.files.map((item, index) => (
+          <div className="md:h-ft h-72" key={index}>
+            <div className="h-full object-contain">
+              <Image
+                src={item.file.filePath}
+                width="100%"
+                height="100%"
+                layout="responsive"
+                alt=""
+              />
+            </div>
           </div>
         ))}
       </Carousel>
