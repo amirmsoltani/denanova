@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import { withAuthSsr } from "../../lib";
-import Image from "next/image";
+import Pic from "../../components/pic";
 
 export const getServerSideProps = withAuthSsr(async () => {
   return {
@@ -120,6 +120,7 @@ const AddPost: NextPage = () => {
       setFilePost(item.id);
     }
     if (statusRelFile === true) {
+      console.log('start pic ' + getFile)
       setGetFile((oldFile) => [...oldFile, item]);
       setMultiChange(!multiChange);
     }
@@ -135,12 +136,7 @@ const AddPost: NextPage = () => {
           <div className="w-32 h-36 mt-8 px-1" key={index}>
             <div className="w-full h-32">
               <div className="w-32 h-32">
-                <img
-                  src={item.filePath}
-                  alt=""
-                  width="100%"
-                  height="100%"
-                />
+                <Pic srcPic={item.filePath} classPic="h-full w-full" altPic="" />
               </div>
             </div>
             <div className="w-32 mt-3  flex justify-center">
@@ -202,12 +198,15 @@ const AddPost: NextPage = () => {
       const error = e as AxiosError<{ message: { param: string }[] }>;
       const err = await error.response?.data;
       const setErr: any = [];
-      err?.message.map((item) => {
-        setErr.push(item.param);
-      });
-
-      setErrorPost(setErr);
+      if(error.response?.status === 401) Router.replace('/admin/login');
+      else{
+        err?.message.map((item) => {
+          setErr.push(item.param);
+        });
+        setErrorPost(setErr);
       setModalErrOpen(!modalErrOpen);
+      }
+      
     }
   };
 
@@ -227,6 +226,7 @@ const AddPost: NextPage = () => {
 
   //show error in modal
   const showErr = () => {
+
     const result: any = [];
     let counter = 0;
     if (errorPost !== undefined) counter = errorPost?.length;
@@ -278,7 +278,7 @@ const AddPost: NextPage = () => {
       }
     }
 
-    if (fileCoverPost === undefined) {
+    if (fileCoverPost === undefined && typePost ==="product") {
       result.push(
         <div
           key={10}
@@ -291,7 +291,7 @@ const AddPost: NextPage = () => {
       );
     }
 
-    if (getFile.length === 0) {
+    if (getFile.length === 0 &&  typePost === 'product') {
       result.push(
         <div
           key={11}
@@ -304,7 +304,7 @@ const AddPost: NextPage = () => {
       );
     }
 
-    return result.reverse();
+    return result;
   };
 
   //modal error handler
@@ -339,12 +339,7 @@ const AddPost: NextPage = () => {
               onClick={() => addImageCoverPost(item)}
             >
               <div className="w-full p-2 ">
-                <img
-                  src={item.filePath}
-                  alt=""
-                  width="100%"
-                  height="100%"
-                />
+                <Pic srcPic={item.filePath} classPic="w-full h-full" altPic="" />
               </div>
               <div className="w-full mt-2 flex justify-center px-2">
                 <span className="text-center text-sm">{item.name}</span>
@@ -414,6 +409,8 @@ const AddPost: NextPage = () => {
                     defaultValue={getPost?.description}
                     className="p-1 w-full h-10 mt-2 border border-gray-500"
                   />
+                  <p className="text-sm mt-4 text-gray-700">لینک وارد شده باید دارای  https باشد مثال : https://www.google.com</p>
+                  
                 </>
               ) : (
                 <>
@@ -441,12 +438,7 @@ const AddPost: NextPage = () => {
                       >
                         {fileCoverPost ? (
                           <div className="w-full h-full">
-                            <img
-                              src={fileCoverPost.filePath}
-                              alt=""
-                              width="100%"
-                              height="100%"
-                            />
+                            <Pic srcPic={fileCoverPost.filePath} classPic="w-full h-full" altPic="" />
                           </div>
                         ) : (
                           <div className="flex items-center justify-center h-96 w-96 border border-black bg-white hover:bg-lime-50 hover:cursor-pointer hover:text-lime-600 hover:border-lime-600">
@@ -495,8 +487,7 @@ const AddPost: NextPage = () => {
           ) : (
             <div className="w-full h-screen flex justify-center items-center">
               <div className="w-24">
-              <Image src="/loading.webp"  alt="" width="100%" height="100%" layout="responsive"  />
-
+                <Pic altPic="" srcPic="/loading.webp" classPic="w-full h-full" />
               </div>
             </div>
           )}

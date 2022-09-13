@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Router from "next/router";
-import Image from "next/image";
+import Pic from "../../components/pic";
 
 const Login: NextPage = (props) => {
   const [showIcon, setShowIcon] = useState(false);
@@ -92,13 +92,7 @@ const Login: NextPage = (props) => {
             className={` hover:bg-cyan-700 hover:text-neutral-300 flex items-center justify-center transition-all delay-50 text-md font-bold px-5 h-10 ml-14  drop-shadow-xl  bg-sky-700 mt-4`}
           >
             <div className={`${showLoading ? "inline" : "hidden"} w-6 inline`}>
-              <Image
-                src="/loading.webp"
-                alt=""
-                width="100%"
-                height="100%"
-                layout="responsive"
-              />
+            <Pic srcPic="/loading.webp" classPic="h-full w-full" altPic="" />
             </div>
             <span className="mx-1">login</span>
           </button>

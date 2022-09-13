@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Carousel } from "react-responsive-carousel";
 import { Warpper } from "../layout";
-import Image from "next/image";
+import Pic from "../components/pic";
 
 const Home: NextPage = () => {
   return (
@@ -14,19 +14,19 @@ const Home: NextPage = () => {
         autoPlay
       >
         <div className="md:h-ft h-72">
-          <Image layout="fill"  src="/ferdowsiUni1.webp" alt="" />
+          <Pic srcPic="/ferdowsiUni1.webp" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image layout="fill"  src="/ferdowsiUni2.webp" alt="" />
+          <Pic srcPic="/ferdowsiUni2.webp" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni3.webp" layout="fill" alt="" />
+          <Pic srcPic="/ferdowsiUni3.webp" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/sliderHomeIMG1.jpg" layout="fill" alt="" />
+          <Pic srcPic="/sliderHomeIMG1.jpg" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/sliderHomeIMG2.jpg" layout="fill" alt="" />
+          <Pic srcPic="/sliderHomeIMG2.jpg" classPic="h-full w-full" altPic="" />
         </div>
       </Carousel>
 

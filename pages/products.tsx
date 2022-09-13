@@ -8,7 +8,7 @@ import { prisma } from "../lib";
 import Link from "next/link";
 import dayjs from "dayjs";
 import Pagination from "../components/pagination";
-import Image from "next/image";
+import Pic from "../components/pic";
 
 export const getServerSideProps = async ({
   query,
@@ -54,6 +54,7 @@ export const getServerSideProps = async ({
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Products: NextPage<PropsType> = ({ content, pagination }) => {
+  console.log(content)
 
   return (
     <Warpper>
@@ -62,11 +63,7 @@ const Products: NextPage<PropsType> = ({ content, pagination }) => {
           content.map( item => (
               <figure className="h-auto bg-gray-100 m-5 drop-shadow-lg" dir="rtl" key={item.id}>
                 <div className=" w-full md:h-72 sm:h-96 h-72">
-                <Image
-                  src={item.files[0].file.filePath}
-                  alt=""
-                  width="100%" height="100%" layout="responsive" 
-                />
+                <Pic srcPic={item.files[0].file.filePath} classPic="h-full w-full" altPic="" />
                 </div>
                 <div className="px-2">
                   <h3 className="my-4 text-2xl text-zinc-800 font-bold">
