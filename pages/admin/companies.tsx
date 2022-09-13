@@ -15,8 +15,8 @@ import Pic from "../../components/pic";
 import Modal from "../../components/modal";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
-  const pageSize = Math.abs(+(query.pageSize || 10));
-  const page = Math.abs(+(query.page || 1));
+  const pageSize = Math.abs(+(query.pageSize || 10)||1);
+  const page = Math.abs(+(query.page || 1)||1);
   const search = (query.search as string) || "";
 
   const companies = await prisma.post.findMany({

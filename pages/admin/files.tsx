@@ -9,8 +9,8 @@ import Router from "next/router";
 import Pic from "../../components/pic";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
-  const pageSize = Math.abs(+(query.pageSize || 10));
-  const page = Math.abs(+(query.page || 1));
+  const pageSize = Math.abs(+(query.pageSize || 10)||1);
+  const page = Math.abs(+(query.page || 1)||1);
   const search = (query.search as string) || "";
 
   const files = await prisma.file.findMany({
