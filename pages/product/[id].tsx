@@ -3,7 +3,7 @@ import type { NextPage, GetStaticPropsContext } from "next";
 import { Carousel } from "react-responsive-carousel";
 import { Warpper } from "../../layout";
 import { prisma } from "../../lib";
-import Image from "next/image";
+import Pic from "../../components/pic";
 
 export const getStaticPaths = async () => {
   return {
@@ -84,13 +84,7 @@ const Product: NextPage<PropsType> = ({ content }) => {
         {content.files.map((item, index) => (
           <div className="md:h-ft h-72" key={index}>
             <div className="h-full object-contain">
-              <Image
-                src={item.file.filePath}
-                width="100%"
-                height="100%"
-                layout="responsive"
-                alt=""
-              />
+            <Pic srcPic={item.file.filePath} classPic="h-full w-full" altPic="" />
             </div>
           </div>
         ))}

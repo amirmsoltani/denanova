@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Pic from "../components/pic";
 
 const menuItems = [
   { href: "/", name: "خانه" },
@@ -33,7 +34,7 @@ const Header = () => {
             <div className="flex justify-center">
               <Link href="/">
                 <a className="flex">
-                  <img className=" h-20" src="/logoFarsi" alt="" />
+                  <Pic srcPic="/logoFarsi" classPic="h-20" altPic="" />
                 </a>
               </Link>
             </div>
@@ -76,12 +77,12 @@ const Header = () => {
       {/* menu for lg and xl */}
 
       <div className="lg:block w-full h-40 hidden mb-5" dir="rtl">
-      <div className="">
+        <div className="">
           <div className="w-full h-full text-center " dir="rtl">
             <div className="flex justify-center">
               <Link href="/">
                 <a className="flex">
-                  <img className=" h-20" src="/logoFarsi" alt="" />
+                  <Pic srcPic="/logoFarsi" classPic="h-20" altPic="" />
                 </a>
               </Link>
             </div>

@@ -7,7 +7,7 @@ import {
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import Image from "next/image";
+import Pic from "../components/pic";
 
 type PropsType = { children: ReactNode };
 
@@ -74,14 +74,14 @@ const warpper: FC<PropsType> = ({ children }) => {
                 <Link href="http://www.instagram.com/denanovaazma">
                   <a>
                     <div className="w-7 mr-2">
-                    <Image src="/instagram.svg" width="100%" height="100%" layout="responsive" />
+                      <Pic srcPic="/instagram.svg" classPic="h-full w-full" altPic="" />
                     </div>
                   </a>
                 </Link>
                 <Link href="https://api.whatsapp.com/send?phone=989155995924">
                   <a>
                     <div className="w-7 mr-3" >
-                      <Image src="/whatsapp.svg" alt="" width="100%" height="100%" layout="responsive" />
+                    <Pic srcPic="/whatsapp.svg" classPic="h-full w-full" altPic="" />
                     </div>
                   </a>
                 </Link>
@@ -91,7 +91,7 @@ const warpper: FC<PropsType> = ({ children }) => {
               <div className="w-full">
                 <Link href="https://www.google.com/maps/place/36.309366,%2059.537432">
                   <a target="_blank"  className="relative h-full w-full block">
-                    <Image src="/map.png" alt="" width="100%" height="100%" layout="responsive" />
+                  <Pic srcPic="/map.png" classPic="h-full w-full" altPic="" />
                   </a>
                 </Link>
               </div>

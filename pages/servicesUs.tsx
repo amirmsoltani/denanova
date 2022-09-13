@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { Warpper } from "../layout";
 import { Carousel } from "react-responsive-carousel";
 import { CubeIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import Pic from "../components/pic";
 
 const AboutUs: NextPage = () => {
   return (
@@ -84,23 +84,22 @@ const AboutUs: NextPage = () => {
         className="mt-6"
       >
         <div className="md:h-ft h-72">
-          <Image src="/sliderSerIMG1.jpg" layout="fill" alt=""/>
+          <Pic srcPic="/sliderSerIMG1.jpg" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/sliderSerIMG2.jpg" layout="fill" alt=""/>
-        </div>
-
-        <div className="md:h-ft h-72">
-          <Image src="/sliderSerIMG3.jpg" layout="fill" alt="" />
+          <Pic srcPic="/sliderSerIMG2.jpg" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni1.webp" layout="fill" alt="" />
+          <Pic srcPic="/sliderSerIMG3.jpg" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni2.webp" layout="fill" alt="" />
+          <Pic srcPic="/ferdowsiUni1.webp" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Image src="/ferdowsiUni3.webp" layout="fill" alt="" />
+          <Pic srcPic="/ferdowsiUni2.webp" classPic="h-full w-full" altPic="" />
+        </div>
+        <div className="md:h-ft h-72">
+          <Pic srcPic="/ferdowsiUni3.webp" classPic="h-full w-full" altPic="" />
         </div>
       </Carousel>
     </Warpper>

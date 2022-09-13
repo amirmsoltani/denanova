@@ -6,7 +6,7 @@ import Modal from "../../components/modal";
 import { prisma, withAuthSsr } from "../../lib";
 import Pagination from "../../components/pagination";
 import Router from "next/router";
-import Image from "next/image";
+import Pic from "../../components/pic";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
   const pageSize = Math.abs(+(query.pageSize || 10));
@@ -35,12 +35,20 @@ type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const File: NextPage<PropsType> = ({ contents, pagination }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [acceptDelete, setAcceptDelete] = useState(false);
+  const [fileDelete, setFileDelete] = useState<number>();
   const [showStatus, setShowStatus] = useState(true);
   const [statusUpload, setStatusUpload] = useState(false);
 
   const modalHandler = () => {
     setModalOpen(!modalOpen);
   };
+
+  const modalDeleteHandler = (id: number | undefined) => {
+    setAcceptDelete(!acceptDelete);
+    id && setFileDelete(id);
+  };
+
 
   const checkStatusUpload = (status: number) => {
     setStatusUpload(false);
@@ -49,7 +57,9 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
     }
     if (status === 201) {
       setModalOpen(!modalOpen);
-      Router.reload();
+      if (pagination.counts + 1 > pagination.lastPage * 10)
+        Router.replace(Router.basePath + "?page=" + (pagination.page + 1));
+      else Router.reload();
     }
   };
 
@@ -67,20 +77,27 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
     checkStatusUpload(response.status);
   };
 
-  const deleteFile = async (id: number) => {
-    const conApi = "/api/admin/file/" + id;
+  const deleteFile = async () => {
+    const conApi = "/api/admin/file/" + fileDelete;
 
     const response = await fetch(conApi, {
       method: "delete",
     });
 
     if (response.status === 200) {
-      Router.reload();
+      if (pagination.counts - 1 === (pagination.lastPage - 1) * 10) {
+        Router.replace(Router.basePath + "?page=" + (pagination.page - 1));
+        setAcceptDelete(!acceptDelete);
+      } else {
+        Router.reload();
+      }
     }
+    if(response.status === 401) Router.replace('/admin/login');
   };
 
   return (
     <>
+      {JSON.stringify(pagination)}
       <Modal width="w-96" visible={modalOpen} onClose={modalHandler}>
         <form className="text-center" onSubmit={onSubmit}>
           <label htmlFor="file" dir="rtl" className="text-xl">
@@ -89,7 +106,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
           <input
             name="image"
             type="file"
-            className="w-full mt-5 "
+            className="w-full mt-5 file:"
             onClick={() => {
               checkStatusUpload(0);
             }}
@@ -105,34 +122,52 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
           </p>
 
           <div className="flex justify-center">
-
-          <button
-            type="submit"
-            className={`${statusUpload? "bg-gray-800 hover:bg-gary-800" : "bg-blue-900 hover:bg-blue-700" } text-xl text-white mt-5  py-2 px-4 h-10 w-auto drop-shadow flex items-center `}
-
-            disabled={statusUpload ? true : false}
-          >
-            
-            <div
+            <button
+              type="submit"
               className={`${
-                    statusUpload ? "inline" : "hidden"
-                  } w-6 h-6 inline`}
-                >
-                  <Image
-                    src="/loading.webp"
-                    alt=""
-                    width="100%"
-                    height="100%"
-                    layout="responsive"
-                  />
-                </div>
-                <span className="inline mx-1" dir="rtl">{
-              statusUpload? 'لطفا منتظر بمانید' : "ارسال"
-            }</span>
+                statusUpload
+                  ? "bg-gray-800 hover:bg-gary-800"
+                  : "bg-blue-900 hover:bg-blue-700"
+              } text-xl text-white mt-5  py-2 px-4 h-10 w-auto drop-shadow flex items-center `}
+              disabled={statusUpload ? true : false}
+            >
+              <div
+                className={`${
+                  statusUpload ? "inline" : "hidden"
+                } w-6 h-6 inline`}
+              >
+                <Pic
+                  srcPic="/loading.webp"
+                  classPic="w-full h-full"
+                  altPic=""
+                />
+              </div>
+              <span className="inline mx-1" dir="rtl">
+                {statusUpload ? "لطفا منتظر بمانید" : "ارسال"}
+              </span>
             </button>
           </div>
-
         </form>
+      </Modal>
+      <Modal
+        width="w-96"
+        visible={acceptDelete}
+        onClose={() => modalDeleteHandler(undefined)}
+      >
+        <p className="w-full text-center mb-4">
+          آیا مطمئن هستید میخواهید فایل را پاک کنید؟
+        </p>
+        <div className="flex justify-center text-white">
+          <button
+            className="px-5 py-1 bg-green-900 mr-5"
+            onClick={() => modalDeleteHandler(undefined)}
+          >
+            خیر
+          </button>
+          <button className="px-5 py-1 bg-red-900" onClick={deleteFile}>
+            بله
+          </button>
+        </div>
       </Modal>
       <AdminWrapper>
         <div className="w-full h-16">
@@ -151,13 +186,17 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
                 className="w-56 h-auto m-2 p-2 drop-shadow  bg-gray-100 "
               >
                 <div className="w-full p-2 ">
-                <img src={item.filePath} alt="" width="100%" height="100%"  />
+                  <Pic
+                    srcPic={item.filePath}
+                    classPic="w-full h-full"
+                    altPic=""
+                  />
                 </div>
                 <div className="w-full mt-2 flex justify-between px-2">
                   <span className="text-center text-sm">{item.name}</span>
                   <button
                     onClick={() => {
-                      deleteFile(item.id);
+                      modalDeleteHandler(item.id);
                     }}
                     className="W-8 h-7 "
                   >

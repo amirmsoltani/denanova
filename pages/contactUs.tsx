@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Warpper } from "../layout";
 import Router from "next/router";
 import Modal from "../components/modal";
-import Image from "next/image";
+import Pic from "../components/pic";
 
 const ContactUs: NextPage = () => {
   const [showLoading, setShowLoading] = useState(false);
@@ -122,12 +122,10 @@ const ContactUs: NextPage = () => {
               <div
                 className={`${showLoading ? "inline" : "hidden"} w-6 inline`}
               >
-                <Image
-                  src="/loading.webp"
-                  width="100%"
-                  height="100%"
-                  layout="responsive"
-                  alt=""
+                <Pic
+                  srcPic="/loading.webp"
+                  classPic="h-full w-full"
+                  altPic=""
                 />
               </div>
             </button>
