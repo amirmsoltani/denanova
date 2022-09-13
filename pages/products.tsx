@@ -54,7 +54,6 @@ export const getServerSideProps = async ({
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Products: NextPage<PropsType> = ({ content, pagination }) => {
-  console.log(content)
 
   return (
     <Warpper>

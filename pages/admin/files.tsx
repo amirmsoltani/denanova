@@ -9,8 +9,8 @@ import Router from "next/router";
 import Pic from "../../components/pic";
 
 export const getServerSideProps = withAuthSsr(async ({ query }) => {
-  const pageSize = Math.abs(+(query.pageSize || 10)||1);
-  const page = Math.abs(+(query.page || 1)||1);
+  const pageSize = Math.abs(+(query.pageSize || 10)|| 1);
+  const page = Math.abs(+(query.page || 1)|| 1);
   const search = (query.search as string) || "";
 
   const files = await prisma.file.findMany({
@@ -57,7 +57,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
     }
     if (status === 201) {
       setModalOpen(!modalOpen);
-      if (pagination.counts + 1 > pagination.lastPage * 10)
+      if (pagination.counts + 1 > pagination.lastPage * 10 && pagination.counts>1)
         Router.replace(Router.basePath + "?page=" + (pagination.page + 1));
       else Router.reload();
     }
@@ -85,7 +85,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
     });
 
     if (response.status === 200) {
-      if (pagination.counts - 1 === (pagination.lastPage - 1) * 10) {
+      if (pagination.counts - 1 === (pagination.lastPage - 1) * 10 && pagination.lastPage>1 && pagination.page>1) {
         Router.replace(Router.basePath + "?page=" + (pagination.page - 1));
         setAcceptDelete(!acceptDelete);
       } else {
@@ -97,7 +97,6 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
 
   return (
     <>
-      {JSON.stringify(pagination)}
       <Modal width="w-96" visible={modalOpen} onClose={modalHandler}>
         <form className="text-center" onSubmit={onSubmit}>
           <label htmlFor="file" dir="rtl" className="text-xl">
