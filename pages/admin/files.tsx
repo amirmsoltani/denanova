@@ -133,7 +133,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
               <div
                 className={`${
                   statusUpload ? "inline" : "hidden"
-                } w-6 h-6 inline`}
+                } w-6 h-6 inline overflow-hidden`}
               >
                 <Pic
                   srcPic="/loading.webp"
@@ -182,12 +182,12 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
             {contents.map((item) => (
               <div
                 key={item.id}
-                className="w-56 h-auto m-2 p-2 drop-shadow  bg-gray-100 "
+                className="w-56 max-h-72 m-2 p-1  drop-shadow  bg-gray-100 "
               >
-                <div className="w-full p-2 ">
+                <div className="w-full h-full ">
                   <Pic
                     srcPic={item.filePath}
-                    classPic="w-full h-full"
+                    classPic="w-full h-full max-h-56 "
                     altPic=""
                   />
                 </div>
