@@ -10,8 +10,8 @@ import { prisma } from "../lib";
 export const getServerSideProps = async ({
   query,
 }: GetServerSidePropsContext) => {
-  const pageSize = Math.abs(+(query.pageSize || 10));
-  const page = Math.abs(+(query.page || 1));
+  const pageSize = Math.abs(+(query.pageSize || 10)||1);
+  const page = Math.abs(+(query.page || 1)||1);
 
   const companies = await prisma.post.findMany({
     where: { type: "company" },

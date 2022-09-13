@@ -13,8 +13,8 @@ import Pic from "../components/pic";
 export const getServerSideProps = async ({
   query,
 }: GetServerSidePropsContext) => {
-  const pageSize = Math.abs(+(query.pageSize || 10));
-  const page = Math.abs(+(query.page || 1));
+  const pageSize = Math.abs(+(query.pageSize || 10)||1);
+  const page = Math.abs(+(query.page || 1)||1);
 
   const products = await prisma.post.findMany({
     where: { type: "product" },
@@ -54,7 +54,6 @@ export const getServerSideProps = async ({
 type PropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const Products: NextPage<PropsType> = ({ content, pagination }) => {
-  console.log(content)
 
   return (
     <Warpper>
