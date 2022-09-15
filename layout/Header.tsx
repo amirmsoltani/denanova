@@ -34,7 +34,7 @@ const Header = () => {
             <div className="flex justify-center">
               <Link href="/">
                 <a className="flex">
-                  <Pic srcPic="/logoFarsi" classPic="h-20" altPic="" />
+                  <Pic srcPic="/logoFarsi.png" classPic="h-20" altPic="" />
                 </a>
               </Link>
             </div>
@@ -82,7 +82,7 @@ const Header = () => {
             <div className="flex justify-center">
               <Link href="/">
                 <a className="flex">
-                  <Pic srcPic="/logoFarsi" classPic="h-20" altPic="" />
+                  <Pic srcPic="/logoFarsi.png" classPic="h-20" altPic="" />
                 </a>
               </Link>
             </div>

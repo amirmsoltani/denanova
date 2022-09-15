@@ -14,23 +14,23 @@ const Home: NextPage = () => {
         autoPlay
       >
         <div className="md:h-ft h-72">
-          <Pic srcPic="/ferdowsiUni1.webp" classPic="h-full w-full" altPic="" />
-        </div>
-        <div className="md:h-ft h-72">
-          <Pic srcPic="/ferdowsiUni2.webp" classPic="h-full w-full" altPic="" />
-        </div>
-        <div className="md:h-ft h-72">
-          <Pic srcPic="/ferdowsiUni3.webp" classPic="h-full w-full" altPic="" />
-        </div>
-        <div className="md:h-ft h-72">
           <Pic srcPic="/sliderHomeIMG1.jpg" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
           <Pic srcPic="/sliderHomeIMG2.jpg" classPic="h-full w-full" altPic="" />
         </div>
+        <div className="md:h-ft h-72">
+          <Pic srcPic="/sliderHomeIMG3.jpg" classPic="h-full w-full" altPic="" />
+        </div>
+        <div className="md:h-ft h-72">
+          <Pic srcPic="/sliderHomeIMG4.jpg" classPic="h-full w-full" altPic="" />
+        </div>
+        <div className="md:h-ft h-72">
+          <Pic srcPic="/sliderHomeIMG5.jpg" classPic="h-full w-full" altPic="" />
+        </div>
       </Carousel>
 
-      <div className="columns-1 mt-10 px-4 text-lg" dir="rtl">
+      <div className="columns-1 mt-8 px-4 text-lg" dir="rtl">
         <hr className="w-full border-t-2" />
         <p className="mt-6 p-1 text-justify">
           شرکت سهامی خاص &quot;دنا نوا آزما&quot; در سال 1400 با تکیه بر اصل علم

@@ -74,26 +74,38 @@ const warpper: FC<PropsType> = ({ children }) => {
                 <Link href="http://www.instagram.com/denanovaazma">
                   <a>
                     <div className="w-7 mr-2">
-                      <Pic srcPic="/instagram.svg" classPic="h-full w-full" altPic="" />
+                      <Pic
+                        srcPic="/instagram.svg"
+                        classPic="h-full w-full"
+                        altPic=""
+                      />
                     </div>
                   </a>
                 </Link>
                 <Link href="https://api.whatsapp.com/send?phone=989155995924">
                   <a>
-                    <div className="w-7 mr-3" >
-                    <Pic srcPic="/whatsapp.svg" classPic="h-full w-full" altPic="" />
+                    <div className="w-7 mr-3">
+                      <Pic
+                        srcPic="/whatsapp.svg"
+                        classPic="h-full w-full"
+                        altPic=""
+                      />
                     </div>
                   </a>
                 </Link>
               </div>
             </div>
-            <div className="w-full px-4   md:mt-10  mt-6 md:ml-4 lg:px-4 lg:w-3/4 xl:w-2/4 2xl:px-16 2xl:w-2/4 ">
-              <div className="w-full">
-                <Link href="https://www.google.com/maps/place/36.309366,%2059.537432">
-                  <a target="_blank"  className="relative h-full w-full block">
-                  <Pic srcPic="/map.png" classPic="h-full w-full" altPic="" />
-                  </a>
-                </Link>
+            <div className="w-full px-4 h-96  md:mt-10  mt-6 md:ml-4 lg:px-4 lg:w-3/4 xl:w-2/4 2xl:px-16 2xl:w-2/4 ">
+              <div className="w-full h-full">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10814.28711752185!2d59.52864255284617!3d36.309716970112255!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xce58408e73db183f!2zMzbCsDE4JzMzLjciTiA1OcKwMzInMTQuOCJF!5e0!3m2!1sen!2s!4v1663226248654!5m2!1sen!2s"
+                  width="100%"
+                  height="100%"
+                  className="border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>
