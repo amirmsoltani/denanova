@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @import url('react-responsive-carousel/lib/styles/carousel.min.css');
+.control-prev::before {
+    border-right-color: #666 !important;
+} 
+
+.control-next::before{
+    border-left-color: #666 !important;
+}
 @import url('react-quill/dist/quill.snow.css');
 
 @font-face {

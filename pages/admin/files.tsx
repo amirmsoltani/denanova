@@ -187,7 +187,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
                 <div className="w-full h-full ">
                   <Pic
                     srcPic={item.filePath}
-                    classPic="w-full h-full max-h-56 "
+                    classPic="w-full h-full max-h-56 f"
                     altPic=""
                   />
                 </div>

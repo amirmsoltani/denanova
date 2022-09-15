@@ -93,13 +93,7 @@ const AboutUs: NextPage = () => {
           <Pic srcPic="/sliderSerIMG3.jpg" classPic="h-full w-full" altPic="" />
         </div>
         <div className="md:h-ft h-72">
-          <Pic srcPic="/ferdowsiUni1.webp" classPic="h-full w-full" altPic="" />
-        </div>
-        <div className="md:h-ft h-72">
-          <Pic srcPic="/ferdowsiUni2.webp" classPic="h-full w-full" altPic="" />
-        </div>
-        <div className="md:h-ft h-72">
-          <Pic srcPic="/ferdowsiUni3.webp" classPic="h-full w-full" altPic="" />
+          <Pic srcPic="/sliderSerIMG4.jpg" classPic="h-full w-full" altPic="" />
         </div>
       </Carousel>
     </Warpper>
