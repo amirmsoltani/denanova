@@ -84,33 +84,38 @@ const Product: NextPage<PropsType> = ({ content }) => {
         {content.files.map((item, index) => (
           <div className="md:h-ft h-72" key={index}>
             <div className="h-full object-contain">
-            <Pic srcPic={item.file.filePath} classPic="h-full w-full" altPic="" />
+              <Pic
+                srcPic={item.file.filePath}
+                classPic="h-full w-full"
+                altPic=""
+              />
             </div>
           </div>
         ))}
       </Carousel>
-      <div className="w-full" dir="rtl">
+      <div className="w-full">
         <div className="p-4">
-          <div className="">
-            <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
-              {dayjs().calendar("jalali").format("DD")}
-              <span className="text-base">
-                {" "}
-                {dayjs().calendar("jalali").locale("fa").format("MMMM")}
+          <div dir="rtl">
+            <div className="">
+              <span className="text-xl mt-2 border-x-2 px-2 border-gray-300 opacity-60">
+                {dayjs().calendar("jalali").format("DD")}
+                <span className="text-base">
+                  {" "}
+                  {dayjs().calendar("jalali").locale("fa").format("MMMM")}
+                </span>
               </span>
-            </span>
-            <span className="mt-2 text-sm opacity-40 mr-2">
+              <span className="mt-2 text-sm opacity-40 mr-2">
+                {" "}
+                {content.author.fullname}
+              </span>
+            </div>
+            <h3 className=" text-3xl text-zinc-800 font-bold my-4">
               {" "}
-              {content.author.fullname}
-            </span>
+              {content.title}{" "}
+            </h3>
           </div>
-          <h3 className=" text-3xl text-zinc-800 font-bold my-4">
-            {" "}
-            {content.title}{" "}
-          </h3>
-
           <div
-            className="my-2 opacity-80 text-justify"
+            className="my-2 opacity-80 text-justify text-base"
             dangerouslySetInnerHTML={{ __html: content.content }}
           ></div>
         </div>
