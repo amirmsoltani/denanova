@@ -115,7 +115,7 @@ const Product: NextPage<PropsType> = ({ content }) => {
             </h3>
           </div>
           <div
-            className="my-2 opacity-80 text-justify text-base"
+            className="my-2 opacity-80 text-justify text-base product"
             dangerouslySetInnerHTML={{ __html: content.content }}
           ></div>
         </div>

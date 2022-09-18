@@ -63,11 +63,10 @@
 }
 
 
-
-ol{
+.product ol{
     @apply list-decimal;
 }
 
-ul{
+.product ul{
     @apply list-disc;
 }
