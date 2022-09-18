@@ -39,6 +39,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
   const [fileDelete, setFileDelete] = useState<number>();
   const [showStatus, setShowStatus] = useState(true);
   const [statusUpload, setStatusUpload] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const modalHandler = () => {
     setModalOpen(!modalOpen);
@@ -46,7 +47,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
 
   const modalDeleteHandler = (id: number | undefined) => {
     setAcceptDelete(!acceptDelete);
-    id && setFileDelete(id);
+    id ? setFileDelete(id) : setShowError(false);
   };
 
 
@@ -91,8 +92,10 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
       } else {
         Router.reload();
       }
-    }
-    if(response.status === 401) Router.replace('/admin/login');
+    }else if(response.status===409){
+      setShowError(true);
+      
+    }else if(response.status === 401) Router.replace('/admin/login');
   };
 
   return (
@@ -167,6 +170,7 @@ const File: NextPage<PropsType> = ({ contents, pagination }) => {
             بله
           </button>
         </div>
+        <p className={`${showError? "block" : "hidden"} text-center mt-4 text-rose-700`}> ! این فایل در محصولات سایت موجود است و امکان حذف آن نمی باشد *</p>
       </Modal>
       <AdminWrapper>
         <div className="w-full h-16">

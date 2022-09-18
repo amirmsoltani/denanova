@@ -16,3 +16,58 @@
     font-family: iranSans;
     src: url("/IranSans.ttf");
 }
+.ql-direction-rtl{
+    direction: rtl;
+}
+
+.ql-align-center {
+    @apply text-center;
+}
+
+.ql-size-huge{
+    @apply text-5xl;
+}
+
+.ql-size-large{
+    @apply text-3xl;
+}
+
+.ql-size-small{
+    @apply text-xs;
+}
+.ql-indent-1{
+    @apply indent-2;
+}
+.ql-indent-2{
+    @apply indent-3;
+}
+.ql-indent-3{
+    @apply indent-6;
+}
+.ql-indent-4{
+    @apply indent-9;
+}.ql-indent-5{
+    @apply indent-12;
+}.ql-indent-6{
+    @apply indent-16;
+}.ql-indent-7{
+    @apply indent-20;
+}.ql-indent-8{
+    @apply indent-24;
+}
+.ql-indent-9{
+    @apply indent-28;
+}
+.ql-indent-10{
+    @apply indent-32;
+}
+
+
+
+ol{
+    @apply list-decimal;
+}
+
+ul{
+    @apply list-disc;
+}

@@ -25,9 +25,6 @@ const Home: NextPage = () => {
         <div className="md:h-ft h-72">
           <Pic srcPic="/sliderHomeIMG4.jpg" classPic="h-full w-full" altPic="" />
         </div>
-        <div className="md:h-ft h-72">
-          <Pic srcPic="/sliderHomeIMG5.jpg" classPic="h-full w-full" altPic="" />
-        </div>
       </Carousel>
 
       <div className="columns-1 mt-8 px-4 text-lg" dir="rtl">

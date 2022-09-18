@@ -43,7 +43,7 @@ const AdminWrapper: FC<PropsType> = (props) => {
               <p className="select-none">پنل مدیریت</p>
             </div>
 
-            <ul className="text-center text-xl ">
+            <ul className="text-center text-xl menuAdmin list-none">
               {menuItems.map((item) => (
                 <li
                   key={item.href}

@@ -120,37 +120,19 @@ const AddPost: NextPage = () => {
       setFilePost(item.id);
     }
     if (statusRelFile === true) {
-      console.log('start pic ' + getFile)
-      setGetFile((oldFile) => [...oldFile, item]);
+      let stock = false;
+      getFile.forEach((file) => {
+        if (item.id === file.id) stock = true;
+      });
+      if(!stock){
+        setGetFile((oldFile) => [...oldFile, item]);
+        console.log('file '+ getFile);
+      }
       setMultiChange(!multiChange);
+
+      
     }
     setModalOpen(!modalOpen);
-  };
-
-  // show selected images silder
-  const propsImage = () => {
-    let property = [];
-    property.push(
-      getFile.map((item, index) => {
-        return (
-          <div className="w-32 h-36 mt-8 px-1" key={index}>
-            <div className="w-full h-32">
-              <div className="w-32 h-32">
-                <Pic srcPic={item.filePath} classPic="h-full w-full" altPic="" />
-              </div>
-            </div>
-            <div className="w-32 mt-3  flex justify-center">
-              <XCircleIcon
-                onClick={() => removeFile(index)}
-                className="w-6  text-red-600 hover:text-red-400 hover:cursor-pointer"
-              />
-            </div>
-          </div>
-        );
-      })
-    );
-
-    return property;
   };
 
   //remove file post
@@ -198,15 +180,14 @@ const AddPost: NextPage = () => {
       const error = e as AxiosError<{ message: { param: string }[] }>;
       const err = await error.response?.data;
       const setErr: any = [];
-      if(error.response?.status === 401) Router.replace('/admin/login');
-      else{
+      if (error.response?.status === 401) Router.replace("/admin/login");
+      else {
         err?.message.map((item) => {
           setErr.push(item.param);
         });
         setErrorPost(setErr);
-      setModalErrOpen(!modalErrOpen);
+        setModalErrOpen(!modalErrOpen);
       }
-      
     }
   };
 
@@ -226,7 +207,6 @@ const AddPost: NextPage = () => {
 
   //show error in modal
   const showErr = () => {
-
     const result: any = [];
     let counter = 0;
     if (errorPost !== undefined) counter = errorPost?.length;
@@ -278,7 +258,7 @@ const AddPost: NextPage = () => {
       }
     }
 
-    if (fileCoverPost === undefined && typePost ==="product") {
+    if (fileCoverPost === undefined && typePost === "product") {
       result.push(
         <div
           key={10}
@@ -291,7 +271,7 @@ const AddPost: NextPage = () => {
       );
     }
 
-    if (getFile.length === 0 &&  typePost === 'product') {
+    if (getFile.length === 0 && typePost === "product") {
       result.push(
         <div
           key={11}
@@ -339,7 +319,11 @@ const AddPost: NextPage = () => {
               onClick={() => addImageCoverPost(item)}
             >
               <div className="w-full p-2 ">
-                <Pic srcPic={item.filePath} classPic="w-full h-full" altPic="" />
+                <Pic
+                  srcPic={item.filePath}
+                  classPic="w-full h-full"
+                  altPic=""
+                />
               </div>
               <div className="w-full mt-2 flex justify-center px-2">
                 <span className="text-center text-sm">{item.name}</span>
@@ -409,8 +393,10 @@ const AddPost: NextPage = () => {
                     defaultValue={getPost?.description}
                     className="p-1 w-full h-10 mt-2 border border-gray-500"
                   />
-                  <p className="text-sm mt-4 text-gray-700">لینک وارد شده باید دارای  https باشد مثال : https://www.google.com</p>
-                  
+                  <p className="text-sm mt-4 text-gray-700">
+                    لینک وارد شده باید دارای https باشد مثال :
+                    https://www.google.com
+                  </p>
                 </>
               ) : (
                 <>
@@ -438,7 +424,11 @@ const AddPost: NextPage = () => {
                       >
                         {fileCoverPost ? (
                           <div className="w-full h-full">
-                            <Pic srcPic={fileCoverPost.filePath} classPic="w-full h-full" altPic="" />
+                            <Pic
+                              srcPic={fileCoverPost.filePath}
+                              classPic="w-full h-full"
+                              altPic=""
+                            />
                           </div>
                         ) : (
                           <div className="flex items-center justify-center h-96 w-96 border border-black bg-white hover:bg-lime-50 hover:cursor-pointer hover:text-lime-600 hover:border-lime-600">
@@ -462,7 +452,29 @@ const AddPost: NextPage = () => {
                       className="w-full flex flex-wrap justify-around items-center h-auto"
                       dir="ltr"
                     >
-                      {!multiChange && propsImage()}
+                      {
+                        getFile.map((item, index) => {
+                          return (
+                            <div className="w-32 h-36 mt-8 px-1" key={index}>
+                              <div className="w-full h-32">
+                                <div className="w-32 h-32">
+                                  <Pic
+                                    srcPic={item.filePath}
+                                    classPic="h-full w-full"
+                                    altPic=""
+                                  />
+                                </div>
+                              </div>
+                              <div className="w-32 mt-3  flex justify-center">
+                                <XCircleIcon
+                                  onClick={() => removeFile(index)}
+                                  className="w-6  text-red-600 hover:text-red-400 hover:cursor-pointer"
+                                />
+                              </div>
+                            </div>
+                          );
+                        })
+                      }
                       <div
                         onClick={() => modalHandler("multi")}
                         className="w-32 ml-2"
@@ -487,7 +499,11 @@ const AddPost: NextPage = () => {
           ) : (
             <div className="w-full h-screen flex justify-center items-center">
               <div className="w-24">
-                <Pic altPic="" srcPic="/loading.webp" classPic="w-full h-full" />
+                <Pic
+                  altPic=""
+                  srcPic="/loading.webp"
+                  classPic="w-full h-full"
+                />
               </div>
             </div>
           )}
